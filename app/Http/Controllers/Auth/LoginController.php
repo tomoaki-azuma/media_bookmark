@@ -51,12 +51,12 @@ class LoginController extends Controller
 
     public function handleTwitterCallback(Request $request){
 
-        try {
-            //dd($request);
-            $token = env('TWITTER_ACCESS_TOKEN');
-            $secret = env('TWITTER_ACCESS_TOKEN_SECRET');
-
-            $user_info = Socialite::driver('twitter')->userFromTokenAndSecret($token, $secret);
+	try {
+	    $token = $request->oauth_token;
+            $secret = $request->oauth_verifier;
+	    $user_info = Socialite::driver('twitter')->user();
+	    //$user_info = Socialite::driver('twitter')->userFromTokenAndSecret($token, $secret);
+	    //dd($user_info);
         } 
         catch (\Exception $e) {
             return redirect('/')->with('oauth_error', 'ログインに失敗しました');

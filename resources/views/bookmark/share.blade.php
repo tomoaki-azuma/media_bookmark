@@ -26,7 +26,7 @@
                                 <template v-for="bookmark in bookmarks">
                                     <tr>
                                         @php
-                                            $shared_url = 'http://localhost:8000/mbm/' // 要変更！
+                                            $shared_url = 'http://my-mbm.sakura.tv/mbm/' // 要変更！
                                         @endphp
                                         <td><a v-bind:href="'{{ $shared_url }}' + bookmark.share_token" target="_blank">@{{ bookmark.title }}</a></td>
                                         <td>@{{ bookmark.comment }}</td>
@@ -71,8 +71,8 @@
                 return d.getFullYear() + '/' + (d.getMonth()+1) + '/' + d.getDate();
             },
             create_qr_code: function(token) {
-                shared_url = "{{ $shared_url }}";
-                this.qr_code_url = `https://api.qrserver.com/v1/create-qr-code/?data=${shared_url}${token}&amp;size=200x200`;
+		shared_url = '{{ $shared_url }}' + token;
+		this.qr_code_url = `https://api.qrserver.com/v1/create-qr-code/?data=${shared_url}&amp;size=200x200`;
             }
         },
         created: function() {
