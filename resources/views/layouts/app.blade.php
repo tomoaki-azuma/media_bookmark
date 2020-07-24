@@ -40,7 +40,11 @@
             <div class="sidebar-header py-2">
                 @if (Auth::user())
                 <div class="d-flex justify-content-center">
-                    <img src="{{ asset('storage').'/'.$auth->img_url }}" class="rounded-circle" width="60" height="60">
+                    @if (preg_match('/^http(.+)/', $auth->img_url))
+                        <img src="{{ $auth->img_url }}" class="rounded-circle" width="60" height="60">
+                    @else
+                        <img src="{{ asset('storage').'/'.$auth->img_url }}" class="rounded-circle" width="60" height="60">
+                    @endif
                 </div>
                 <div class="d-flex justify-content-center">
                     <a href="/user"> {{ $auth->name }} </a>
