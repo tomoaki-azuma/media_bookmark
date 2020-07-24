@@ -27,7 +27,7 @@
                                     <tr>
                                         @php
                                             // $shared_url = 'http://:8000/mbm/' // 要変更！
-                                            $shared_url = 'http://http://my-mbm.sakura.tv/mbm/'
+                                            $shared_url = 'http://my-mbm.sakura.tv/mbm/'
                                         @endphp
                                         <td><a v-bind:href="'{{ $shared_url }}' + bookmark.share_token" target="_blank">@{{ bookmark.title }}</a></td>
                                         <td>@{{ bookmark.comment }}</td>
