@@ -12,7 +12,7 @@
         
         <style>
             html {
-                font-size: 16px; /* ルート要素のフォントサイズを1rem=14pxと定義する */
+                font-size: 14px; /* ルート要素のフォントサイズを1rem=14pxと定義する */
             }
 
             .card {
@@ -39,41 +39,39 @@
                 <div class="">
                     <div id="app">
                         
-                            <div class="sticky-top ">
-                                <div class="row d-flex justify-content-between bg-primary text-white p-2">
-                                    <div><h4 class="ml-1">{{ $bookmark->title }}</h4></div>
-                                    <div class="mx-3">
-                                        <i class="fas fa-info-circle fa-2x" data-toggle="modal" data-target="#aboutModal"></i>
-                                    </div>
-                                </div>
+                        <div class="sticky-top ">
+                            <div class="row d-flex justify-content-between bg-primary text-white p-2">
+                                <div><h4 class="ml-1">{{ $bookmark->title }}</h4></div>
                                 <div class="mx-3">
-                                    <div class="row mt-3">
-                                        <div class="row mr-auto">
-                                            <div class="ml-3">
-                                                <input type="text" v-model="search_keyword" @input="search_by_keyword" placeholder="search title">
-                                            </div>
-                                        </div>
-                                        <div>
-                                            editor: {{ $editor->name}}
-                                        </div>
-                                        
-                                    </div>
-                                </div>
-                                
-                                    
-                                <div v-show="ytplay_flg">
-                                    <div class="row d-flex justify-content-center bg-light">
-                                        <div id="ytarea"></div>
-                                        <p @click="closeYT">
-                                        <i class="far fa-times-circle fa-2x"></i>
-                                        </p>
-                                    </div>
+                                    <i class="fas fa-info-circle fa-2x" data-toggle="modal" data-target="#aboutModal"></i>
                                 </div>
                             </div>
+                            <div class="mx-3">
+                                <div class="row mt-3">
+                                    <div class="row mr-auto">
+                                        <div class="row ml-3">
+                                            <input type="text" v-model="search_keyword" @input="search_by_keyword" placeholder="search title">
+                                            <div class="ml-2"><i class="fas fa-sort fa-2x" @click="sort_change()"></i></div>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        editor: {{ $editor->name}}
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                            
+                                
+                            <div v-show="ytplay_flg">
+                                <div class="row d-flex justify-content-center bg-light">
+                                    <div id="ytarea"></div>
+                                    <p @click="closeYT">
+                                    <i class="far fa-times-circle fa-2x"></i>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
 
-                        
-                        
-            
                         <div class="modal fade" id="aboutModal">
                             <div class="modal-dialog">
                                 <div class="modal-content">
@@ -119,21 +117,21 @@
                                 </div>
                             </div>
                         </div>
-                        <div>
-                            <div class="d-flex mx-0 mt-3">
-                                <div><i class="fas fa-sort fa-2x" @click="sort_change()"></i></div>
-                            </div>
-                            <div v-for="data in searched_program" class="border-top my-2 py-1 mx-2 pl-2">
-                                <div class="row mt-1">
-                                    <div class="text-left px-0" v-cloak>@{{ data['title'] }} </div>
+
+                        <div class="mt-3">
+                            <div v-for="data in searched_program" class="d-flex justify-content-between border-top my-2 py-1 pl-2">
+                                <div>
+                                    <div class="col mt-1 px-0">
+                                        <div class="text-left px-0" v-cloak>@{{ data['title'] }} </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="text-left px-0" v-cloak>@{{ data['comment'] }} </div>
+                                    </div>
                                 </div>
-                                <div class="row">
-                                    <div class="text-left px-0" v-cloak>@{{ data['comment'] }} </div>
-                                </div>
-                                <div class="row d-flex justify-content-end align-self-end">
+                                <div class="d-flex justify-content-end align-self-end ml-3">
                                     <div v-for="url_element in data.urls" class="my-1">
                                         <div v-if="url_element.file_type == 'y'" @click="playYT(url_element['url'])">
-                                            <i class="fab fa-youtube mx-2 fa-2x"></i>
+                                            <img v-bind:src="'https://img.youtube.com/vi/' + url_element['url'] + '/sddefault.jpg'" width="100" height="75" @click="playYT(url_element['url'])">
                                         </div>
                                         <div v-if="url_element.file_type == 'p'">
                                             <a v-bind:href="url_element['url']" target="_blank">
@@ -171,7 +169,6 @@
         <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
         <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
         <!-- Popper JS -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
         <script src="https://unpkg.com/axios/dist/axios.min.js"></script>    
 

@@ -25,7 +25,7 @@
                                         avatar :
                                     </div>
                                     <div class="col-8">
-                                        <img src="{{ $auth->img_url }}" class="rounded-circle" width="60" height="60">
+                                        <img src="{{ asset('storage').'/'.$auth->img_url }}" class="rounded-circle" width="60" height="60">
                                     </div>
                                 </div>
                                 <div class="d-flex mt-3">

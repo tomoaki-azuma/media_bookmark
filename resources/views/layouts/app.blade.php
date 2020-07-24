@@ -28,8 +28,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,900;1,900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Racing+Sans+One&display=swap" rel="stylesheet">
     <style>
-        
-        </style>
+  
+    </style>
 </head>
 <body>
     <div class="wrapper">
@@ -38,10 +38,10 @@
                 <i id="dismiss" class="fas fa-arrow-circle-left bg-primary"></i>
             </div>
             <div class="sidebar-header py-2">
-                <div class="d-flex justify-content-center">
-                    <img src="{{ $auth->img_url }}" class="rounded-circle" width="60" height="60">
-                </div>
                 @if (Auth::user())
+                <div class="d-flex justify-content-center">
+                    <img src="{{ asset('storage').'/'.$auth->img_url }}" class="rounded-circle" width="60" height="60">
+                </div>
                 <div class="d-flex justify-content-center">
                     <a href="/user"> {{ $auth->name }} </a>
                 </div>

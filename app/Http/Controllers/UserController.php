@@ -30,20 +30,18 @@ class UserController extends Controller
 
         $auth->name = $form['name'];
         $auth->comment = $form['comment'];
+        
 
-        if ($path = $request->file('photo')) {
-
+        if ($request->file('photo')) {
             if ($auth->img_url) {
                 $res = Storage::delete('public/'.$auth->img_url);
             }
 
-            $path = $request->file('photo')->store('avatars','public');
-            $path = asset('/storage').'/'.$path;
+            $path = $request->file('photo')->store('avatars','public'); //store で一意のファイル名で保存
             $auth->img_url = $path;
             
         }
         
-
         $auth->save();
 
         return view('user.index',[ 'auth' => $auth ]);
