@@ -26,7 +26,7 @@
                                 <template v-for="bookmark in bookmarks">
                                     <tr>
                                         @php
-                                            $shared_url = env('APP_URL').'/mbm/'; // 要変更！
+                                            $shared_url = url('').'/mbm/'; // 要変更！
                                         @endphp
                                         <td><a v-bind:href="'{{ $shared_url }}' + bookmark.share_token" target="_blank">@{{ bookmark.title }}</a></td>
                                         <td>@{{ bookmark.comment }}</td>
@@ -67,7 +67,6 @@
         methods: {
             date_format: function(date) {
                 d = new Date(date);
-                console.log(d);
                 return d.getFullYear() + '/' + (d.getMonth()+1) + '/' + d.getDate();
             },
             create_qr_code: function(token) {
