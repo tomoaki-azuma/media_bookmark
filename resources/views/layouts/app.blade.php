@@ -70,15 +70,12 @@
                         Logout
                     </a>
                 </li>
-
-            </ul>       
-            
+            </ul>      
         </nav>
     
         <div id="content" class="">
             <nav class="navbar navbar-expand-lg navbar-light">
                 <div class="container-fluid">
-        
                     <button type="button" id="sidebarCollapse" class="btn btn-info">
                         <i class="fab fa-elementor fa-lg"></i>
                         MENU

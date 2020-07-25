@@ -37,7 +37,7 @@ Route::post('/program/store', 'ProgramController@store');
 Route::get('/program/show/{id}', 'ProgramController@show');
 Route::post('/program/destroy', 'ProgramController@destroy');
 
-Route::get('/mbm/programs/{id}', 'MbmController@get_programs')->where('bm_id', '[0-9]+');
+Route::get('/mbm/programs/{program}', 'MbmController@get_programs')->where('bm_id', '[0-9]+');
 Route::get('/mbm/{share_token}', 'MbmController@index');
 
 Route::get('/user', 'UserController@index');

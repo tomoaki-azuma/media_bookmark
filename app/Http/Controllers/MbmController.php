@@ -17,14 +17,7 @@ class MbmController extends Controller
     }
 
     public function get_programs($id) {
-        $programs = Program::with('urls:id,url,file_type,program_id')->where('bookmark_id',$id)->get();
-        
-        foreach ($programs as $program) {
-            foreach ($program->urls as $url_element) {
-                 $url_element->url = self::convert_youtube_url($url_element->url);
-            }
-        }
-        
+        $programs = Program::where('bookmark_id',$id)->get();        
         return $programs->toArray();
     }
 

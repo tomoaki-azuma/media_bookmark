@@ -19,7 +19,7 @@ class ProgramController extends Controller
     }
 
     public function show_by_bmid($bm_id) {
-        $programs = Program::with('urls:id,url,file_type,program_id')->where('bookmark_id',$bm_id)->get();
+        $programs = Program::where('bookmark_id',$bm_id)->get();
         return $programs->toArray();
     }
 
@@ -35,29 +35,17 @@ class ProgramController extends Controller
 
 
         if ($form['type'] == 'update') {
-            $program = Program::With('urls')->find($form['id']);
-            $urls = $program->urls;
-            foreach ($urls as $url) {
-                Url::destroy($url->id);
-            }
+            $program = Program::find($form['id']);
         } 
 
         $program->user_id = $form['user_id'];
         $program->bookmark_id = $form['bookmark_id'];
         $program->title = $form['title'];
         $program->comment = $form['comment'];
+        $program->url = $form['url'];
         $program->save();
 
-        $new_program_urls = $form['new_program_urls'];
-        foreach ($new_program_urls as $new_program_url) {  
-            $url = new Url;
-            $url->url = $new_program_url['url'];
-            $url->file_type = $new_program_url['file_type'];
-            $url->program_id = $program->id;
-            $url->save();
-        }
-
-        $programs = Program::with('urls:id,url,file_type,program_id')->where('bookmark_id',$program->bookmark_id)->get();
+        $programs = Program::where('bookmark_id',$program->bookmark_id)->get();
         return $programs->toArray();
 
     }
@@ -65,12 +53,8 @@ class ProgramController extends Controller
     public function destroy(Request $request) {
         $program = Program::find($request->id);
         Program::destroy($request->id);
-        $urls = $program->urls;
-        foreach ($urls as $url) {
-            Url::destroy($url->id);
-        }
-
-        $programs = Program::with('urls:id,url,file_type,program_id')->where('bookmark_id',$request->bookmark_id)->get();
+        
+        $programs = Program::where('bookmark_id',$request->bookmark_id)->get();
         return $programs->toArray();
 
     }

@@ -94,7 +94,12 @@
                                             <div class="d-flex justify-content-center my-4">
                                                 <div class="text-center">
                                                     <div>
-                                                        <img src="{{ asset('/storage/'.$editor->img_url) }}" class="rounded-circle" width="60" height="60">
+                                                        {{ $editor }}
+                                                        @if (preg_match('/^http(.+)/', $editor->img_url))
+                                                            <img src="{{ $editor->img_url }}" class="rounded-circle" width="60" height="60">
+                                                        @else
+                                                            <img src="{{ asset('storage').'/'.$editor->img_url }}" class="rounded-circle" width="60" height="60">
+                                                        @endif
                                                     </div>
                                                     <div>
                                                         {{ $editor->name }}
@@ -124,36 +129,16 @@
                                     <div class="col mt-1 px-0">
                                         <div class="text-left px-0" v-cloak>@{{ data['title'] }} </div>
                                     </div>
-                                    <div class="col">
+                                    <div class="col mt-1 px-0">
                                         <div class="text-left px-0" v-cloak>@{{ data['comment'] }} </div>
                                     </div>
                                 </div>
                                 <div class="d-flex justify-content-end align-self-end ml-3">
-                                    <div v-for="url_element in data.urls" class="my-1">
-                                        <div v-if="url_element.file_type == 'y'" @click="playYT(url_element['url'])">
-                                            <img v-bind:src="'https://img.youtube.com/vi/' + url_element['url'] + '/sddefault.jpg'" width="100" height="75" @click="playYT(url_element['url'])">
+                                    <template v-if="is_youtube_url(data['url'])" >
+                                        <div @click="playYT(data['url'])">
+                                            <img v-bind:src="'https://img.youtube.com/vi/' + get_youtube_program_id(data['url']) + '/sddefault.jpg'" width="100" height="75">
                                         </div>
-                                        <div v-if="url_element.file_type == 'p'">
-                                            <a v-bind:href="url_element['url']" target="_blank">
-                                                <i class="fas fa-podcast mx-2 fa-2x"></i>
-                                            </a>
-                                        </div>
-                                        <div v-if="url_element.file_type == 'i'">
-                                            <a v-bind:href="url_element['url']" target="_blank">
-                                                <i class="fas fa-images mx-2 fa-2x"></i>
-                                            </a>
-                                        </div>
-                                        <div v-if="url_element.file_type == 'w'">
-                                            <a v-bind:href="url_element['url']" target="_blank">
-                                                <i class="far fa-file-alt mx-2 fa-2x"></i>
-                                            </a>
-                                        </div>
-                                        <div v-if="url_element.file_type == 's'">
-                                            <a v-bind:href="url_element['url']" target="_blank">
-                                                <i class="fab fa-dropbox mx-2 fa-2x"></i>
-                                            </a>
-                                        </div>
-                                    </div>
+                                    </template>
                                 </div>
                             </div>
                         </div>
@@ -164,8 +149,6 @@
             </div>
         </div>
         
-    
-    
         <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
         <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
         <!-- Popper JS -->
@@ -186,7 +169,8 @@ let vm = new Vue({
         search_keyword: ""
     },
     methods: {
-        playYT: function(video_id) {
+        playYT: function(url) {
+            video_id = this.get_youtube_program_id(url);
             this.ytplay_flg = true;
             this.cur_video_id = video_id;
             console.log(video_id);
@@ -258,12 +242,36 @@ let vm = new Vue({
             }
             this.sort_program(this.sort_flg);
         },
-        theme_books: function(id) {
-            console.log(id)
-            return this.book_json.filter( function( value, index, array ) {
-                return value.id === id;       
-            }, id)
-        }
+        is_youtube_url: function(url) {
+            re = /^https?:\/\/www\.youtube\.com\/watch\?v=(.{11})/;
+            result1 = re.exec(url);
+            
+            if (result1) {
+                return true;
+            }
+            re2 = /^https?:\/\/youtu\.be\/(.{11})/;
+            result2 = re2.exec(url);
+            
+            if (result2) {
+                return true;
+            }
+            return false;
+        },
+        get_youtube_program_id: function(url) {
+            re = /^https?:\/\/www\.youtube\.com\/watch\?v=(.{11})/;
+            result1 = re.exec(url);
+            if (result1) {
+                return result1[1];
+            }
+
+            re2 = /^https?:\/\/youtu\.be\/(.{11})/;
+            result2 = re2.exec(url);
+            if (result2) {
+                console.log(result2);
+                return result2[1];
+            }
+
+        },
     },
     computed: {
 
