@@ -178,6 +178,8 @@ return [
         // Laravel Socialite　追加
         Laravel\Socialite\SocialiteServiceProvider::class,
 
+        // Goutte 追加
+        Weidner\Goutte\GoutteServiceProvider::class,
     ],
 
     /*
@@ -233,6 +235,8 @@ return [
         //　Laravel Socialite 用
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
 
+        // Goutte
+        'Goutte' => Weidner\Goutte\GoutteFacade::class,
     ],
 
 ];

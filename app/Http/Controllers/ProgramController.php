@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Program;
 use App\Url;
+use Goutte;
+use Exception;
 
 class ProgramController extends Controller
 {
@@ -43,6 +45,7 @@ class ProgramController extends Controller
         $program->title = $form['title'];
         $program->comment = $form['comment'];
         $program->url = $form['url'];
+        $program->thumbnail_img = $form['image'];
         $program->save();
 
         $programs = Program::where('bookmark_id',$program->bookmark_id)->get();
@@ -57,5 +60,39 @@ class ProgramController extends Controller
         $programs = Program::where('bookmark_id',$request->bookmark_id)->get();
         return $programs->toArray();
 
+    }
+
+    public function metadata(Request $request) {
+        $form = $request->all();
+        
+        try {
+            $html = Goutte::request('GET', $form['url']);
+            $comment = '';
+            $title = '';
+            $image = '';
+            
+            if ($html->filterXpath('//meta[@property="og:title"]')->count()) {
+                $title = $html->filterXpath('//meta[@property="og:title"]')->attr('content');
+            } else {
+                $title = $html->filter('title')->text();
+            }
+            
+            if ($html->filterXpath('//meta[@property="og:description"]')->count()) {
+                $comment = $html->filterXpath('//meta[@property="og:description"]')->attr('content');
+            } else {
+                if ($html->filterXpath('//meta[@name="description"]')->count()) {
+                    $comment = $html->filterXpath('//meta[@name="description"]')->attr('content');
+                };
+            }
+            
+            if ($html->filterXpath('//meta[@property="og:image"]')->count()) {
+                $image = $html->filterXpath('//meta[@property="og:image"]')->attr('content');
+            } 
+            
+            return ['title' => $title, 'comment' => $comment, 'image' => $image];
+        
+        } catch (Exception $ex) {
+            return [];
+        }
     }
 }

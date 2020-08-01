@@ -37,9 +37,14 @@
                         </a>
                     </div>
                     <div v-for="program in programs" class="border border-left-0 border-right-0 border-top-0 my-1 py-1 mx-1 px-0">
-                        <div class="row my-1">
-                            <div class="text-left px-2"><span class="badge badge-secondary">Title</span></div>
-                            <div class="text-left px-2" v-cloak>@{{ program.title }} </div>
+                        <div class="d-flex justify-content-between my-1">
+                            <div class="row">
+                                <div class="text-left px-2"><span class="badge badge-secondary">Title</span></div>
+                                <div class="text-left px-2" v-cloak>@{{ program.title }} </div>
+                            </div> 
+                            <div>
+                                <img v-bind:src="program.thumbnail_img" alt="" class="img-fluid" width="100px">
+                            </div>
                         </div>
                         <div class="row my-1">
                             <div class="text-left px-2"><span class="badge badge-secondary">Comment</span></div>
@@ -88,7 +93,11 @@
                             <div class="tab-content mx-3">
                                 <div id="theme" class="tab-pane active">
                                     <div class="form-group">
-                                        <label for="new_program_url" class="mr-3">URL</label>
+                                        <div class="d-flex justify-content-between my-2">
+                                            <label for="new_program_url" class="mr-3">URL</label>
+                                            <button type="button" class="btn-sm btn-danger" value="META" @click="get_metadata">get metadata</button>
+                                        </div>
+                                        
                                         <textarea v-model="new_program_url" class="form-control"></textarea>
                                     </div>
                                     <div class="form-group">
@@ -99,6 +108,11 @@
                                         <label for="new_program_comment" class="mr-3">Comment</label>
                                         <textarea v-model="new_program_comment" class="form-control"></textarea>
                                     </div>
+                                    <div>
+                                        <label for="new_program_image" class="mr-3">Thumbnail</label>
+                                        <textarea v-model="new_program_image" class="form-control"></textarea>
+                                        <img v-bind:src="new_program_image" class="img-fluid" alt="">
+                                    </div>
                                     <div class="row my-3 mx-2 d-flex justify-content-center">
                                         <template v-if="edit_type === 'delete'">
                                             <button type="button" class="btn btn-danger" value="DELETE" @click="submit_delete_program">DELETE</button>
@@ -106,7 +120,7 @@
                                         <template v-else>
                                             <input type="submit" class="btn btn-primary" value="OK" @click="submit_new_program">
                                         </template>
-                                        <div class="mx-3"><a href="/home" id="modal_close_btn" class="btn btn-secondary" role="button" data-dismiss="modal">Cancel</a></div>
+                                        <div class="mx-3"><a href="/home" id="modal_close_btn" class="btn btn-secondary" role="button" data-dismiss="modal" @click="clear_values()">Cancel</a></div>
                                     </div>
                                 </div>
                                 <template v-if="edit_type === 'create'">
@@ -137,12 +151,14 @@
             new_program_title: '',
             new_program_comment: '',
             new_program_url: '',
+            new_program_image: '',
             edit_type: '',
             program_id: ''
         },
         methods: {
             init_program_modal: function() {
                 this.edit_type = 'create';
+                this.clear_values();
             },
             submit_new_program: function() {
                 axios
@@ -153,7 +169,8 @@
                     title: this.new_program_title,
                     comment: this.new_program_comment,
                     url: this.new_program_url,
-                    type: this.edit_type
+                    type: this.edit_type,
+                    image: this.new_program_image,
                 })
                 .then( response => {
                     // console.log(response.data);
@@ -171,6 +188,7 @@
                 this.new_program_title = program.title;
                 this.new_program_comment = program.comment;
                 this.new_program_url = program.url;
+                this.new_program_image = program.image;
             },
             delete_program: function(program) {
                 this.edit_type = 'delete';
@@ -178,9 +196,10 @@
                 this.new_program_title = program.title;
                 this.new_program_comment = program.comment;
                 this.new_program_url = program.url;
+                this.new_program_image = program.image;
             },
             submit_delete_program: function() {
-                 axios
+                axios
                 .post('/program/destroy', {
                     id: this.program_id,
                     bookmark_id: {{ $bookmark->id }}
@@ -198,7 +217,25 @@
                 this.new_program_title = '';
                 this.new_program_comment = '';
                 this.new_program_url = '';
-            }
+                this.new_program_image = '';
+            },
+            get_metadata: function() {
+                if (this.new_program_url == '') {
+                    return;
+                }
+                axios
+                .post('/program/metadata', {
+                    url: this.new_program_url,
+                })
+                .then( response => {
+                    this.new_program_comment = response.data.comment;
+                    this.new_program_title = response.data.title;
+                    this.new_program_image = response.data.image;
+                })    
+                .catch(function(error) {
+                    console.log(error);
+                });
+            },
         },
         created: function() {
             axios

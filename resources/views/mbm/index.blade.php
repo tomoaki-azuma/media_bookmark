@@ -94,7 +94,6 @@
                                             <div class="d-flex justify-content-center my-4">
                                                 <div class="text-center">
                                                     <div>
-                                                        {{ $editor }}
                                                         @if (preg_match('/^http(.+)/', $editor->img_url))
                                                             <img src="{{ $editor->img_url }}" class="rounded-circle" width="60" height="60">
                                                         @else
