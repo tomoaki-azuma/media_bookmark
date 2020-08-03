@@ -127,7 +127,13 @@
                             <div v-for="data in searched_program" class="d-flex justify-content-between border-top my-2 py-1 pl-2">
                                 <div>
                                     <div class="col mt-1 px-0">
-                                        <div class="text-left px-0" v-cloak>@{{ data['title'] }} </div>
+                                        <div class="row">
+                                            <div class="text-left px-0" v-cloak>@{{ data['title'] }}
+                                                <template v-if="is_youtube_url(data['url'])" >
+                                                    <i class="text-danger fab fa-youtube fa-x"></i>
+                                                </template>
+                                            </div>
+                                        </div>
                                     </div>
                                     <div class="col mt-1 px-0">
                                         <div class="text-left px-0" v-cloak>
