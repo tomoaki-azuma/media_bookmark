@@ -42,7 +42,7 @@
                         
                         <div class="sticky-top ">
                             <div class="row d-flex justify-content-between bg-primary text-white p-2">
-                                <div><h4 class="ml-1">{{ $bookmark->title }}</h4></div>
+                                <div><h5 class="ml-1">{{ $bookmark->title }}</h4></div>
                                 <div class="mx-3">
                                     <i class="fas fa-info-circle fa-2x" data-toggle="modal" data-target="#aboutModal"></i>
                                 </div>
@@ -64,7 +64,7 @@
                             
                                 
                             <div v-show="ytplay_flg">
-                                <div id="ytarea_wrapper" class="row d-flex justify-content-center bg-light">
+                                <div id="ytarea_wrapper" class="row d-flex justify-content-center bg-light my-2">
                                     <div id="ytarea"></div>
                                     <p @click="closeYT">
                                     <i class="far fa-times-circle fa-2x"></i>
@@ -131,7 +131,7 @@
                                     </div>
                                     <div class="col mt-1 px-0">
                                         <div class="text-left px-0" v-cloak>
-                                            <a v-bind:href="data['url']">@{{ data['url']}}</a>
+                                            <a v-bind:href="data['url']" target="_blank" rel="noopener noreferrer">@{{ data['url']}}</a>
                                         </div>
                                     </div>
                                 </div>
@@ -143,7 +143,9 @@
                                     </template>
                                     <template v-else>
                                         <div>
-                                            <img v-bind:src="data['thumbnail_img']" width="100" height="75">
+                                            <a v-bind:href="data['url']" target="_blank" rel="noopener noreferrer">
+                                                <img v-bind:src="data['thumbnail_img']" class="img-thumbnail" width="100" height="75">
+                                            </a>
                                         </div>
                                     </template>
                                 </div>
