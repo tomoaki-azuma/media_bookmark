@@ -30,6 +30,7 @@
             [v-cloak] {
                 display: none;
             }
+            
         </style>
     </head>
     <body>
@@ -63,7 +64,7 @@
                             
                                 
                             <div v-show="ytplay_flg">
-                                <div class="row d-flex justify-content-center bg-light">
+                                <div id="ytarea_wrapper" class="row d-flex justify-content-center bg-light">
                                     <div id="ytarea"></div>
                                     <p @click="closeYT">
                                     <i class="far fa-times-circle fa-2x"></i>
@@ -129,13 +130,20 @@
                                         <div class="text-left px-0" v-cloak>@{{ data['title'] }} </div>
                                     </div>
                                     <div class="col mt-1 px-0">
-                                        <div class="text-left px-0" v-cloak>@{{ data['comment'] }} </div>
+                                        <div class="text-left px-0" v-cloak>
+                                            <a v-bind:href="data['url']">@{{ data['url']}}</a>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="d-flex justify-content-end align-self-end ml-3">
                                     <template v-if="is_youtube_url(data['url'])" >
                                         <div @click="playYT(data['url'])">
-                                            <img v-bind:src="'https://img.youtube.com/vi/' + get_youtube_program_id(data['url']) + '/sddefault.jpg'" width="100" height="75">
+                                            <img v-bind:src="data['thumbnail_img']" width="100" height="75">
+                                        </div>
+                                    </template>
+                                    <template v-else>
+                                        <div>
+                                            <img v-bind:src="data['thumbnail_img']" width="100" height="75">
                                         </div>
                                     </template>
                                 </div>
@@ -187,24 +195,6 @@ let vm = new Vue({
             } else {
                 return '#ex.' + Number(num.substr(3)) 
             }
-        },
-        modify_themes: function() {
-            let l = this.themes.length;
-            dx = 3 - l%3;
-            for (i=0; i<dx; i++) {
-                this.themes.push([])
-            }
-        },
-        search_theme: function(theme_id) {
-            
-            let temp = []
-            this.searched_program = this.program_data.filter( function( value, index, array ) {
-                return value.theme_id === theme_id;       
-            }, theme_id)
-            
-            this.sort_flg = 'a'
-            this.sort_program(this.sort_flg)
-            $('#myModal').modal('hide');
         },
         search_by_keyword: function() {
             this.searched_program = this.program_data.filter( function( value, index, array ) {
@@ -301,6 +291,13 @@ let firstScriptTag = document.getElementsByTagName('script')[0];
 firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
 let ytPlayer;
+let yt_window_size = window.innerWidth;
+if (yt_window_size >= 600) {
+    yt_window_size = 600;
+}
+
+let yt_window_height = yt_window_size * 0.6;
+
 // API読み込み後にプレーヤー埋め込み
 // When You Tube API is ready, create a new 
 // You Tube player in the div with id 'player'
@@ -308,8 +305,8 @@ function onYouTubeIframeAPIReady() {
     ytPlayer = new YT.Player('ytarea', 
       {
           videoId: 'FvCf8xYLYuA',   // Load the initial video
-          width: 250,
-          height: 190,
+          width: yt_window_size,
+          height: yt_window_height,
           playerVars: {
                  autoplay: 0,      // Don't autoplay the initial video
                  rel: 0,           //  Don’t show related videos
