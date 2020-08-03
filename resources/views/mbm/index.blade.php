@@ -135,11 +135,11 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col mt-1 px-0">
+                                    <!-- <div class="col mt-1 px-0">
                                         <div class="text-left px-0" v-cloak>
                                             <a v-bind:href="data['url']" target="_blank" rel="noopener noreferrer">@{{ data['url']}}</a>
                                         </div>
-                                    </div>
+                                    </div> -->
                                 </div>
                                 <div class="d-flex justify-content-end align-self-end ml-3">
                                     <template v-if="is_youtube_url(data['url'])" >
