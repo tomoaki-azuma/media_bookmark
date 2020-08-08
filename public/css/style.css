@@ -59,3 +59,43 @@ ul ul a {
 .container{
     color: #696969;
 }
+
+.container-fluid{
+    color: #757575;
+}
+
+
+/*   header logo */
+.header-wrap {
+    background-color: #7DC1F6;
+    color: #FFFFFF;
+    font-family: 'Rowdies', cursive;
+    font-size: 20px;
+}
+
+.footer-wrap {
+    background-color: #7DC1F6;
+    color: #FFFFFF;
+    font-size: 14px;
+}
+
+a {
+    color: #98A6B5;
+}
+
+a:link, a:visited, a:hover, a:active {
+  color: #98A6B5;
+}
+
+.login-menu-box {
+    font-size: 10px;
+}
+
+.top-contents {
+    font-size: 15px;
+}
+
+
+
+
+
