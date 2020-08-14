@@ -103,6 +103,7 @@
             </div>
         </div>
     </div>
+    @include('layouts.contents-footer', ['current' => 'edit'])
 </div>
 @endsection
 
