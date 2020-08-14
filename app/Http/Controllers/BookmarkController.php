@@ -57,7 +57,8 @@ class BookmarkController extends Controller
         if ($form['type'] == 'update') {
             return redirect('/bookmark/edit/'.$form['id']);
         } else {
-            return redirect('/home');
+            $bookmarks= Bookmark::where('user_id', $form['user_id'])->get();
+            return $bookmarks->toArray();
         }
     }
 

@@ -1,53 +1,5 @@
-.wrapper {
-    display: flex;
-    align-items: stretch;
-    width: 100%;
-    height: 100%;
-    background-color: white;
-}
-
-#sidebar {
-    min-width: 250px;
-    max-width: 250px;
-    height: 100vh;
-    font-size: 20px;
-    font-family: 'Racing Sans One', cursive;
-    background-color: #e2ffc6;
-}
-
-.sidebar-header {
-    background-color: #e2ffc6;
-}
-
-#sidebar.active {
-    margin-left: -250px;
-}
-
 #content {
     width: 100%;
-}
-
-@media (max-width: 768px) {
-    #sidebar {
-        margin-left: -250px;
-    }
-    #sidebar.active {
-        margin-left: 0;
-        z-index: 10;
-        position: absolute;
-    }
-}
-
-@media (min-width: 768px) {
-    #dismiss {
-        display: none;
-    }
-}
-
-#sidebar {
-    /* don't forget to add all the previously mentioned styles here too */
-    color: #fff;
-    transition: all 0.3s;
 }
 
 ul ul a {
@@ -56,14 +8,9 @@ ul ul a {
     background: #6d7fcc;
 }
 
-.container{
-    color: #696969;
-}
-
 .container-fluid{
     color: #757575;
 }
-
 
 /*   header logo */
 .header-wrap {
@@ -85,6 +32,20 @@ a {
 
 a:link, a:visited, a:hover, a:active {
   color: #98A6B5;
+  text-decoration: none;
+}
+
+.clickable-box {
+    position: relative;
+}
+
+.clickable-box a {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height:100%;
+    width: 100%;
 }
 
 .login-menu-box {
@@ -95,7 +56,34 @@ a:link, a:visited, a:hover, a:active {
     font-size: 15px;
 }
 
+.bookmark-title {
+    font-weight: bold;
+}
 
+.bookmark-comment {
+    font-size: 10px;
+}
 
+#contents-footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: white;
+    z-index: 999;
+    border-top: ridge 1px #98A6B5;
+}
 
+.url-title {
+    font-size: 12px;
+    font-weight: bold;
+}
 
+.url-comment {
+    font-size: 10px;
+}
+
+.url-link {
+    font-size: 11px;
+    text-decoration: solid;
+}

@@ -27,4 +27,9 @@ class HomeController extends Controller
         $auth = Auth::user();
         return view('home', ['auth' => $auth]);
     }
+
+    public function edit() {
+        $auth = Auth::user();
+        return view('bookmark.edit_list', ['auth' => $auth]);
+    }
 }
