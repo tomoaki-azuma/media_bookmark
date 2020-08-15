@@ -7,15 +7,6 @@
         </a>
     @endif
 
-    @if ($current == 'edit')
-        <img class="" src="{{ asset('storage').'/common/edit-selected.png' }}" alt="">
-    @else
-        <a href="/edit">
-            <img class="" src="{{ asset('storage').'/common/footer-edit.png' }}" alt="">
-        </a>
-    @endif
-
-
     @if ($current == 'favorite')
         <img class="" src="{{ asset('storage').'/common/favorite-selected.png' }}" alt="">
     @else

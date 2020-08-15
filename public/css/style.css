@@ -10,6 +10,7 @@ ul ul a {
 
 .container-fluid{
     color: #757575;
+    font-family: 'Kosugi Maru', sans-serif;
 }
 
 /*   header logo */
@@ -58,10 +59,23 @@ a:link, a:visited, a:hover, a:active {
 
 .bookmark-title {
     font-weight: bold;
+} 
+
+.bookmark-edit-title {
+    font-weight: bold;
+    font-size: 18px;
 }
 
 .bookmark-comment {
     font-size: 10px;
+}
+
+.card-header {
+    background-color: #98A6B5;
+}
+
+.bookmark-edit-comment {
+    font-size: 12px;
 }
 
 #contents-footer {
@@ -75,15 +89,20 @@ a:link, a:visited, a:hover, a:active {
 }
 
 .url-title {
-    font-size: 12px;
+    font-size: 14px;
     font-weight: bold;
 }
 
 .url-comment {
-    font-size: 10px;
+    font-size: 12px;
 }
 
 .url-link {
-    font-size: 11px;
+    font-size: 12px;
     text-decoration: solid;
+}
+
+.url-header {
+    background-color: #880000;
+    color: white;
 }

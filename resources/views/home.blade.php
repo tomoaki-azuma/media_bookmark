@@ -3,32 +3,41 @@
 @section('content')
 <div>
     
-    <div class="d-flex">
-            <div class="my-2 ml-2 mr-auto"></div>
-            <div class="mt-1 mr-2">
+    <div class="">
+            <div class="my-2 text-center">
+            <h5>My Media Bookmarks</h5>
+            </div>
+            <div class="text-right mt-1 mr-2">
                 <a href="/bookmark/create">
-                    <img class="" src="{{ asset('storage').'/common/ic_add_circle.png' }}" alt="">
+                    <img class="" src="{{ asset('storage').'/common/ic_add_circle.png' }}" width="20px">
                 </a>
             </div>
     </div>
     
-    <div class="d-flex justify-content-between border-bottom mt-2 pb-2" v-for="bookmark in bookmarks">
+    <div class="d-flex justify-content-between border-bottom mt-2 pb-2" v-for="(bookmark,index) in bookmarks">
         @php
             $shared_url = url('').'/mbm/'; 
         @endphp
-        <div class="ml-2 align-top clickable-box w-80">
-            <a v-bind:href="'{{ $shared_url }}' + bookmark.share_token" target="_blank"></a>
-            <div class="bookmark-title">
+        <div class="ml-2 align-top w-80">
+            <div class="bookmark-title w-100">
                 @{{ bookmark.title }}
             </div>
-            <div class="bookmark-comment">
-                @{{ bookmark.comment }}
-            </div>           
+                <!-- <a class="" data-toggle="collapse" v-bind:href="'#collapseExample'+index" aria-expanded="false" v-bind:aria-controls="'collapseExample'+index">
+                <img src="{{ asset('storage').'/common/ic_more.png' }}">
+                </a>
+                <div class="collapse url-comment" v-bind:id="'collapseExample'+index"> -->
+                <div class="bookmark-comment">
+                    @{{ bookmark.comment }}
+                </div>
+                <!-- </div>                           -->
         </div>
         <div class="mx-2 my-auto w-20">
-            <img class="" src="{{ asset('storage').'/common/ic_share.png' }}" data-toggle="modal" data-target="#share-modal" alt="" width="20px" @click='create_modal_data(bookmark)'>
+            <a v-bind:href="'/bookmark/edit/'+bookmark.id">
+                <img class="" src="{{ asset('storage').'/common/ic_arrow.png' }}">
+            </a>
         </div>
     </div>
+    <div><br> <br> <br> <br> </div>
     @include('layouts.contents-footer', ['current' => 'home'])
 </div>
 @endsection

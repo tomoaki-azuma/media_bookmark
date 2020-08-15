@@ -1,15 +1,24 @@
 @extends('layouts.app')
 
 @section('content')
+
+@php
+    $shared_url = url('').'/mbm/'; 
+@endphp
 <div class="px-2">
     <div>
         <div class="d-flex justify-content-between my-2">
-            <div class="ml-2">
-                <a href="/edit">
-                    <img class="" src="{{ asset('storage').'/common/ic_back.png' }}" alt="">
-                </a>
+            <div class="text-center mb-1">
+                <a href="/home">
+                    <img class="" src="{{ asset('storage').'/common/ic_back.png' }}" width="20px" alt="">
+                </a> 
             </div>
             <div class="row mr-1">
+                <div class="mx-2">
+                    <a href="" data-toggle="modal" data-target="#share-modal" @click="create_modal_data()">
+                    <img class="" src="{{ asset('storage').'/common/ic_share.png'}}" width="20px" alt="">
+                    </a>
+                </div>
                 <div class="mx-2">
                     <img class="" src="{{ asset('storage').'/common/ic_edit.png' }}" alt="">
                 </div>
@@ -18,26 +27,28 @@
                 </div>
             </div>
         </div> 
-        <div class="mx-2">   
-            <div class="my-2">
-                <div><u>Title</u></div>
-                <div class="ml-2 bookmark-title">{{ $bookmark->title }}</div>
-            </div>
-            <div class="my-2">
-                <div><u>Comment</u></div>
-                <div class="ml-2">{{ $bookmark->comment }}</div>
-            </div>
+        <div class="mx-2">
+            <div class="card mb-3">
+                <div class="card-header p-0 m-0">
+                <div class="my-1 text-center">
+                    <div class="bookmark-edit-title">{{ $bookmark->title }}</div>
+                </div>
+                </div>   
+                <div class="my-2">
+                    <div class="ml-2 bookmark-edit-comment">{{ $bookmark->comment }}</div>
+                </div>
+            </div>    
+
         </div>
-            <hr>
             <div>
-                <div class="text-center">
-                    <h5 class="m-0">Links</h5>
+                <div class="text-center url-header my-2">
+                    <h5 class="py-1">Links</h5>
                 </div>
                 <div>
                     <div class="mx-2 d-flex justify-content-end">
                         <div class="thumbnail-box">
                             <a href="" data-toggle="modal" data-target="#myModal" @click="init_program_modal">
-                                <img src="{{ asset('storage').'/common/ic_add_circle.png' }}">
+                                <img src="{{ asset('storage').'/common/ic_add_circle.png' }}" width="20px">
                             </a>
                         </div>
                     </div>
@@ -49,6 +60,9 @@
                                 <div class="url-title">
                                     @{{ program.title }} 
                                 </div>
+                                <div class="url-link">
+                                    <a v-bind:href="program.url" target="_blank">@{{ program.url}}</a> 
+                                </div>
                                 <div class="">
                                 <a class="" data-toggle="collapse" v-bind:href="'#collapseExample'+index" aria-expanded="false" v-bind:aria-controls="'collapseExample'+index">
                                 <img src="{{ asset('storage').'/common/ic_more.png' }}">
@@ -57,7 +71,6 @@
                                     <div class="card card-body">
                                     @{{ program.comment }}
                                     <div class="url-link mt-2">
-                                    <a v-bind:href="program.url" target="_blank">@{{ program.url}}</a> 
                                     </div>
                                     </div>
                                 </div>                          
@@ -67,43 +80,13 @@
                                 <img v-bind:src="program.thumbnail_img" alt="" class="img-fluid">
                             </div>
                         </div>
-                            <!-- <div class="row">
-                                <div class="text-left px-2"><span class="badge badge-secondary">Title</span></div>
-                                <div class="text-left px-2" v-cloak>@{{ program.title }} </div>
-                            </div> 
-                            <div>
-                                <img v-bind:src="program.thumbnail_img" alt="" class="img-fluid" width="100px">
-                            </div>
-                        </div>
-                        <div class="row my-1">
-                            <div class="text-left px-2"><span class="badge badge-secondary">Comment</span></div>
-                            <div class="text-left px-2" v-cloak>@{{ program.comment }} </div>
-                        </div>
-                        <div class="row my-1">
-                            <div class="text-left px-2"><span class="badge badge-secondary">URL</span></div>
-                            <div class="text-left px-2" v-cloak>
-                                <div><a v-bind:href="program.url" target="_blank">@{{ program.url }}</a></div>
-                            </div>
-                        </div>
-                        
-                        <div class="row d-flex justify-content-end align-self-end">
-                             <div class="mx-2">
-                                <a href="" data-toggle="modal" data-target="#myModal" @click="edit_program(program)">
-                                    <i class="fas fa-edit fa-x"></i>
-                                </a>
-                            </div>
-                            <div class="mx-2">
-                                <a href="" data-toggle="modal" data-target="#myModal" @click="delete_program(program)">
-                                    <i class="fas fa-trash-alt fa-x"></i>
-                                </a>
-                            </div>
-                        </div> -->
                     </div>
+                    <div><br> <br> <br> <br> </div>
                 </div>
             </div>
         </div>
     </div>
-    @include('layouts.contents-footer', ['current' => 'edit'])
+    @include('layouts.contents-footer', ['current' => 'home'])
 </div>
 @endsection
 
@@ -173,6 +156,49 @@
         </div>
     </div>
 </div>
+
+<div class="modal fade" id="share-modal">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="mt-1 mr-1"> 
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="mx-4">
+                <div class="text-center my-2">
+                    <h5>Share Your Media Bookmark</h5>
+                </div>
+                <div class="my-3">
+                    <div><u>Title</u></div>
+                    <div class="ml-2 bookmark-title">@{{ modal_title}}</div>
+                </div>
+                <div class="my-3">
+                    <div><u>Comment</u></div>
+                    <div class="ml-2">@{{ modal_comment}}</div>
+                </div>
+                <div class="my-3">
+                    <div><u>Share via</u></div>
+                    <div class="ml-2">
+                    <input id="copy-target" class="form-control-plaintext" type="text" v-bind:value=shared_url readonly>
+                    </div>
+                    <div class="text-right"><img src="{{ asset('storage').'/common/ic_clipboard.png' }}" alt="" @click="copy_clipboard()"></div>
+                </div>
+                <div class="my-3">
+                    <div class="ml-2">QR Code</div>
+                    <div class="text-center my-2"><img v-bind:src="qr_code_url" width="150" height="150" alt="" title="" /></div>
+                </div>
+                <div class="my-3">
+                    <div class="ml-2">SNS</div>
+                    <div class="d-flex justify-content-around my-3">
+                    <img src="{{ asset('storage').'/common/twitter-icon.png' }}" alt="">
+                    <img src="{{ asset('storage').'/common/facebook-icon.png' }}" alt="">
+                    <img src="{{ asset('storage').'/common/line-icon.png' }}" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 @endsection
 
 @section('vuepart')
@@ -186,7 +212,12 @@
             new_program_url: '',
             new_program_image: '',
             edit_type: '',
-            program_id: ''
+            program_id: '',
+            modal_title: '',
+            modal_comment: '',
+            qr_code_url: '',
+            shared_url: ''
+
         },
         methods: {
             init_program_modal: function() {
@@ -269,6 +300,18 @@
                     console.log(error);
                 });
             },
+            create_modal_data: function(bookmark) {
+                this.modal_title = '{{ $bookmark->title }}';
+                this.modal_comment = '{{ $bookmark->comment }}';
+                shared_url = '{{ $shared_url.$bookmark->share_token }}';
+                this.shared_url = shared_url;
+                this.qr_code_url = `https://api.qrserver.com/v1/create-qr-code/?data=${shared_url}&amp;size=200x200`;
+            },
+            copy_clipboard: function() {
+                var copyTarget = document.getElementById("copy-target");
+                copyTarget.select();
+                document.execCommand("Copy");
+            }
         },
         created: function() {
             axios
