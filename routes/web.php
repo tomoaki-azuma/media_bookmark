@@ -31,7 +31,7 @@ Route::get('/bookmark/create', 'BookmarkController@create');
 Route::post('/bookmark/store', 'BookmarkController@store');
 Route::get('/bookmark/edit/{id}', 'BookmarkController@edit')->where('id', '[0-9]+');
 Route::get('/bookmark/share', 'BookmarkController@share');
-Route::get('/bookmark/destroy/{id}', 'BookmarkController@destroy')->where('id', '[0-9]+');
+Route::post('/bookmark/destroy', 'BookmarkController@destroy');
 
 Route::get('/program/bm/{bm_id}', 'ProgramController@show_by_bmid')->where('bm_id', '[0-9]+');
 Route::post('/program/store', 'ProgramController@store');

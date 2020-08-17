@@ -55,7 +55,7 @@ class BookmarkController extends Controller
         $bookmark->save();
 
         if ($form['type'] == 'update') {
-            return redirect('/bookmark/edit/'.$form['id']);
+            return $bookmark->toArray(); 
         } else {
             $bookmarks= Bookmark::where('user_id', $form['user_id'])->get();
             return $bookmarks->toArray();
@@ -76,7 +76,7 @@ class BookmarkController extends Controller
 
     public function destroy(Request $request) {
         Bookmark::destroy($request->id);
-        return redirect('/home');
+        return '';
     }
 
 

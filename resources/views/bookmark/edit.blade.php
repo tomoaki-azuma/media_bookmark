@@ -20,10 +20,14 @@
                     </a>
                 </div>
                 <div class="mx-2">
+                    <a href="" data-toggle="modal" data-target="#edit-bookmark-modal" @click="create_modal_bookmark_data('update')" >
                     <img class="" src="{{ asset('storage').'/common/ic_edit.png' }}" alt="">
+                    </a>
                 </div>
                 <div class="mx-2">
+                    <a href="" data-toggle="modal" data-target="#edit-bookmark-modal" @click="create_modal_bookmark_data('delete')" >
                     <img class="" src="{{ asset('storage').'/common/ic_trush.png' }}" alt="">
+                    </a>
                 </div>
             </div>
         </div> 
@@ -31,11 +35,11 @@
             <div class="card mb-3">
                 <div class="card-header p-0 m-0">
                 <div class="my-1 text-center">
-                    <div class="bookmark-edit-title">{{ $bookmark->title }}</div>
+                    <div class="bookmark-edit-title">@{{ bookmark_title }}</div>
                 </div>
                 </div>   
                 <div class="my-2">
-                    <div class="ml-2 bookmark-edit-comment">{{ $bookmark->comment }}</div>
+                    <div class="ml-2 bookmark-edit-comment">@{{ bookmark_comment }}</div>
                 </div>
             </div>    
 
@@ -199,6 +203,49 @@
     </div>
 </div>
 
+<div class="modal fade" id="edit-bookmark-modal">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+        <div class="modal-header p-0 d-flex justify-content-end">
+            <div class="py-2">
+                <button id="b_modal_close_btn" type="button" class="close py-2" data-dismiss="modal">&times;</button>
+            </div>
+        </div>
+            <div class="mx-4">
+                <div class="text-center my-2">
+                    <h5>Edit Media Bookmark</h5>
+                </div>
+                <div class="form-group">
+                    <label for="title">Title</label>
+                    <template v-if="bookmark_edit_type === 'update'">
+                    <input type="text" v-model="bookmark_modal_title" class="form-control" value="">
+                    </template>
+                    <template v-else>
+                    <input type="text" v-model="bookmark_modal_title" class="form-control" value="" disabled>
+                    </template>
+                </div>
+                <div class="form-group">
+                    <label for="comment">Comment</label>
+                    <template v-if="bookmark_edit_type === 'update'">
+                    <textarea v-model="bookmark_modal_comment" class="form-control"></textarea>
+                    </template>
+                    <template v-else>
+                    <textarea v-model="bookmark_modal_comment" class="form-control" disabled></textarea>
+                    </template>
+                </div>
+                <div class="row my-3 mx-2 d-flex justify-content-center">
+                    <template v-if="bookmark_edit_type === 'update'">
+                    <input type="submit" class="btn btn-primary" value="OK" @click="submit_edit_bookmark">
+                    </template>
+                    <template v-else>
+                    <input type="submit" class="btn btn-danger" value="DELETE" @click="submit_delete_bookmark">
+                    </template>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 @endsection
 
 @section('vuepart')
@@ -206,6 +253,12 @@
     let vm = new Vue({
         el: '#app',
         data: {
+            bookmark_id: '{{ $bookmark->id }}',
+            bookmark_title: '{{ $bookmark->title }}',
+            bookmark_comment: '{{ $bookmark->comment }}',
+            bookmark_modal_title: '',
+            bookmark_modal_comment: '',
+            bookmark_edit_type: 'update',
             programs: [],
             new_program_title: '',
             new_program_comment: '',
@@ -216,8 +269,7 @@
             modal_title: '',
             modal_comment: '',
             qr_code_url: '',
-            shared_url: ''
-
+            shared_url: '',
         },
         methods: {
             init_program_modal: function() {
@@ -300,7 +352,7 @@
                     console.log(error);
                 });
             },
-            create_modal_data: function(bookmark) {
+            create_modal_data: function() {
                 this.modal_title = '{{ $bookmark->title }}';
                 this.modal_comment = '{{ $bookmark->comment }}';
                 shared_url = '{{ $shared_url.$bookmark->share_token }}';
@@ -311,7 +363,41 @@
                 var copyTarget = document.getElementById("copy-target");
                 copyTarget.select();
                 document.execCommand("Copy");
-            }
+            },
+            create_modal_bookmark_data: function (edit_type){
+                this.bookmark_edit_type = edit_type;
+                this.bookmark_modal_title = this.bookmark_title;
+                this.bookmark_modal_comment = this.bookmark_comment;
+            },
+            submit_edit_bookmark: function() {
+                axios
+                .post('/bookmark/store', {
+                    id: this.bookmark_id,
+                    title: this.bookmark_modal_title,
+                    comment: this.bookmark_modal_comment,
+                    type: 'update'
+                })
+                .then( response => {
+                    this.bookmark_title = response.data.title;
+                    this.bookmark_comment = response.data.comment;
+                    $("#b_modal_close_btn").click();
+                })    
+                .catch(function(error) {
+                    console.log(error);
+                });
+            },
+            submit_delete_bookmark: function() {
+                axios
+                .post('/bookmark/destroy', {
+                    id: this.bookmark_id,
+                })
+                .then( response => {
+                    location.href='/home';
+                })    
+                .catch(function(error) {
+                    console.log(error);
+                });
+            },
         },
         created: function() {
             axios

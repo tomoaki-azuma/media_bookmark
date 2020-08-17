@@ -28,11 +28,11 @@ ul ul a {
 }
 
 a {
-    color: #98A6B5;
+    color: #757575;
 }
 
 a:link, a:visited, a:hover, a:active {
-  color: #98A6B5;
+  color: #757575;
   text-decoration: none;
 }
 

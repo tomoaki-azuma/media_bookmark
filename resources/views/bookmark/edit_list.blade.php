@@ -80,7 +80,6 @@
                 this.modal_comment = '';
             },
             submit_new_bookmark: function() {
-                console.log(this.modal_title);
                 axios
                 .post('/bookmark/store', {
                     user_id: {{ Auth::user()->id }},
