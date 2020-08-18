@@ -22,9 +22,9 @@
                 @{{ bookmark.title }}
                 </a>
             </div>
-                <div class="bookmark-comment">
+                <!-- <div class="bookmark-comment">
                     @{{ bookmark.comment }}
-                </div>
+                </div> -->
         </div>
         <div class="mx-2 my-auto w-20">
             <a v-bind:href="'/bookmark/edit/'+bookmark.id">

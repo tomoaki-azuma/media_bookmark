@@ -49,9 +49,9 @@
                     <h5 class="py-1">Links</h5>
                 </div>
                 <div>
-                    <div class="mx-2 d-flex justify-content-end">
-                        <div class="thumbnail-box">
-                            <a href="" data-toggle="modal" data-target="#myModal" @click="init_program_modal">
+                    <div class="mx-2 d-flex justify-content-end mb-2">
+                        <div class="">
+                            <a href="" data-toggle="modal" data-target="#myModal" @click="init_program_modal" class="p-2">
                                 <img src="{{ asset('storage').'/common/ic_add_circle.png' }}" width="20px">
                             </a>
                         </div>
@@ -61,23 +61,29 @@
                     <div v-for="(program, index) in programs" class="border border-left-0 border-right-0 border-top-0 my-1 py-1 mx-1 px-0">
                         <div class="d-flex justify-content-between">
                             <div class="w-75">
-                                <div class="url-title">
+                                <div class="url-title" data-toggle="modal" data-target="#myModal" @click="edit_program(program)">
                                     @{{ program.title }} 
                                 </div>
-                                <div class="url-link">
-                                    <a v-bind:href="program.url" target="_blank">@{{ program.url}}</a> 
-                                </div>
                                 <div class="">
-                                <a class="" data-toggle="collapse" v-bind:href="'#collapseExample'+index" aria-expanded="false" v-bind:aria-controls="'collapseExample'+index">
-                                <img src="{{ asset('storage').'/common/ic_more.png' }}">
-                                </a>
-                                <div class="collapse url-comment" v-bind:id="'collapseExample'+index">
-                                    <div class="card card-body">
-                                    @{{ program.comment }}
-                                    <div class="url-link mt-2">
+                                    <div class="d-flex justify-content-between">
+                                        <div class="p-2" data-toggle="collapse" v-bind:href="'#collapseExample'+index" aria-expanded="false" v-bind:aria-controls="'collapseExample'+index">
+                                        <img src="{{ asset('storage').'/common/ic_more.png' }}">
+                                        </div>
+                                        <div class="p-2">
+                                        <img src="{{ asset('storage').'/common/ic_pulldown.png' }}" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                                <a class="dropdown-item m-1 p-1" data-toggle="modal" data-target="#myModal" href="#" @click="delete_program(program)">DELETE</a>
+                                            </div>
+                                        </div>
                                     </div>
-                                    </div>
-                                </div>                          
+                                    <div class="collapse url-comment" v-bind:id="'collapseExample'+index">
+                                        <div class="card card-body">
+                                        @{{ program.comment }}
+                                        <div class="url-link mt-2">
+                                        <a v-bind:href="program.url" target="_blank">@{{ program.url}}</a> 
+                                        </div>
+                                        </div>
+                                    </div>                          
                                 </div>
                             </div>
                             <div class="w-25 mx-2">
@@ -116,13 +122,15 @@
             <!-- Modal body -->
             <div class="tab-content mx-3">
                 <div id="theme" class="tab-pane active">
-                    <div class="form-group">
+                    <div class="form-group mb-1">
                         <div class="d-flex justify-content-between my-2">
                             <label for="new_program_url" class="mr-3">URL</label>
-                            <button type="button" class="btn-sm btn-danger" value="META" @click="get_metadata">get metadata</button>
                         </div>
                         
                         <textarea v-model="new_program_url" class="form-control"></textarea>
+                    </div>
+                    <div class="text-right">
+                       <button type="button" class="btn-sm btn-warning" value="META" @click="get_metadata">get metadata</button>
                     </div>
                     <div class="form-group">
                         <label for="new_program_title" class="mr-3">Title</label>
@@ -144,7 +152,7 @@
                         <template v-else>
                             <input type="submit" class="btn btn-primary" value="OK" @click="submit_new_program">
                         </template>
-                        <div class="mx-3"><a href="/home" id="modal_close_btn" class="btn btn-secondary" role="button" data-dismiss="modal" @click="clear_values()">Cancel</a></div>
+                        <div class="mx-3"><a href="/home" id="modal_close_btn" class="btn btn-secondary text-white" role="button" data-dismiss="modal" @click="clear_values()">Cancel</a></div>
                     </div>
                 </div>
                 <template v-if="edit_type === 'create'">
@@ -304,7 +312,7 @@
                 this.new_program_title = program.title;
                 this.new_program_comment = program.comment;
                 this.new_program_url = program.url;
-                this.new_program_image = program.image;
+                this.new_program_image = program.thumbnail_img;
             },
             delete_program: function(program) {
                 this.edit_type = 'delete';
@@ -312,7 +320,7 @@
                 this.new_program_title = program.title;
                 this.new_program_comment = program.comment;
                 this.new_program_url = program.url;
-                this.new_program_image = program.image;
+                this.new_program_image = program.thumbnail_img;
             },
             submit_delete_program: function() {
                 axios

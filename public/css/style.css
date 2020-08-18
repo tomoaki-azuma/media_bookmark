@@ -97,12 +97,17 @@ a:link, a:visited, a:hover, a:active {
     font-size: 12px;
 }
 
-.url-link {
+.url-link a {
     font-size: 12px;
-    text-decoration: solid;
+    text-decoration: underline;
+    color: red;
 }
 
 .url-header {
     background-color: #880000;
     color: white;
+}
+
+.dropdown-menu a {
+    color: red;
 }
