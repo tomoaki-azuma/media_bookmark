@@ -170,6 +170,7 @@
                         <label for="new_program_comment" class="mr-3">Comment</label>
                         <textarea v-model="new_program_comment" class="form-control" disabled></textarea>
                     </div>
+                    </template>
                     <div class="row my-3 mx-2 d-flex justify-content-center">
                         <template v-if="edit_type === 'delete'">
                             <button type="button" class="btn btn-danger" value="DELETE" @click="submit_delete_program">DELETE</button>
@@ -179,7 +180,6 @@
                         </template>
                         <div class="mx-3"><a href="/home" id="modal_close_btn" class="btn btn-secondary text-white" role="button" data-dismiss="modal" @click="clear_values()">Cancel</a></div>
                     </div>
-                    </template>
                 </div>
                 <template v-if="edit_type === 'create'">
                     <div id="helper" class="tab-pane">

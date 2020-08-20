@@ -4,7 +4,7 @@
 <div class="px-2">
     <div class="my-2">
         <div class="sticky-top ">
-            <div class="row d-flex justify-content-center">
+            <div class="row d-flex justify-content-center mt-2">
                 <div><h5 class="ml-1">{{ $bookmark->title }}</h4></div>
             </div>
             <!-- <div class="mx-3">
@@ -32,6 +32,8 @@
                 <div id="ytarea_wrapper" class="row d-flex justify-content-center bg-light my-2">
                     <div id="ytarea"></div>
                     <p @click="closeYT">
+                    
+                        <button id="b_modal_close_btn" type="button" class="close py-2">&times;</button>
                     <i class="far fa-times-circle fa-2x"></i>
                     </p>
                 </div>
