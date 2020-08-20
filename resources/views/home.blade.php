@@ -8,7 +8,7 @@
             <h5>My Media Bookmarks</h5>
             </div>
             <div class="text-right mt-1 mr-2">
-                <img class="" src="{{ asset('storage').'/common/ic_add_circle.png' }}" width="20px" data-toggle="modal" data-target="#add-bookmark-modal" @click="init_modal_data">
+                <img class="m-2" src="{{ asset('storage').'/common/ic_add_circle.png' }}" width="20px" data-toggle="modal" data-target="#add-bookmark-modal" @click="init_modal_data">
             </div>
     </div>
     
@@ -28,7 +28,7 @@
         </div>
         <div class="mx-2 my-auto w-20">
             <a v-bind:href="'/bookmark/edit/'+bookmark.id">
-                <img class="" src="{{ asset('storage').'/common/ic_arrow.png' }}">
+                <img class="m-2" src="{{ asset('storage').'/common/ic_arrow.png' }}">
             </a>
         </div>
     </div>

@@ -1,175 +1,149 @@
+@extends('layouts.app')
 
-<!doctype html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>My-MBM:{{ $bookmark->title }}</title>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
-        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
-        
-        <style>
-            html {
-                font-size: 14px; /* ルート要素のフォントサイズを1rem=14pxと定義する */
-            }
-
-            .card {
-                cursor: pointer;
-                font-size: 10px;
-            }
-
-            .book_title { 
-
-                /*線の種類（二重線）太さ 色*/
-                border-bottom: double 5px #FFC778;
-
-            }
-
-            [v-cloak] {
-                display: none;
-            }
+@section('content')
+<div class="px-2">
+    <div class="my-2">
+        <div class="sticky-top ">
+            <div class="row d-flex justify-content-center">
+                <div><h5 class="ml-1">{{ $bookmark->title }}</h4></div>
+            </div>
+            <!-- <div class="mx-3">
+                <div class="row mt-3">
+                    <div class="row mr-auto">
+                        <div class="row ml-3">
+                            <input type="text" v-model="search_keyword" @input="search_by_keyword" placeholder="search title">
+                            <div class="ml-2"><i class="fas fa-sort fa-2x" @click="sort_change()"></i></div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div> -->
             
-        </style>
-    </head>
-    <body>
-    
-        <div class="container-fluid d-flex justify-content-center p-0">
-            <div class="col-xs-12 col-xl-6 col-lg-8">
-                <div class="">
-                    <div id="app">
-                        
-                        <div class="sticky-top ">
-                            <div class="row d-flex justify-content-between bg-primary text-white p-2">
-                                <div><h5 class="ml-1">{{ $bookmark->title }}</h4></div>
-                                <div class="mx-3">
-                                    <i class="fas fa-info-circle fa-2x" data-toggle="modal" data-target="#aboutModal"></i>
-                                </div>
-                            </div>
-                            <div class="mx-3">
-                                <div class="row mt-3">
-                                    <div class="row mr-auto">
-                                        <div class="row ml-3">
-                                            <input type="text" v-model="search_keyword" @input="search_by_keyword" placeholder="search title">
-                                            <div class="ml-2"><i class="fas fa-sort fa-2x" @click="sort_change()"></i></div>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        editor: {{ $editor->name}}
-                                    </div>
-                                    
-                                </div>
-                            </div>
-                            
-                                
-                            <div v-show="ytplay_flg">
-                                <div id="ytarea_wrapper" class="row d-flex justify-content-center bg-light my-2">
-                                    <div id="ytarea"></div>
-                                    <p @click="closeYT">
-                                    <i class="far fa-times-circle fa-2x"></i>
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="modal fade" id="aboutModal">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
+            <div>
+                <div>
+                    <div>
+                    </div>
+                    <div>
+                    </div>
+                </div>
+            </div>
                 
-                                    <!-- Modal Header -->
-                                    <div class="modal-header bg-warning text-white">
-                                        <h4 class="modal-title">Information</h4>
-                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                    </div>
-                                    <!-- Modal body -->
-                                    <div class="m-3">
-                                        <div class="my-3">
-                                            <h5 class="book_title my-2">About {{ $bookmark->title }} </h5>
-                                            <div>
-                                                {{ $bookmark->comment }}
-                                            </div>
-                                        </div>
-                                        <div class="my-3">
-                                            <h5 class="book_title my-2">Editor</h5>
-                                            <div class="d-flex justify-content-center my-4">
-                                                <div class="text-center">
-                                                    <div>
-                                                        @if (preg_match('/^http(.+)/', $editor->img_url))
-                                                            <img src="{{ $editor->img_url }}" class="rounded-circle" width="60" height="60">
-                                                        @else
-                                                            <img src="{{ asset('storage').'/'.$editor->img_url }}" class="rounded-circle" width="60" height="60">
-                                                        @endif
-                                                    </div>
-                                                    <div>
-                                                        {{ $editor->name }}
-                                                    </div>
-                                                </div>
-                                                
-                                            </div>
-                                        </div>
-                                        <div class="my-3">
-                                            <h5 class="book_title my-2">FROM My-MBM</h5>
-                                            <div class="px-3">
-                                                自分の好きをシェアしよう
-                                            </div>
-                                            
-                                        </div>
-                
-                                    </div>
-                                
-                                    
-                                </div>
-                            </div>
-                        </div>
+            <div v-show="ytplay_flg">
+                <div id="ytarea_wrapper" class="row d-flex justify-content-center bg-light my-2">
+                    <div id="ytarea"></div>
+                    <p @click="closeYT">
+                    <i class="far fa-times-circle fa-2x"></i>
+                    </p>
+                </div>
+            </div>
+        </div>
 
-                        <div class="mt-3">
-                            <div v-for="data in searched_program" class="d-flex justify-content-between border-top my-2 py-1 pl-2">
-                                <div>
-                                    <div class="col mt-1 px-0">
-                                        <div class="row">
-                                            <div class="text-left px-0" v-cloak>@{{ data['title'] }}
-                                                <template v-if="is_youtube_url(data['url'])" >
-                                                    <i class="text-danger fab fa-youtube fa-x"></i>
-                                                </template>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- <div class="col mt-1 px-0">
-                                        <div class="text-left px-0" v-cloak>
-                                            <a v-bind:href="data['url']" target="_blank" rel="noopener noreferrer">@{{ data['url']}}</a>
-                                        </div>
-                                    </div> -->
+
+        <div class="mt-3">
+
+            <div v-for="(data, index) in searched_program" class="border border-left-0 border-right-0 border-top-0 my-1 py-1 mx-1 px-0">
+                <div class="d-flex justify-content-between">
+                    <div class="w-75">
+                        <div class="url-title" data-toggle="modal" data-target="#myModal" @click="edit_program(program)">
+                            @{{ data['title'] }} 
+                            <template v-if="is_youtube_url(data['url'])" >
+                                <i class="text-danger fab fa-youtube fa-x"></i>
+                            </template>
+                        </div>
+                        <div class="">
+                            <div class="d-flex justify-content-between">
+                                <div class="p-2" data-toggle="collapse" v-bind:href="'#collapseExample'+index" aria-expanded="false" v-bind:aria-controls="'collapseExample'+index">
+                                <img src="{{ asset('storage').'/common/ic_more.png' }}">
                                 </div>
-                                <div class="d-flex justify-content-end align-self-end ml-3">
-                                    <template v-if="is_youtube_url(data['url'])" >
-                                        <div @click="playYT(data['url'])">
-                                            <img v-bind:src="data['thumbnail_img']" width="100" height="75">
-                                        </div>
-                                    </template>
-                                    <template v-else>
-                                        <div>
-                                            <a v-bind:href="data['url']" target="_blank" rel="noopener noreferrer">
-                                                <img v-bind:src="data['thumbnail_img']" class="img-thumbnail" width="100" height="75">
-                                            </a>
-                                        </div>
-                                    </template>
+                                <div class="p-2">
                                 </div>
                             </div>
+                            <div class="collapse url-comment" v-bind:id="'collapseExample'+index">
+                                <div class="card card-body">
+                                @{{ data['comment'] }}
+                                <div class="url-link mt-2">
+                                <a v-bind:href="data.url" target="_blank">@{{ data['url']}}</a> 
+                                </div>
+                                </div>
+                            </div>                          
                         </div>
-            
-                        
+                    </div>
+                    <div class="w-25 mx-2">
+                        <template v-if="is_youtube_url(data['url'])" >
+                            <div @click="playYT(data['url'])">
+                                <img v-bind:src="data['thumbnail_img']" class="img-fluid img-thumbnail">
+                            </div>
+                        </template>
+                        <template v-else>
+                            <div>
+                                <a v-bind:href="data['url']" target="_blank" rel="noopener noreferrer">
+                                    <img v-bind:src="data['thumbnail_img']" class="img-fluid img-thumbnail">
+                                </a>
+                            </div>
+                        </template>
                     </div>
                 </div>
             </div>
         </div>
-        
-        <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
-        <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-        <!-- Popper JS -->
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
-        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>    
+    </div>
+</div>
+@endsection
 
+
+@section('modal-contents')
+
+<div class="modal fade" id="aboutModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header bg-warning text-white">
+                <h4 class="modal-title">Information</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <!-- Modal body -->
+            <div class="m-3">
+                <div class="my-3">
+                    <h5 class="book_title my-2">About {{ $bookmark->title }} </h5>
+                    <div>
+                        {{ $bookmark->comment }}
+                    </div>
+                </div>
+                <div class="my-3">
+                    <h5 class="book_title my-2">Editor</h5>
+                    <div class="d-flex justify-content-center my-4">
+                        <div class="text-center">
+                            <div>
+                                @if (preg_match('/^http(.+)/', $editor->img_url))
+                                    <img src="{{ $editor->img_url }}" class="rounded-circle" width="60" height="60">
+                                @else
+                                    <img src="{{ asset('storage').'/'.$editor->img_url }}" class="rounded-circle" width="60" height="60">
+                                @endif
+                            </div>
+                            <div>
+                                {{ $editor->name }}
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+                <div class="my-3">
+                    <h5 class="book_title my-2">FROM My-MBM</h5>
+                    <div class="px-3">
+                        自分の好きをシェアしよう
+                    </div>
+                    
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+@endsection
+
+@section('vuepart')
 <script>
-
 let vm = new Vue({
     el: '#app',
     data: {
@@ -326,9 +300,4 @@ function onYouTubeIframeAPIReady() {
 }
 
 </script>
-
-
-
-
-    </body>
-</html>
+@endsection

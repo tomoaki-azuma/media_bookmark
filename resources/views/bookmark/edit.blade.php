@@ -10,22 +10,22 @@
         <div class="d-flex justify-content-between my-2">
             <div class="text-center mb-1">
                 <a href="/home">
-                    <img class="" src="{{ asset('storage').'/common/ic_back.png' }}" width="20px" alt="">
+                    <img class="m-2" src="{{ asset('storage').'/common/ic_back.png' }}" width="20px" alt="">
                 </a> 
             </div>
             <div class="row mr-1">
                 <div class="mx-2">
-                    <a href="" data-toggle="modal" data-target="#share-modal" @click="create_modal_data()">
+                    <a class="p-2" href="" data-toggle="modal" data-target="#share-modal" @click="create_modal_data()">
                     <img class="" src="{{ asset('storage').'/common/ic_share.png'}}" width="20px" alt="">
                     </a>
                 </div>
                 <div class="mx-2">
-                    <a href="" data-toggle="modal" data-target="#edit-bookmark-modal" @click="create_modal_bookmark_data('update')" >
+                    <a class="m-2" href="" data-toggle="modal" data-target="#edit-bookmark-modal" @click="create_modal_bookmark_data('update')" >
                     <img class="" src="{{ asset('storage').'/common/ic_edit.png' }}" alt="">
                     </a>
                 </div>
                 <div class="mx-2">
-                    <a href="" data-toggle="modal" data-target="#edit-bookmark-modal" @click="create_modal_bookmark_data('delete')" >
+                    <a class="m-2" href="" data-toggle="modal" data-target="#edit-bookmark-modal" @click="create_modal_bookmark_data('delete')" >
                     <img class="" src="{{ asset('storage').'/common/ic_trush.png' }}" alt="">
                     </a>
                 </div>
@@ -70,10 +70,6 @@
                                         <img src="{{ asset('storage').'/common/ic_more.png' }}">
                                         </div>
                                         <div class="p-2">
-                                        <img src="{{ asset('storage').'/common/ic_pulldown.png' }}" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                                <a class="dropdown-item m-1 p-1" data-toggle="modal" data-target="#myModal" href="#" @click="delete_program(program)">DELETE</a>
-                                            </div>
                                         </div>
                                     </div>
                                     <div class="collapse url-comment" v-bind:id="'collapseExample'+index">
@@ -87,7 +83,7 @@
                                 </div>
                             </div>
                             <div class="w-25 mx-2">
-                                <img v-bind:src="program.thumbnail_img" alt="" class="img-fluid">
+                                <img v-bind:src="program.thumbnail_img" alt="" class="img-fluid img-thumbnail">
                             </div>
                         </div>
                     </div>
@@ -107,21 +103,33 @@
         <div class="modal-content">
 
             <!-- Modal Header -->
-            <div class="modal-header">
-                <template v-if="edit_type === 'create'">
-                    <h5 class="modal-title">Add new program</h5>
-                </template>
-                <template v-if="edit_type === 'update'">
-                    <h5 class="modal-title">Edit program</h5>
-                </template>
-                <template v-if="edit_type === 'delete'">
-                    <h5 class="modal-title">Delete program</h5>
-                </template>
+            <div class="modal-header p-2">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
             <!-- Modal body -->
             <div class="tab-content mx-3">
+                <div class="d-flex justify-content-between mt-2">
+                    <div>
+                        <template v-if="edit_type === 'create'">
+                            <h5 class="modal-title">Add new program</h5>
+                        </template>
+                        <template v-if="edit_type === 'update'">
+                            <h5 class="modal-title">Edit program</h5>
+                        </template>
+                        <template v-if="edit_type === 'delete'">
+                            <h5 class="modal-title">Delete program</h5>
+                        </template>
+                    </div>
+                    <div>
+                        <template v-if="edit_type === 'update'">
+                        <div @click="delete_program" >
+                            <img class="p-2" src="{{ asset('storage').'/common/ic_trush.png' }}" alt="">
+                        </div>
+                        </template>
+                    </div>
+                </div>
                 <div id="theme" class="tab-pane active">
+                    <template v-if="edit_type != 'delete'">
                     <div class="form-group mb-1">
                         <div class="d-flex justify-content-between my-2">
                             <label for="new_program_url" class="mr-3">URL</label>
@@ -145,6 +153,23 @@
                         <textarea v-model="new_program_image" class="form-control"></textarea>
                         <img v-bind:src="new_program_image" class="img-fluid" alt="">
                     </div>
+                    </template>
+                    <template v-else>
+                    <div class="form-group mb-1">
+                        <div class="d-flex justify-content-between my-2">
+                            <label for="new_program_url" class="mr-3">URL</label>
+                        </div>
+                        
+                        <textarea v-model="new_program_url" class="form-control" disabled></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="new_program_title" class="mr-3">Title</label>
+                        <input type="text" v-model="new_program_title" class="form-control" value="" disabled>
+                    </div>
+                    <div class="form-group">
+                        <label for="new_program_comment" class="mr-3">Comment</label>
+                        <textarea v-model="new_program_comment" class="form-control" disabled></textarea>
+                    </div>
                     <div class="row my-3 mx-2 d-flex justify-content-center">
                         <template v-if="edit_type === 'delete'">
                             <button type="button" class="btn btn-danger" value="DELETE" @click="submit_delete_program">DELETE</button>
@@ -154,6 +179,7 @@
                         </template>
                         <div class="mx-3"><a href="/home" id="modal_close_btn" class="btn btn-secondary text-white" role="button" data-dismiss="modal" @click="clear_values()">Cancel</a></div>
                     </div>
+                    </template>
                 </div>
                 <template v-if="edit_type === 'create'">
                     <div id="helper" class="tab-pane">
@@ -316,11 +342,6 @@
             },
             delete_program: function(program) {
                 this.edit_type = 'delete';
-                this.program_id = program.id;
-                this.new_program_title = program.title;
-                this.new_program_comment = program.comment;
-                this.new_program_url = program.url;
-                this.new_program_image = program.thumbnail_img;
             },
             submit_delete_program: function() {
                 axios
