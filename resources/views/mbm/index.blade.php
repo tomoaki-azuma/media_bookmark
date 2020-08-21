@@ -32,7 +32,7 @@
                     <div id="ytarea"></div>
                     <p @click="closeYT">
                     
-                        <button id="b_modal_close_btn" type="button" class="close py-2">&times;</button>
+                        <button id="b_modal_close_btn" type="button" class="close p-3">&times;</button>
                     <i class="far fa-times-circle fa-2x"></i>
                     </p>
                 </div>
