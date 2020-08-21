@@ -25,7 +25,8 @@
                 editor: {{ $editor->name }}
                 </div>
             </div>
-                
+        </div>
+        <div class="sticky-top">        
             <div v-show="ytplay_flg">
                 <div id="ytarea_wrapper" class="row d-flex justify-content-center bg-light my-2">
                     <div id="ytarea"></div>
