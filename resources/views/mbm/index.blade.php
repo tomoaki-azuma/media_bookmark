@@ -71,7 +71,7 @@
                     <div class="w-25 mx-2">
                         <template v-if="is_youtube_url(data['url'])" >
                             <div @click="playYT(data['url'])">
-                                <img v-bind:src="data['thumbnail_img']" class="img-fluid img-thumbnail">
+                                <img v-bind:src="data['thumbnail_img']" class="img-fluid">
                             </div>
                         </template>
                         <template v-else>
