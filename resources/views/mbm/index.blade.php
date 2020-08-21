@@ -4,8 +4,9 @@
 <div class="px-2">
     <div class="my-2">
         <div class="sticky-top ">
-            <div class="row d-flex justify-content-center mt-2">
-                <div><h5 class="ml-1">{{ $bookmark->title }}</h4></div>
+            <div class="d-flex justify-content-center mt-2">
+                <div><h5>{{ $bookmark->title }}</h5></div>
+                
             </div>
             <!-- <div class="mx-3">
                 <div class="row mt-3">
@@ -19,12 +20,9 @@
                 </div>
             </div> -->
             
-            <div>
+            <div class="text-right">
                 <div>
-                    <div>
-                    </div>
-                    <div>
-                    </div>
+                editor: {{ $editor->name }}
                 </div>
             </div>
                 
@@ -46,7 +44,7 @@
             <div v-for="(data, index) in searched_program" class="border border-left-0 border-right-0 border-top-0 my-1 py-1 mx-1 px-0">
                 <div class="d-flex justify-content-between">
                     <div class="w-75">
-                        <div class="url-title" data-toggle="modal" data-target="#myModal" @click="edit_program(program)">
+                        <div class="url-title">
                             @{{ data['title'] }} 
                             <template v-if="is_youtube_url(data['url'])" >
                                 <img src="{{ asset('storage').'/common/yt_logo.png' }}">
