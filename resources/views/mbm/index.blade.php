@@ -3,7 +3,7 @@
 @section('content')
 <div class="px-2">
     <div class="my-2">
-        <div class="sticky-top ">
+        <div class="">
             <div class="d-flex justify-content-center mt-2">
                 <div><h5>{{ $bookmark->title }}</h5></div>
                 
