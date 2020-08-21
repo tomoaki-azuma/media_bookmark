@@ -49,7 +49,7 @@
                         <div class="url-title" data-toggle="modal" data-target="#myModal" @click="edit_program(program)">
                             @{{ data['title'] }} 
                             <template v-if="is_youtube_url(data['url'])" >
-                                <i class="text-danger fab fa-youtube fa-x"></i>
+                                <img src="{{ asset('storage').'/common/yt_logo.png' }}">
                             </template>
                         </div>
                         <div class="">
