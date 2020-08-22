@@ -1,9 +1,9 @@
 @extends('layouts.app')
 
 @section('ogp-matadata')
-<meta property="og:title" content="">
+<meta property="og:title" content="{{ $bookmark->title }}">
 <meta property="og:description" content="{{ $bookmark->comment }}">
-<meta property="og:image" content="`https://api.qrserver.com/v1/create-qr-code/?data={{ $bookmark->shared_url }}&amp;size=200x200`">
+<meta property="og:image" content="`https://api.qrserver.com/v1/create-qr-code/?data={{ $bookmark->share_token }}&amp;size=200x200`">
 @endsection
 
 @section('content')
@@ -12,7 +12,6 @@
         <div class="">
             <div class="d-flex justify-content-center mt-2">
                 <div><h5>{{ $bookmark->title }}</h5></div>
-                
             </div>
             <!-- <div class="mx-3">
                 <div class="row mt-3">
