@@ -3,7 +3,7 @@
 @section('ogp-matadata')
 <meta property="og:title" content="{{ $bookmark->title }}">
 <meta property="og:description" content="{{ $bookmark->comment }}">
-<meta property="og:image" content="`https://api.qrserver.com/v1/create-qr-code/?data={{ $bookmark->share_token }}&amp;size=200x200`">
+<meta property="og:image" content="https://api.qrserver.com/v1/create-qr-code/?data={{ $bookmark->share_token }}&amp;size=200x200">
 @endsection
 
 @section('content')
