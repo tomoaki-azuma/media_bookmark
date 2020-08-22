@@ -5,9 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <title>Media Bookmark</title>
-        <meta property="og:title" content="Media Bookmark">
-        <meta property="og:description" content="Media Bookmark Toppage">
-        <meta property="og:image" content="{{ asset('storage').'/common/toppage.gif' }}">
+        @yield('ogp-matadata')
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css2?family=Rowdies:wght@300;400&display=swap" rel="stylesheet">
@@ -26,10 +24,10 @@
 
     <div id="app" class="container-fluid d-flex justify-content-center p-0">
         <div class="col-xs-12 col-xl-6 col-lg-8 p-0">
-            <div class="d-flex justify-content-center header-wrap py-1 sticky-top">
-                <div>
+            <div class="d-flex justify-content-center header-wrap text-white py-1 sticky-top">
                 Media Bookmark
-                </div>
+                
+                <!-- <img class="my-2" src="{{ asset('storage').'/common/logo3-1.png' }}" alt="" height="20px"> -->
 
             </div>
 

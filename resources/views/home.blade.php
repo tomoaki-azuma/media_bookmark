@@ -1,5 +1,12 @@
 @extends('layouts.app')
 
+
+@section('ogp-matadata')
+<meta property="og:title" content="Media Bookmark">
+<meta property="og:description" content="Media Bookmark">
+<meta property="og:image" content="{{ asset('storage').'/common/toppage.gif' }}">
+@endsection
+
 @section('content')
 <div>
     

@@ -1,5 +1,12 @@
 @extends('layouts.app')
 
+
+@section('ogp-matadata')
+<meta property="og:title" content="Media Bookmark">
+<meta property="og:description" content="Media Bookmark">
+<meta property="og:image" content="{{ asset('storage').'/common/toppage.gif' }}">
+@endsection
+
 @section('content')
 
 @php
@@ -149,7 +156,7 @@
                         <textarea v-model="new_program_comment" class="form-control"></textarea>
                     </div>
                     <div>
-                        <label for="new_program_image" class="mr-3">Thumbnail</label>
+                        <label for="new_program_image" class="mr-3">Thumbnail(URL)</label>
                         <textarea v-model="new_program_image" class="form-control"></textarea>
                         <img v-bind:src="new_program_image" class="img-fluid" alt="">
                     </div>

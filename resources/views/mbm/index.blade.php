@@ -1,5 +1,11 @@
 @extends('layouts.app')
 
+@section('ogp-matadata')
+<meta property="og:title" content="">
+<meta property="og:description" content="{{ $bookmark->comment }}">
+<meta property="og:image" content="`https://api.qrserver.com/v1/create-qr-code/?data={{ $bookmark->shared_url }}&amp;size=200x200`">
+@endsection
+
 @section('content')
 <div class="px-2">
     <div class="my-2">
@@ -154,7 +160,8 @@ let vm = new Vue({
         themes: [],
         searched_program: [],
         sort_flg: 'd',  // ascending or decending
-        search_keyword: ""
+        search_keyword: "",
+        qr_code_url: ""
     },
     methods: {
         playYT: function(url) {
@@ -259,8 +266,7 @@ let vm = new Vue({
             });
     },
     created: function () {
-        
-        
+       this.qr_code_url = `https://api.qrserver.com/v1/create-qr-code/?data={{ $bookmark->shared_url }}&amp;size=200x200`;
     }
 })
 
