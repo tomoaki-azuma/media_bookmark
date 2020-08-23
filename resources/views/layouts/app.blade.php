@@ -25,9 +25,9 @@
     <div id="app" class="container-fluid d-flex justify-content-center p-0">
         <div class="col-xs-12 col-xl-6 col-lg-8 p-0">
             <div class="d-flex justify-content-center header-wrap text-white py-1 sticky-top">
-                Media Bookmark
+                <!-- Media Bookmark -->
                 
-                <!-- <img class="my-2" src="{{ asset('storage').'/common/logo3-1.png' }}" alt="" height="20px"> -->
+                <img class="my-2" src="{{ asset('storage').'/common/logo1-1.png' }}" alt="" height="20px">
 
             </div>
 
