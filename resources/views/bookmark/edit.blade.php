@@ -71,35 +71,35 @@
                                 <div class="url-title" data-toggle="modal" data-target="#myModal" @click="edit_program(program)">
                                     @{{ program.title }} 
                                 </div>
-                                <div class="">
-                                    <div class="d-flex justify-content-between">
-                                        <div class="p-2" data-toggle="collapse" v-bind:href="'#collapseExample'+index" aria-expanded="false" v-bind:aria-controls="'collapseExample'+index">
-                                        <img src="{{ asset('storage').'/common/ic_more.png' }}">
-                                        </div>
-                                        <div class="p-2">
-                                        </div>
-                                    </div>
-                                    <div class="collapse url-comment" v-bind:id="'collapseExample'+index">
-                                        <div class="card card-body">
-                                        @{{ program.comment }}
-                                        <div class="url-link mt-2">
-                                        <a v-bind:href="program.url" target="_blank">@{{ program.url}}</a> 
-                                        </div>
-                                        </div>
-                                    </div>                          
-                                </div>
                             </div>
                             <div class="w-25 mx-2">
                                 <img v-bind:src="program.thumbnail_img" alt="" class="img-fluid img-thumbnail">
                             </div>
                         </div>
+                        <div>
+                            <div class="w-100 px-2">
+                                <div class="text-center" > 
+                                    <img class="p-3" src="{{ asset('storage').'/common/ic_more.png' }}" data-toggle="collapse" v-bind:href="'#collapseExample'+index" aria-expanded="false" v-bind:aria-controls="'collapseExample'+index">
+                                </div>
+                                <div class="collapse url-comment" v-bind:id="'collapseExample'+index">
+                                    <div class="card card-body">
+                                    @{{ program.comment }}
+                                    <div class="url-link mt-2">
+                                    <a v-bind:href="program.url" target="_blank">@{{ program.url}}</a> 
+                                    </div>
+                                    </div>
+                                </div>                          
+                            </div>
+                        </div>
                     </div>
+                
                     <div><br> <br> <br> <br> </div>
+                    </div>
+                
                 </div>
             </div>
         </div>
-    </div>
-    @include('layouts.contents-footer', ['current' => 'home'])
+        @include('layouts.contents-footer', ['current' => 'home'])
 </div>
 @endsection
 

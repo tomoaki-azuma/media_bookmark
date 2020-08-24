@@ -15,9 +15,16 @@
 <div class="px-2">
     <div class="my-2">
         <div class="">
-            <div class="d-flex justify-content-center mt-2">
-                <div><h5>{{ $bookmark->title }}</h5></div>
-            </div>
+        
+            <div class="card m-3">
+                <div class="card-header p-0 m-0">
+                <div class="my-1 text-center">
+                    <div class="bookmark-edit-title">{{ $bookmark->title }}</div>
+                </div>
+                </div>   
+                    <div class="m-2 bookmark-edit-comment">{{ $bookmark->comment }}</div>
+                </div>
+            </div>    
             <!-- <div class="mx-3">
                 <div class="row mt-3">
                     <div class="row mr-auto">
@@ -31,7 +38,7 @@
             </div> -->
             
             <div class="text-right">
-                <div>
+                <div class="mbm-editor">
                 editor: {{ $editor->name }}
                 </div>
             </div>
@@ -61,23 +68,6 @@
                                 <img src="{{ asset('storage').'/common/yt_logo.png' }}">
                             </template>
                         </div>
-                        <div class="">
-                            <div class="d-flex justify-content-between">
-                                <div class="p-2" data-toggle="collapse" v-bind:href="'#collapseExample'+index" aria-expanded="false" v-bind:aria-controls="'collapseExample'+index">
-                                <img src="{{ asset('storage').'/common/ic_more.png' }}">
-                                </div>
-                                <div class="p-2">
-                                </div>
-                            </div>
-                            <div class="collapse url-comment" v-bind:id="'collapseExample'+index">
-                                <div class="card card-body">
-                                @{{ data['comment'] }}
-                                <div class="url-link mt-2">
-                                <a v-bind:href="data.url" target="_blank">@{{ data['url']}}</a> 
-                                </div>
-                                </div>
-                            </div>                          
-                        </div>
                     </div>
                     <div class="w-25 mx-2">
                         <template v-if="is_youtube_url(data['url'])" >
@@ -92,6 +82,20 @@
                                 </a>
                             </div>
                         </template>
+                    </div>
+                </div>
+                <div class="">
+                    <div class="w-100 text-center px-2"> 
+                            <img class="p-3" src="{{ asset('storage').'/common/ic_more.png' }}" data-toggle="collapse" v-bind:href="'#collapseExample'+index" aria-expanded="false" v-bind:aria-controls="'collapseExample'+index">
+                    </div>
+                    <div class="collapse url-comment" v-bind:id="'collapseExample'+index">
+                        <div class="card card-body">
+                        @{{ data['comment'] }}
+                        <div class="url-link mt-2">
+                        <a v-bind:href="data.url" target="_blank">@{{ data['url']}}</a> 
+                        </div>
+                        </div>
+                    </div>                          
                     </div>
                 </div>
             </div>
