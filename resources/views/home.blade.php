@@ -15,28 +15,39 @@
             <h5>My Media Bookmarks</h5>
             </div>
             <div class="text-right mt-1 mr-2">
-                <img class="m-2" src="{{ asset('storage').'/common/ic_add_circle.png' }}" width="20px" data-toggle="modal" data-target="#add-bookmark-modal" @click="init_modal_data">
+
+                <a class="btn btn-primary btn-sm text-white m-2" href="#" data-toggle="modal" data-target="#add-bookmark-modal" @click="init_modal_data">
+                Add
+                </a>
+                <!-- <img class="m-2" src="{{ asset('storage').'/common/ic_add_circle.png' }}" width="20px" data-toggle="modal" data-target="#add-bookmark-modal" @click="init_modal_data"> -->
             </div>
     </div>
     
-    <div class="d-flex justify-content-between border-bottom mt-2 pb-2" v-for="(bookmark,index) in bookmarks">
+    <div class="border-bottom mt-2 pb-2" v-for="(bookmark,index) in bookmarks">
         @php
             $shared_url = url('').'/mbm/'; 
         @endphp
-        <div class="ml-2 align-top w-80">
-            <div class="bookmark-title w-100">
-                <a v-bind:href="'{{ $shared_url}}' + bookmark.share_token " target="_blank">
-                @{{ bookmark.title }}
+        <div class="d-flex justify-content-between">
+            <div class="ml-2 align-top w-80">
+                <div class="w-100">
+                    <div class="bookmark-title">
+                        @{{ bookmark.title }}
+                    </div>
+                    <div class="url-link">
+                        <a v-bind:href="'{{ $shared_url}}' + bookmark.share_token " target="_blank">
+                            {{ $shared_url }}@{{ bookmark.share_token }}
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="mx-2 my-auto w-20">
+                <a v-bind:href="'/bookmark/edit/'+bookmark.id">
+                    <img class="m-2" src="{{ asset('storage').'/common/ic_arrow.png' }}">
                 </a>
             </div>
-                <!-- <div class="bookmark-comment">
-                    @{{ bookmark.comment }}
-                </div> -->
         </div>
-        <div class="mx-2 my-auto w-20">
-            <a v-bind:href="'/bookmark/edit/'+bookmark.id">
-                <img class="m-2" src="{{ asset('storage').'/common/ic_arrow.png' }}">
-            </a>
+        <div class="url-comment my-2 mx-2">
+            @{{ bookmark.comment }}
         </div>
     </div>
     <div><br> <br> <br> <br> </div>

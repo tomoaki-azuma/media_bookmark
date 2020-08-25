@@ -59,15 +59,24 @@
 
         <div class="mt-3">
 
-            <div v-for="(data, index) in searched_program" class="border border-left-0 border-right-0 border-top-0 my-1 py-1 mx-1 px-0">
+            <div v-for="(data, index) in searched_program" class="mbm-link-wrapper border border-left-0 border-right-0 border-top-0 my-1 py-1 mx-1 px-0 pt-2">
                 <div class="d-flex justify-content-between">
                     <div class="w-75">
-                        <div class="url-title">
-                            @{{ data['title'] }} 
-                            <template v-if="is_youtube_url(data['url'])" >
+                        <template v-if="is_youtube_url(data['url'])" >
+                            <div class="url-title" @click="playYT(data['url'])">
+                                <a href="javascript:void(0)">
+                                @{{ data['title'] }} 
                                 <img src="{{ asset('storage').'/common/yt_logo.png' }}">
-                            </template>
-                        </div>
+                                </a>
+                            </div>
+                        </template>
+                        <template v-else>
+                            <div class="url-title">
+                                <a v-bind:href="data['url']" target="_blank" rel="noopener noreferrer">
+                                @{{ data['title'] }} 
+                                </a>
+                            </div>
+                        </template>
                     </div>
                     <div class="w-25 mx-2">
                         <template v-if="is_youtube_url(data['url'])" >
@@ -78,13 +87,21 @@
                         <template v-else>
                             <div>
                                 <a v-bind:href="data['url']" target="_blank" rel="noopener noreferrer">
-                                    <img v-bind:src="data['thumbnail_img']" class="img-fluid img-thumbnail">
+                                    <img v-bind:src="data['thumbnail_img']" class="img-fluid">
                                 </a>
                             </div>
                         </template>
                     </div>
                 </div>
-                <div class="">
+                <div class="url-comment my-3">
+                        <div class="card card-body">
+                        @{{ data['comment'] }}
+                        <div class="url-link mt-2">
+                        <a v-bind:href="data.url" target="_blank">@{{ data['url']}}</a> 
+                        </div>
+                        </div>
+                </div>
+                <!-- <div class="">
                     <div class="w-100 text-center px-2"> 
                             <img class="p-3" src="{{ asset('storage').'/common/ic_more.png' }}" data-toggle="collapse" v-bind:href="'#collapseExample'+index" aria-expanded="false" v-bind:aria-controls="'collapseExample'+index">
                     </div>
@@ -97,7 +114,7 @@
                         </div>
                     </div>                          
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
     </div>

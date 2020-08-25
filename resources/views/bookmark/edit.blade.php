@@ -48,19 +48,22 @@
                 <div class="my-2">
                     <div class="ml-2 bookmark-edit-comment">@{{ bookmark_comment }}</div>
                 </div>
-            </div>    
-
+            </div>
         </div>
             <div>
                 <div class="text-center url-header my-2">
                     <h5 class="py-1">Links</h5>
                 </div>
                 <div>
-                    <div class="mx-2 d-flex justify-content-end mb-2">
+                    <div class="mx-2 border-bottom d-flex justify-content-end mb-2">
                         <div class="">
-                            <a href="" data-toggle="modal" data-target="#myModal" @click="init_program_modal" class="p-2">
-                                <img src="{{ asset('storage').'/common/ic_add_circle.png' }}" width="20px">
+
+                            <a class="btn btn-primary btn-sm text-white m-2" href="#" data-toggle="modal" data-target="#myModal" @click="init_program_modal">
+                            Add Link
                             </a>
+                            <!-- <a href="" data-toggle="modal" data-target="#myModal" @click="init_program_modal" class="p-2">
+                                <img src="{{ asset('storage').'/common/ic_add_circle.png' }}" width="20px">
+                            </a> -->
                         </div>
                     </div>
                 </div>
@@ -68,27 +71,27 @@
                     <div v-for="(program, index) in programs" class="border border-left-0 border-right-0 border-top-0 my-1 py-1 mx-1 px-0">
                         <div class="d-flex justify-content-between">
                             <div class="w-75">
-                                <div class="url-title" data-toggle="modal" data-target="#myModal" @click="edit_program(program)">
+                                <div class="url-title" >
                                     @{{ program.title }} 
+                                </div>
+
+                                <div class="url-link mt-2">
+                                    <a v-bind:href="program.url" target="_blank">@{{ program.url}}</a> 
                                 </div>
                             </div>
                             <div class="w-25 mx-2">
                                 <img v-bind:src="program.thumbnail_img" alt="" class="img-fluid img-thumbnail">
                             </div>
                         </div>
-                        <div>
-                            <div class="w-100 px-2">
-                                <div class="text-center" > 
-                                    <img class="p-3" src="{{ asset('storage').'/common/ic_more.png' }}" data-toggle="collapse" v-bind:href="'#collapseExample'+index" aria-expanded="false" v-bind:aria-controls="'collapseExample'+index">
-                                </div>
-                                <div class="collapse url-comment" v-bind:id="'collapseExample'+index">
-                                    <div class="card card-body">
-                                    @{{ program.comment }}
-                                    <div class="url-link mt-2">
-                                    <a v-bind:href="program.url" target="_blank">@{{ program.url}}</a> 
-                                    </div>
-                                    </div>
-                                </div>                          
+                        <div class="url-comment my-3">
+                            <div class="text-right text-white">
+                                <a class="btn btn-outline-primary btn-sm text-primary m-2" href="#" data-toggle="modal" data-target="#myModal" @click="edit_program(program)" role="button">
+                                EDIT
+                                </a>
+                            </div>
+                            <div class="card card-body">
+                                @{{ program.comment }}
+
                             </div>
                         </div>
                     </div>
