@@ -94,7 +94,7 @@
                     </div>
                 </div>
                 <div class="url-comment my-3">
-                        <div class="card card-body">
+                        <div class="card card-body p-2">
                         @{{ data['comment'] }}
                         <div class="url-link mt-2">
                         <a v-bind:href="data.url" target="_blank">@{{ data['url']}}</a> 
