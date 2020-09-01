@@ -124,3 +124,41 @@ a:link, a:visited, a:hover, a:active {
 .dropdown-menu a {
     color: red;
 }
+
+.bookmark-card {
+    background-color: #EFFCFF;
+    color: #53A5DB;
+    border-radius: 10px;
+}
+
+.bookmark-card a {
+    color: #53A5DB;
+    text-decoration: underline;
+}
+
+.bookmark-card-title {
+    font-size: 16px;
+    font-style: bold;
+}
+
+.bookmark-card-link {
+    font-size: 12px;
+    display: block;
+}
+
+.bookmark-card-text {
+    font-size: 14px;
+    color: #707070;
+}
+
+.bookmark-card-icon {
+    width: fit-content;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.bookmark-card-footer {
+    font-size: 12px;
+    color: #707070;
+}
