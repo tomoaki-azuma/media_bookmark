@@ -7,6 +7,42 @@
 <meta property="og:image" content="{{ asset('storage').'/common/toppage.gif' }}">
 @endsection
 
+
+@section('bookmark-edit-header')
+<div class="d-flex">
+    <div class="mx-2 bookmark-card-icon">
+        <a href="/home">
+        <i class="fas fa-angle-left fa-2x"></i>
+        </a>
+    </div>
+    <div class="ml-2 w-100">
+        <div class="my-1">
+            <div class="bookmark-edit-title">@{{ bookmark_title }}</div>
+        </div>
+        <div class="my-2">
+            <div class="bookmark-edit-comment">@{{ bookmark_comment }}</div>
+        </div>
+        <div class="d-flex justify-content-end">
+                    <div class="mx-2">
+                        <a class="p-2" href="" data-toggle="modal" data-target="#share-modal" @click="create_modal_data()">
+                        <i class="fas fa-share-alt"></i>
+                        </a>
+                    </div>
+                    <div class="mx-2">
+                        <a class="m-2" href="" data-toggle="modal" data-target="#edit-bookmark-modal" @click="create_modal_bookmark_data('update')" >
+                        <i class="fas fa-pen"></i>
+                        </a>
+                    </div>
+                    <div class="mx-2">
+                        <a class="m-2" href="" data-toggle="modal" data-target="#edit-bookmark-modal" @click="create_modal_bookmark_data('delete')" >
+                        <i class="fas fa-trash"></i>
+                        </a>
+                    </div>
+        </div>
+    </div>
+</div>
+@endsection
+
 @section('content')
 
 @php
@@ -14,95 +50,59 @@
 @endphp
 <div class="px-2">
     <div>
-        <div class="d-flex justify-content-between my-2">
-            <div class="text-center mb-1">
-                <a href="/home">
-                    <img class="m-2" src="{{ asset('storage').'/common/ic_back.png' }}" width="20px" alt="">
-                </a> 
-            </div>
-            <div class="row mr-1">
-                <div class="mx-2">
-                    <a class="p-2" href="" data-toggle="modal" data-target="#share-modal" @click="create_modal_data()">
-                    <img class="" src="{{ asset('storage').'/common/ic_share.png'}}" width="20px" alt="">
-                    </a>
-                </div>
-                <div class="mx-2">
-                    <a class="m-2" href="" data-toggle="modal" data-target="#edit-bookmark-modal" @click="create_modal_bookmark_data('update')" >
-                    <img class="" src="{{ asset('storage').'/common/ic_edit.png' }}" alt="">
-                    </a>
-                </div>
-                <div class="mx-2">
-                    <a class="m-2" href="" data-toggle="modal" data-target="#edit-bookmark-modal" @click="create_modal_bookmark_data('delete')" >
-                    <img class="" src="{{ asset('storage').'/common/ic_trush.png' }}" alt="">
-                    </a>
-                </div>
-            </div>
-        </div> 
-        <div class="mx-2">
-            <div class="card mb-3">
-                <div class="card-header p-0 m-0">
-                <div class="my-1 text-center">
-                    <div class="bookmark-edit-title">@{{ bookmark_title }}</div>
-                </div>
-                </div>   
-                <div class="my-2">
-                    <div class="ml-2 bookmark-edit-comment">@{{ bookmark_comment }}</div>
-                </div>
-            </div>
-        </div>
             <div>
-                <div class="text-center url-header my-2">
-                    <h5 class="py-1">Links</h5>
-                </div>
-                <div>
-                    <div class="mx-2 border-bottom d-flex justify-content-end mb-2">
-                        <div class="">
-
-                            <a class="btn btn-primary btn-sm text-white m-2" href="#" data-toggle="modal" data-target="#myModal" @click="init_program_modal">
-                            Add Link
-                            </a>
-                            <!-- <a href="" data-toggle="modal" data-target="#myModal" @click="init_program_modal" class="p-2">
-                                <img src="{{ asset('storage').'/common/ic_add_circle.png' }}" width="20px">
-                            </a> -->
-                        </div>
+                <div class="mx-2 border-bottom d-flex justify-content-center py-2">
+                    <div class="">
+                        <a class="text-white m-2" href="#" data-toggle="modal" data-target="#myModal" @click="init_program_modal">
+                        <button type="" class="submit-button">
+                        <i class="fas fa-plus"></i> Add Media Bookmark</button>
+                        </a>
                     </div>
                 </div>
                 <div>
-                    <div v-for="(program, index) in programs" class="border border-left-0 border-right-0 border-top-0 my-1 py-1 mx-1 px-0">
+                    <div v-for="(program, index) in programs" class="edit-contents my-2 py-1 mx-1 px-0">
                         <div class="d-flex justify-content-between">
-                            <div class="w-75">
+                            <div class="program-title">
                                 <div class="url-title" >
                                     @{{ program.title }} 
                                 </div>
 
-                                <div class="url-link mt-2">
-                                    <a v-bind:href="program.url" target="_blank">@{{ program.url}}</a> 
-                                </div>
                             </div>
-                            <div class="w-25 mx-2">
+                            <div class="mx-2 program-img">
                                 <img v-bind:src="program.thumbnail_img" alt="" class="img-fluid img-thumbnail">
                             </div>
                         </div>
                         <div class="url-comment my-3">
-                            <div class="text-right text-white">
-                                <a class="btn btn-outline-primary btn-sm text-primary m-2" href="#" data-toggle="modal" data-target="#myModal" @click="edit_program(program)" role="button">
-                                EDIT
-                                </a>
-                            </div>
-                            <div class="card card-body">
+                            <div class="">
                                 @{{ program.comment }}
 
+                                <div class="url-link mt-2">
+                                    <a v-bind:href="program.url" target="_blank">@{{ program.url}}</a> 
+                                </div>
+                            <div class="d-flex justify-content-end text-right text-white mt-2">
+                                <div class="mx-3">
+                                <a class="" href="#" data-toggle="modal" data-target="#myModal" @click="edit_program(program)" role="button">
+                                <button type="" class="edit-button">
+                                Edit</button>
+                                </div>
+                                </a>
+                                <div>
+                                <a class="" href="#" data-toggle="modal" data-target="#myModal" @click="delete_program(program)" role="button">
+                                <button type="" class="delete-button">
+                                Delete</button>
+                                </a> 
+                                </div>
+                            </div>
                             </div>
                         </div>
                     </div>
                 
-                    <div><br> <br> <br> <br> </div>
+                    <div><br> <br></div>
                     </div>
                 
                 </div>
             </div>
         </div>
-        @include('layouts.contents-footer', ['current' => 'home'])
 </div>
 @endsection
 
@@ -118,23 +118,16 @@
             </div>
             <!-- Modal body -->
             <div class="tab-content mx-3">
-                <div class="d-flex justify-content-between mt-2">
-                    <div>
+                <div class="d-flex justify-content-center mt-2">
+                    <div class="">
                         <template v-if="edit_type === 'create'">
-                            <h5 class="modal-title">Add new program</h5>
+                            <div class="function-title">Add new program</div>
                         </template>
                         <template v-if="edit_type === 'update'">
-                            <h5 class="modal-title">Edit program</h5>
+                            <div class="function-title">Edit program</div>
                         </template>
                         <template v-if="edit_type === 'delete'">
-                            <h5 class="modal-title">Delete program</h5>
-                        </template>
-                    </div>
-                    <div>
-                        <template v-if="edit_type === 'update'">
-                        <div @click="delete_program" >
-                            <img class="p-2" src="{{ asset('storage').'/common/ic_trush.png' }}" alt="">
-                        </div>
+                            <div class="function-title">Delete program</div>
                         </template>
                     </div>
                 </div>
@@ -147,8 +140,8 @@
                         
                         <textarea v-model="new_program_url" class="form-control"></textarea>
                     </div>
-                    <div class="text-right">
-                       <button type="button" class="btn-sm btn-warning" value="META" @click="get_metadata">get metadata</button>
+                    <div class="text-center">
+                       <button type="button" class="submit-button-middle" value="META" @click="get_metadata">Get metadata via URL</button>
                     </div>
                     <div class="form-group">
                         <label for="new_program_title" class="mr-3">Title</label>
@@ -181,14 +174,14 @@
                         <textarea v-model="new_program_comment" class="form-control" disabled></textarea>
                     </div>
                     </template>
-                    <div class="row my-3 mx-2 d-flex justify-content-center">
+                    <div class="row my-3 mx-2 d-flex justify-content-around">
                         <template v-if="edit_type === 'delete'">
-                            <button type="button" class="btn btn-danger" value="DELETE" @click="submit_delete_program">DELETE</button>
+                            <button type="button" class="submit-button-half-delete" value="DELETE" @click="submit_delete_program" data-dismiss="modal">DELETE</button>
                         </template>
                         <template v-else>
-                            <input type="submit" class="btn btn-primary" value="OK" @click="submit_new_program">
+                            <button type="button" class="submit-button-half" @click="submit_new_program" data-dismiss="modal">OK</button>
                         </template>
-                        <div class="mx-3"><a href="/home" id="modal_close_btn" class="btn btn-secondary text-white" role="button" data-dismiss="modal" @click="clear_values()">Cancel</a></div>
+                        <button type="button" class="submit-button-half-cancel" @click="clear_values" data-dismiss="modal" >Cancel</button>
                     </div>
                 </div>
                 <template v-if="edit_type === 'create'">
@@ -213,7 +206,7 @@
             </div>
             <div class="mx-4">
                 <div class="text-center my-2">
-                    <h5>Share Your Media Bookmark</h5>
+                    <div class="function-title">Share Your Media Bookmark</div>
                 </div>
                 <div class="my-3">
                     <div><u>Title</u></div>
@@ -277,13 +270,18 @@
                     <textarea v-model="bookmark_modal_comment" class="form-control" disabled></textarea>
                     </template>
                 </div>
-                <div class="row my-3 mx-2 d-flex justify-content-center">
+                <div class="row my-3 mx-2 d-flex justify-content-around">
                     <template v-if="bookmark_edit_type === 'update'">
-                    <input type="submit" class="btn btn-primary" value="OK" @click="submit_edit_bookmark">
+                        <button class="submit-button-half" @click="submit_edit_bookmark">
+                        OK
+                        </button>
                     </template>
                     <template v-else>
-                    <input type="submit" class="btn btn-danger" value="DELETE" @click="submit_delete_bookmark">
+                    <button class="submit-button-half-delete" @click="submit_delete_bookmark">DELETE</button>
                     </template>
+                    <button class="submit-button-half-cancel" data-dismiss="modal">
+                    Cancel 
+                    </button>
                 </div>
             </div>
         </div>
@@ -336,7 +334,7 @@
                     // console.log(response.data);
                     this.programs = response.data;
                     this.clear_values();
-                    $("#modal_close_btn").click();
+                    $("#b_modal_close_btn").click();
                 })    
                 .catch(function(error) {
                     console.log(error);
@@ -352,6 +350,11 @@
             },
             delete_program: function(program) {
                 this.edit_type = 'delete';
+                this.program_id = program.id;
+                this.new_program_title = program.title;
+                this.new_program_comment = program.comment;
+                this.new_program_url = program.url;
+                this.new_program_image = program.thumbnail_img;
             },
             submit_delete_program: function() {
                 axios
@@ -362,7 +365,7 @@
                 .then( response => {
                     this.programs = response.data;
                     this.clear_values();
-                    $("#modal_close_btn").click();
+                    $("#b_modal_close_btn").click();
                 })    
                 .catch(function(error) {
                     console.log(error);

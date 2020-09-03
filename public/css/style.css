@@ -2,7 +2,7 @@
     width: 100%;
 }
 
-ul ul a {
+ul a {
     font-size: 0.9em !important;
     padding-left: 30px !important;
     background: #6d7fcc;
@@ -17,8 +17,6 @@ ul ul a {
 .header-wrap {
     background-color: #7DC1F6;
     color: #FFFFFF; 
-    font-family: 'Rowdies', cursive;
-    font-size: 20px;
 }
 
 .footer-wrap {
@@ -61,12 +59,6 @@ a:link, a:visited, a:hover, a:active {
     font-weight: bold;
 } 
 
-.bookmark-edit-title {
-    font-weight: bold;
-    font-size: 20px;
-    color: #333333;
-}
-
 .bookmark-comment {
     font-size: 10px;
 }
@@ -77,11 +69,6 @@ a:link, a:visited, a:hover, a:active {
 
 .card-header {
     background-color: #98A6B5;
-}
-
-.bookmark-edit-comment {
-    font-size: 13px;
-    color: #000000;
 }
 
 #contents-footer {
@@ -129,6 +116,7 @@ a:link, a:visited, a:hover, a:active {
     background-color: #EFFCFF;
     color: #53A5DB;
     border-radius: 10px;
+    box-shadow: 1px 1px 3px #777777;
 }
 
 .bookmark-card a {
@@ -161,4 +149,179 @@ a:link, a:visited, a:hover, a:active {
 .bookmark-card-footer {
     font-size: 12px;
     color: #707070;
+}
+
+.submit-button {
+    background-color: #5360F1;
+    color: white;
+}
+
+#profile-card {
+    background-color: #FFFFFF;
+    border-radius: 25px;
+    box-shadow: 0px 0px 6px #777777;
+    color: #E6EBEE;
+}
+
+.profile-title {
+    background-color: #5360F1;
+    text-align: center;
+    width: 100%;
+    border-radius: 25px 25px 0 0;
+    color: #FFFFFF;
+    font-style: bold;
+    font-size: 20px;
+}
+
+.profile-name {
+    color: #53A5DB;
+    font-size: 20px;
+}
+
+
+.profile-comment {
+    color: #707070;
+}
+
+.profile-button {
+	padding: 5px 0;
+	width: 80px;
+	margin: 5px 0;
+	border-radius: 25px;
+	border: none;
+	font-size: 16px;
+	font-weight: 300;
+	background-color: #4069E2;
+    color: #E6EBEE;
+}
+
+.submit-button {
+	padding: 5px 0;
+	width: 300px;
+	margin: 5px 0;
+	border-radius: 25px;
+	border: none;
+	font-size: 16px;
+	font-weight: 300;
+	background-color: #4069E2;
+    color: #E6EBEE;
+}
+
+.submit-button-middle {
+	padding: 5px 0;
+	width: 200px;
+	margin: 5px 0;
+	border-radius: 25px;
+	border: none;
+	font-size: 16px;
+	font-weight: 300;
+	background-color: #4069E2;
+    color: #E6EBEE;
+}
+
+.submit-button-half {
+	padding: 5px 0;
+	width: 100px;
+	margin: 5px 0;
+	border-radius: 25px;
+	border: none;
+	font-size: 16px;
+	font-weight: 300;
+	background-color: #4069E2;
+    color: #E6EBEE;
+}
+
+.submit-button-half-cancel {
+	padding: 5px 0;
+	width: 100px;
+	margin: 5px 0;
+    border-radius: 25px;
+    border: solid 1px #4069E2;
+	font-size: 16px;
+	font-weight: 300;
+	background-color: white;
+    color: #4069E2;
+}
+
+.submit-button-half-delete {
+	padding: 5px 0;
+	width: 100px;
+	margin: 5px 0;
+	border-radius: 25px;
+	border: none;
+	font-size: 16px;
+	font-weight: 300;
+	background-color: red;
+    color: #E6EBEE;
+}
+
+.submit-button-mini {
+	width: 40px;
+	border-radius: 25px;
+	border: none;
+	background-color: #4069E2;
+    color: #E6EBEE;
+}
+
+
+.function-title {
+    color: #60BFFD;
+    font-style: bold;
+}
+
+.edit-header-wrap {
+    background-color: #03ADD1;
+    color: #FFFFFF; 
+    border-radius: 10px 10px 0 0;
+}
+
+.bookmark-wrap-card {
+	border-radius: 10px;
+    box-shadow: 0px 0px 6px #777777;
+}
+
+.bookmark-edit-title {
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.bookmark-edit-comment {
+    font-size: 13px;
+}
+
+.edit-header-wrap a {
+    color: #FFFFFF;
+}
+
+.program-title {
+    width: 70%;
+}
+
+.program-img {
+    width:30%;
+    max-width:150px;
+}
+
+.edit-button {
+	width: 60px;
+    border-radius: 10px;
+    border: solid 1px #03add1;
+	font-size: 12px;
+	font-style: bold;
+	background-color: white;
+    color: #03add1;
+}
+
+.delete-button {
+	width: 60px;
+    border-radius: 10px;
+    border: solid 1px red;
+	font-size: 12px;
+	font-style: bold;
+	background-color: white;
+    color: red;
+}
+
+.edit-contents {
+    border-bottom: dotted 1px #03add1 
 }

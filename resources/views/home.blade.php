@@ -11,45 +11,44 @@
 <div>
     
     <div class="">
-            <div class="my-2 text-center">
-            <h5>My Media Bookmarks</h5>
+            <div class="my-2 text-center function-title">
+            My Media Bookmarks
             </div>
-            <div class="text-right mt-1 mr-2">
-
-                <a class="btn btn-primary btn-sm text-white m-2" href="#" data-toggle="modal" data-target="#add-bookmark-modal" @click="init_modal_data">
-                Add
-                </a>
-                <!-- <img class="m-2" src="{{ asset('storage').'/common/ic_add_circle.png' }}" width="20px" data-toggle="modal" data-target="#add-bookmark-modal" @click="init_modal_data"> -->
+            <div class="text-center mt-1 mr-2">
+            <button type="" data-toggle="modal" data-target="#add-bookmark-modal" class="submit-button" @click="init_modal_data">
+            <i class="fas fa-plus"></i> Add Media Bookmark</button>
             </div>
     </div>
-    
-    <div class="border-bottom mt-2 pb-2" v-for="(bookmark,index) in bookmarks">
-        @php
-            $shared_url = url('').'/mbm/'; 
-        @endphp
-        <div class="d-flex justify-content-between">
-            <div class="ml-2 align-top w-80">
-                <div class="w-100">
-                    <div class="bookmark-title">
-                        @{{ bookmark.title }}
+
+    @php
+        $shared_url = url('').'/mbm/'; 
+    @endphp
+
+    <div class="mx-2">
+        <div class="bookmark-card my-3" v-for="bookmark in bookmarks" >
+            <div class="bookmark-card-body p-2 d-flex justify-content-between">
+                <div class="">
+                    <div class="bookmark-card-title">@{{ bookmark.title }}</div>
+                    <div>
+                    <a v-bind:href="'{{ $shared_url }}'+bookmark.share_token" class="bookmark-card-link" target="_blank">{{ $shared_url }}@{{ bookmark.share_token }}</a>
                     </div>
-                    <div class="url-link">
-                        <a v-bind:href="'{{ $shared_url}}' + bookmark.share_token " target="_blank">
-                            {{ $shared_url }}@{{ bookmark.share_token }}
-                        </a>
+                    <div class="bookmark-card-text mt-2">@{{ bookmark.comment }}</div>
+                    <div class="bookmark-card-footer d-flex my-2">
+                    <div class="mr-2">
+                    </div>
+                    <div>
+                    view: 230</div>
                     </div>
                 </div>
+                <div class="bookmark-card-icon mt-2 ml-2">
+                    <a v-bind:href="'/bookmark/edit/'+bookmark.id">
+                        <i class="fas fa-angle-right fa-2x"></i>
+                    </a>
+                </div>
             </div>
-            <div class="mx-2 my-auto w-20">
-                <a v-bind:href="'/bookmark/edit/'+bookmark.id">
-                    <img class="m-2" src="{{ asset('storage').'/common/ic_arrow.png' }}">
-                </a>
-            </div>
-        </div>
-        <div class="url-comment my-2 mx-2">
-            @{{ bookmark.comment }}
         </div>
     </div>
+    
     <div><br> <br> <br> <br> </div>
     @include('layouts.contents-footer', ['current' => 'home'])
 </div>

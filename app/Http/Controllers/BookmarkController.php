@@ -88,25 +88,19 @@ class BookmarkController extends Controller
     public function search(Request $request) {
         $form = $request->all();
         $keyword = $form['keyword'];
-        $user = $form['user'];
-        $url = $form['url'];
-        $query = Bookmark::query()->with('user:id,name');
+        $auth = Auth::user();
+        $query = Bookmark::query()->where('user_id', '<>', $auth->id)->with('user:id,name');
 
-        if ($user) {
-            $query->nameEqual($user);
-        }
-
-        if ($keyword) {
-            $query->keywordLike($keyword);
-        }
-
-        if ($url) {
-            $query->shareTokenEqual($url);
+        $word_list = preg_split('/\s/', $keyword);
+        foreach ($word_list as $word) {
+            $query->where(function($query) use ($word) {
+                $query->nameEqual($word);
+                $query->keywordLike($word);
+                $query->shareTokenEqual($word);
+            });
         }
 
         $bookmarks = $query->get()->toArray();
-
-        $auth = Auth::user();
         
         $favorites = Favorite::where('user_id', $auth->id)->pluck('bookmark_id');
 

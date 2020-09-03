@@ -15,44 +15,39 @@
         <link href="{{ asset('css/style.css') }}" rel="stylesheet">
         <!-- Bootstrap CSS CDN -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
-
+        <!-- FontAweSome ICON -->
+        <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
         <style>
 
         </style>
 </head>
 <body>
 
-    <div id="app" class="container-fluid d-flex justify-content-center p-0">
-        <div class="col-xs-12 col-xl-6 col-lg-8 p-0">
-            <div class="d-flex justify-content-center header-wrap text-white py-1 sticky-top">
-                <!-- Media Bookmark -->
+    @if (preg_match('/bookmark\/edit\//', request()->path()))
+        <div id="app" class="bookmark-wrap-card d-flex justify-content-center my-2 mx-2">
+            <div class="col-xs-12 col-xl-6 col-lg-8 p-0">
+                <div class="edit-header-wrap text-white py-1">
+                @yield('bookmark-edit-header')
+                </div>
                 
-                <img class="my-2" src="{{ asset('storage').'/common/logo1-1.png' }}" alt="" height="20px">
+                @yield('content')
 
+                @yield('modal-contents')
             </div>
-
-            @yield('content')
-
-            @yield('modal-contents')
         </div>
-    </div>
+    @else
+        <div id="app" class="container-fluid d-flex justify-content-center p-0">
+            <div class="col-xs-12 col-xl-6 col-lg-8 p-0">
+                <div class="d-flex justify-content-center header-wrap text-white py-1 sticky-top">
+                    <img class="my-2" src="{{ asset('storage').'/common/logo1-2.png' }}" alt="" height="20px">
+                </div>
 
+                @yield('content')
 
-            {{-- <!-- <div class="sidebar-header py-2"> -->
-                // @if (Auth::user()
-                <!-- <div class="d-flex justify-content-center"> -->
-                //    <!-- @if (preg_match('/^http(.+)/', $auth->img_url)) -->
-                        <!-- <img src="{{ $auth->img_url }}" class="rounded-circle" width="60" height="60"> -->
-                    <!-- @else -->
-                        <!-- <img src="{{ asset('storage').'/'.$auth->img_url }}" class="rounded-circle" width="60" height="60"> -->
-                //    <!-- @endif -->
-                <!-- </div> -->
-                <!-- <div class="d-flex justify-content-center"> -->
-                    <!-- <a href="/user"> {{ $auth->name }} </a> -->
-                <!-- </div> -->
-                //<!-- @endif -->
-            <!-- </div> --> --}}
-    
+                @yield('modal-contents')
+            </div>
+        </div>
+    @endif
     <!-- jQuery CDN - Slim version (=without AJAX) -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <!-- Popper.JS -->

@@ -8,54 +8,20 @@
 <div>
     <div class="mx-2">
         <div class="">
-            <div class="my-2 text-center">
-                <h5>Search</h5>
-            </div>
-        </div>
-        <template v-if="search_state === true">
-        <div class="my-4">
-        Keyword (title, comment): 
-            <div>
-                <input type="text" v-model="keyword" class="form-control">
+            <div class="my-2 text-center function-title">
+                Search
             </div>
         </div>
         <div class="my-4">
-        User: 
-            <div>
-                <input type="text" v-model="user" class="form-control">
-            </div>
-        </div>
-        <div class="my-4">
-        Share URL Token:
-        <div>ex.) 5f217cb6433b1</div> 
-            <div>
-                <input type="text" v-model="url" class="form-control">
-            </div>
-        </div>
-        <div class="text-center">
-            <input type="button" class="btn btn-primary" value="OK" @click="submit_search">
-        </div>
-        </template>
-        <template v-else>
-            <div class="text-right">
-            <img src="{{ asset('storage').'/common/ic_search.png' }}" alt="" @click="change_search_state">
-            </div>
-            <template v-if="keyword !== ''">
-            <div class="my-2">
-            Keyword:@{{ keyword }} 
-            </div>
-            </template>
-            <template v-if="user !== ''">
-            <div class="my-2">
-            User:@{{ user }} 
-            </div>
-            </template>
-            <template v-if="url !== ''">
-            <div class="my-2">
-            URL:@{{ url }}
-            </div>
-            </template>
-        </template>
+        Keyword:<br> (title, comment, user, share_token)
+            <div class="input-group">
+                <input type="text" class="form-control" v-model="keyword">
+                <span class="input-group-btn">
+                    <button type="button" class="btn submit-button-mini ml-2" @click="submit_search">
+                    <i class="fas fa-search"></i>
+                    </button>
+                </span>
+            </div> 
     </div>
     <div class="mx-2">
         <div class="bookmark-card my-3" v-for="bookmark in bookmarks" >
@@ -103,8 +69,6 @@
         el: '#app',
         data: {
             keyword: '',
-            user: '',
-            url: '',
             bookmarks: [],
             favorites: [],
             search_state: true,
@@ -116,8 +80,6 @@
                 axios
                 .post('/bookmark/search', {
                     keyword: this.keyword,
-                    url: this.url,
-                    user: this.user,
                 })
                 .then( response => {
                     this.bookmarks = response.data.bookmarks;

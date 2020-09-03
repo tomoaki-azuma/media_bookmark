@@ -1,51 +1,34 @@
 @extends('layouts.app')
 
 @section('content')
-<div>
-    <div>
-        <div class="">
-            <div class="my-2 text-center">
-                <h5>Profile</h5>
-            </div>
-        </div>
-        <div class="my-2">
-            <div class="text-center my-3">
-                <template v-if="img_url === '' || img_url === null">
-                    <img src="{{ asset('storage').'/avatars/avatardefault.png' }}" class="rounded-circle" width="60" height="60">
-                </template>
-                <template v-else>    
-                    <img v-bind:src="img_url" class="rounded-circle" width="60" height="60">
-                </template>
-            </div>
-            <div class="d-flex justify-content-center">
-                <div class="w-75">
-                Name : @{{ name }} 
-                </div>
-            </div>
-            <div class="d-flex justify-content-center">
-                <div class="w-75">
-                Mail : @{{ email }}
-                </div>
-            </div>
-            <div class="d-flex justify-content-center mt-3">
-                <div class="w-75">
-                    <div>
-                    Comment
-                    </div>
-                    <div>
-                    @{{ comment }}
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="mt-5">
-            <div class="d-flex justify-content-center">
-                <button type="button" data-toggle="modal" data-target="#myModal" class="btn btn-primary btn-sm" @click="init_modal_data">Edit</button>
-            </div>
-        </div>
+<div id="profile-card" class="mt-4 mx-3 pb-4">
+    <div class="profile-title my-2 py-2">
+	Profile
     </div>
-
+	<div class="profile-img text-center my-3">
+        <template v-if="img_url === '' || img_url === null">
+            <img src="{{ asset('storage').'/avatars/avatardefault.png' }}" class="rounded-circler" width="80" height="80">
+        </template>
+        <template v-else>    
+            <img v-bind:src="img_url" class="rounded-circle" width="80" height="80">
+        </template>
+    </div>
+    <div class="text-center profile-name mb-3">
+        @{{ name }}
+    </div>
+	<div class="profile-comment mx-5">
+	@{{ comment }}
+	</div>
+	<div class="d-flex justify-content-around mx-3 my-4">
+        <button type="" data-toggle="modal" data-target="#myModal" class="profile-button" @click="init_modal_data">Edit</button>
+        <a href="/logout">
+            <button class="profile-button">Logout</button>
+        </a>
+    </div>
+    
     @include('layouts.contents-footer', ['current' => 'profile'])
+</div>
+
 </div>
 @endsection
 
@@ -71,10 +54,10 @@
                     </div>
                     <div class="text-center">
                         <template v-if="new_img_url === '' || new_img_url === null">
-                            <img src="{{ asset('storage').'/avatars/avatardefault.png' }}" class="rounded-circle" width="60" height="60">
+                            <img src="{{ asset('storage').'/avatars/avatardefault.png' }}" class="rounded-circle" width="80" height="80">
                         </template>
                         <template v-else>    
-                            <img v-bind:src="new_img_url" class="rounded-circle" width="60" height="60">
+                            <img v-bind:src="new_img_url" class="rounded-circle" width="80" height="80">
                         </template>
                     </div>
                     <div class="form-group">
@@ -83,7 +66,7 @@
                     </div>
                     <div class="row my-3 mx-2 d-flex justify-content-center">
                         <div class="mx-1">
-                            <input class="btn btn-primary" value="OK" @click="submit_user_update">
+                            <input type="button" class="btn btn-primary" value="OK" @click="submit_user_update">
                         </div>
                     </div>
                 </div>

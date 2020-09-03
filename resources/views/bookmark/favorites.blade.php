@@ -8,8 +8,8 @@
 <div>
     <div class="mx-2">
         <div class="">
-            <div class="my-2 text-center">
-                <h5>My Favorites</h5>
+            <div class="my-2 text-center function-title">
+                My Favorites
             </div>
         </div>
     </div>
