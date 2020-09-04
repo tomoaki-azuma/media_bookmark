@@ -12,6 +12,9 @@
     <div class="flex-fill">
         <div class="bookmark-card-text mt-2m ml-1">@{{ bookmark.comment }}</div>
         <div class="bookmark-card-footer d-flex my-2 ml-1">
+            @if (!$my_bookmark)
+            <div class="mr-3">editor: @{{ bookmark.user.name }}</div>
+            @endif
             <div><i class="far fa-eye"></i>: @{{ bookmark.view_cnt }}</div>
             <div class="ml-3"><i class="far fa-heart"></i>: @{{ bookmark.favorite_cnt }}</div>
             <div class="ml-3">
