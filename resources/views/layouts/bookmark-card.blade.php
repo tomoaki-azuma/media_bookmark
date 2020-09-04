@@ -16,7 +16,14 @@
             <div class="mr-3">editor: @{{ bookmark.user.name }}</div>
             @endif
             <div><i class="far fa-eye"></i>: @{{ bookmark.view_cnt }}</div>
-            <div class="ml-3"><i class="far fa-heart"></i>: @{{ bookmark.favorite_cnt }}</div>
+            <div class="ml-3">
+            <template v-if="bookmark.favorite_cnt > 0">
+            <i style="color: red;" class="fas fa-heart"></i>: @{{ bookmark.favorite_cnt }}
+            </template>
+            <template v-else>
+            <i class="far fa-heart"></i>: @{{ bookmark.favorite_cnt }}
+            </template>
+            </div>
             <div class="ml-3">
                 <button type="" class="edit-button" data-toggle="modal" data-target="#share-modal" @click="create_share_data(bookmark)">
                 Share
