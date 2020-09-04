@@ -13,32 +13,10 @@
             </div>
         </div>
     </div>
+    
     <div class="mx-2">
         <div class="bookmark-card my-3" v-for="bookmark in bookmarks" >
-            <div class="bookmark-card-body p-2 d-flex justify-content-between">
-                <div class="">
-                    <div class="bookmark-card-title">@{{ bookmark.title }}</div>
-                    <div>
-                    <a v-bind:href="'{{ $shared_url }}'+bookmark.share_token" class="bookmark-card-link" target="_blank">{{ $shared_url }}@{{ bookmark.share_token }}</a>
-                    </div>
-                    <div class="bookmark-card-text mt-2">@{{ bookmark.comment }}</div>
-                    <div class="bookmark-card-footer d-flex my-2">
-                    <div class="mr-2">
-                    editor: @{{ bookmark.user.name }}
-                    </div>
-                    <div>
-                    view: 230</div>
-                    </div>
-                </div>
-                <div class="bookmark-card-icon mt-2">
-                    <template v-if="include_favorite(bookmark.id)">
-                        <img src="{{ asset('storage').'/common/ic_favorite.png' }}" @click="delete_favorite(bookmark.id)">
-                    </template>
-                    <template v-else>
-                        <img src="{{ asset('storage').'/common/ic_heart.png' }}" alt="" @click="add_favorite(bookmark.id)">
-                    </template>
-                </div>
-            </div>
+        @include('layouts.bookmark-card', ['my_bookmark' => false])
         </div>
     </div>
 
@@ -50,7 +28,7 @@
 @endsection
 
 @section('modal-contents')
-
+    @include('layouts.sharemodal')
 @endsection
 
 @section('vuepart')
@@ -64,7 +42,11 @@
             bookmarks: [],
             favorites: [],
             search_state: true,
-            user_id: ''
+            user_id: '',
+            share_title: '',
+            share_comment: '',
+            shared_url: '',
+            qr_code_url: ''
         },
         methods: {
             submit_search: function() {
@@ -111,6 +93,13 @@
             },
             include_favorite: function(bookmark_id) {
                 return this.favorites.includes(bookmark_id);
+            },
+            create_share_data: function(bookmark) {
+                this.share_title = bookmark.title;
+                this.share_comment = bookmark.comment;
+                shared_url = '{{ $shared_url}}' + bookmark.share_token;
+                this.shared_url = shared_url;
+                this.qr_code_url = `https://api.qrserver.com/v1/create-qr-code/?data=${shared_url}&amp;size=200x200`;
             },
         },
         created: function() {

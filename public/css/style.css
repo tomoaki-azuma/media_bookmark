@@ -113,10 +113,16 @@ a:link, a:visited, a:hover, a:active {
 }
 
 .bookmark-card {
-    background-color: #EFFCFF;
-    color: #53A5DB;
-    border-radius: 10px;
-    box-shadow: 1px 1px 3px #777777;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0px 0px 2px #555555;
+}
+
+.bookmark-card-tab {
+    width: fit-content;
+    background-color: #03ADD1;
+    width: 12px;
+    border-radius: 8px 0 0 8px;
 }
 
 .bookmark-card a {
@@ -126,7 +132,18 @@ a:link, a:visited, a:hover, a:active {
 
 .bookmark-card-title {
     font-size: 16px;
+    background-color: #03ADD1;
+    color: white;
     font-style: bold;
+    border-radius: 8px 8px 0 0;
+}
+
+.bookmark-card-title-others {
+    font-size: 16px;
+    background-color: #feca00;
+    color: white;
+    font-style: bold;
+    border-radius: 8px 8px 0 0;
 }
 
 .bookmark-card-link {
@@ -135,8 +152,9 @@ a:link, a:visited, a:hover, a:active {
 }
 
 .bookmark-card-text {
-    font-size: 14px;
+    font-size: 12px;
     color: #707070;
+    min-height: 30px;
 }
 
 .bookmark-card-icon {

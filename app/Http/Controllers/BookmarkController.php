@@ -108,7 +108,7 @@ class BookmarkController extends Controller
         
     }
 
-    public function add_favorite(Request $request) {
+    private function add_favorite_common(Request $request) {
         $auth = Auth::user();
         $user_id = $auth->id;
         $form = $request->all();
@@ -119,7 +119,20 @@ class BookmarkController extends Controller
             $favorite->user_id = $user_id;
             $favorite->bookmark_id = $bookmark_id;
             $favorite->save();
+
+            $bookmark = Bookmark::find($bookmark_id);
+            $bookmark->increment('favorite_cnt');
+            $bookmark->save();
         }
+    }
+
+    public function add_favorite_and_search(Request $request) {
+        $this->add_favorite_common($request);
+        return $this->search($request);
+    }
+
+    public function add_favorite(Request $request) {
+        $this->add_favorite_common($request);
 
         $favorites = Favorite::where('user_id', $auth->id)->pluck('bookmark_id');
         $favorite_bookmarks = Bookmark::whereIn('id', $favorites)->with('user:id,name')->get()->toArray();
@@ -127,7 +140,7 @@ class BookmarkController extends Controller
         
     }
 
-    public function delete_favorite(Request $request) {
+    private function delete_favorite_common(Request $request) {
         $auth = Auth::user();
         $user_id = $auth->id;
         $form = $request->all();
@@ -135,6 +148,19 @@ class BookmarkController extends Controller
         
         $favorite = Favorite::where('bookmark_id', $bookmark_id)->where('user_id', $user_id)->delete();
 
+        $bookmark = Bookmark::find($bookmark_id);
+        $bookmark->decrement('favorite_cnt');
+        $bookmark->save();
+    }
+
+    public function delete_favorite_and_search(Request $request) {
+        $this->delete_favorite_common($request);
+        return $this->search($request);
+    }
+
+    public function delete_favorite(Request $request) {
+        $this->delete_favorite_common($request);
+        $auth = Auth::user();
         $favorites = Favorite::where('user_id', $auth->id)->pluck('bookmark_id');
         $favorite_bookmarks = Bookmark::whereIn('id', $favorites)->with('user:id,name')->get()->toArray();
 

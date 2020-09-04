@@ -34,8 +34,9 @@ Route::get('/bookmark/share', 'BookmarkController@share');
 Route::post('/bookmark/destroy', 'BookmarkController@destroy');
 Route::get('/bookmark/search_init', 'BookmarkController@search_init');
 Route::post('/bookmark/search', 'BookmarkController@search');
-Route::post('/bookmark/add_favorite', 'BookmarkController@add_favorite');
+Route::post('/bookmark/add_favorite_and_search', 'BookmarkController@add_favorite_and_search');
 Route::post('/bookmark/delete_favorite', 'BookmarkController@delete_favorite');
+Route::post('/bookmark/delete_favorite_and_search', 'BookmarkController@delete_favorite_and_search');
 Route::get('/bookmark/my_favorite', 'BookmarkController@init_my_favorite');
 Route::get('/bookmark/get_my_favorite', 'BookmarkController@my_favorite');
 

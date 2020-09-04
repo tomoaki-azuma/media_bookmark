@@ -84,8 +84,8 @@
                                 <a class="" href="#" data-toggle="modal" data-target="#myModal" @click="edit_program(program)" role="button">
                                 <button type="" class="edit-button">
                                 Edit</button>
-                                </div>
                                 </a>
+                                </div>
                                 <div>
                                 <a class="" href="#" data-toggle="modal" data-target="#myModal" @click="delete_program(program)" role="button">
                                 <button type="" class="delete-button">
@@ -198,47 +198,7 @@
     </div>
 </div>
 
-<div class="modal fade" id="share-modal">
-    <div class="modal-dialog modal-sm">
-        <div class="modal-content">
-            <div class="mt-1 mr-1"> 
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-            </div>
-            <div class="mx-4">
-                <div class="text-center my-2">
-                    <div class="function-title">Share Your Media Bookmark</div>
-                </div>
-                <div class="my-3">
-                    <div><u>Title</u></div>
-                    <div class="ml-2 bookmark-title">@{{ modal_title}}</div>
-                </div>
-                <div class="my-3">
-                    <div><u>Comment</u></div>
-                    <div class="ml-2">@{{ modal_comment}}</div>
-                </div>
-                <div class="my-3">
-                    <div><u>Share via</u></div>
-                    <div class="ml-2">
-                    <input id="copy-target" class="form-control-plaintext" type="text" v-bind:value=shared_url readonly>
-                    </div>
-                    <div class="text-right"><img src="{{ asset('storage').'/common/ic_clipboard.png' }}" alt="" @click="copy_clipboard()"></div>
-                </div>
-                <div class="my-3">
-                    <div class="ml-2">QR Code</div>
-                    <div class="text-center my-2"><img v-bind:src="qr_code_url" width="150" height="150" alt="" title="" /></div>
-                </div>
-                <div class="my-3">
-                    <div class="ml-2">SNS</div>
-                    <div class="d-flex justify-content-around my-3">
-                    <img src="{{ asset('storage').'/common/twitter-icon.png' }}" alt="">
-                    <img src="{{ asset('storage').'/common/facebook-icon.png' }}" alt="">
-                    <img src="{{ asset('storage').'/common/line-icon.png' }}" alt="">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+@include('layouts.sharemodal')
 
 <div class="modal fade" id="edit-bookmark-modal">
     <div class="modal-dialog modal-sm">
@@ -249,9 +209,17 @@
             </div>
         </div>
             <div class="mx-4">
+
+                <template v-if="bookmark_edit_type === 'update'">
                 <div class="text-center my-2">
-                    <h5>Edit Media Bookmark</h5>
+                    <div class="function-title">Edit Media Bookmark</div>
                 </div>
+                </template>
+                <template v-else>
+                <div class="text-center my-2">
+                    <div class="function-title">Delete Media Bookmark</div>
+                </div>
+                </template>
                 <div class="form-group">
                     <label for="title">Title</label>
                     <template v-if="bookmark_edit_type === 'update'">
@@ -308,8 +276,8 @@
             new_program_image: '',
             edit_type: '',
             program_id: '',
-            modal_title: '',
-            modal_comment: '',
+            share_title: '',
+            share_comment: '',
             qr_code_url: '',
             shared_url: '',
         },
@@ -395,8 +363,8 @@
                 });
             },
             create_modal_data: function() {
-                this.modal_title = '{{ $bookmark->title }}';
-                this.modal_comment = '{{ $bookmark->comment }}';
+                this.share_title = '{{ $bookmark->title }}';
+                this.share_comment = '{{ $bookmark->comment }}';
                 shared_url = '{{ $shared_url.$bookmark->share_token }}';
                 this.shared_url = shared_url;
                 this.qr_code_url = `https://api.qrserver.com/v1/create-qr-code/?data=${shared_url}&amp;size=200x200`;
