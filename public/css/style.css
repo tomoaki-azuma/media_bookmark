@@ -126,8 +126,7 @@ a:link, a:visited, a:hover, a:active {
 }
 
 .bookmark-card a {
-    color: #53A5DB;
-    text-decoration: underline;
+    text-decoration: none;
 }
 
 .bookmark-card-title {
@@ -136,6 +135,16 @@ a:link, a:visited, a:hover, a:active {
     color: white;
     font-style: bold;
     border-radius: 8px 8px 0 0;
+}
+
+.bookmark-card-title a {
+    color: white;
+    text-decoration: none;
+}
+
+.bookmark-card-title-others a {
+    color: white;
+    text-decoration: none;
 }
 
 .bookmark-card-title-others {

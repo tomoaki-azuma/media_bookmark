@@ -12,6 +12,9 @@ class MbmController extends Controller
     public function index($share_token)
     {
         $bookmark = Bookmark::where('share_token', $share_token)->get()[0];
+        $bookmark->increment('view_cnt');
+        $bookmark->save();
+
         $editor = User::find($bookmark->user_id);
         return view('mbm.index', ['bookmark' => $bookmark, 'editor' => $editor]);
     }

@@ -1,7 +1,11 @@
 @if ($my_bookmark)
-<div class="bookmark-card-title p-1 pl-2">@{{ bookmark.title }}</div>
+<div class="bookmark-card-title p-1 pl-2">
+<a v-bind:href="'{{ $shared_url }}'+ bookmark.share_token" target="_blank">@{{ bookmark.title }}</a>
+</div>
 @else
-<div class="bookmark-card-title-others p-1 pl-2">@{{ bookmark.title }}</div>
+<div class="bookmark-card-title-others p-1 pl-2">
+<a v-bind:href="'{{ $shared_url }}'+ bookmark.share_token" target="_blank">@{{ bookmark.title }}</a>
+</div>
 @endif
 
 <div class="bookmark-card-body d-flex ml-2 mt-2">
