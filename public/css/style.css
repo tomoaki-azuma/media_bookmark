@@ -137,6 +137,14 @@ a:link, a:visited, a:hover, a:active {
     border-radius: 8px 8px 0 0;
 }
 
+.home-card-title {
+    font-size: 14px;
+    background-color: #47B6FD;
+    color: white;
+    border-radius: 8px 8px 0 0;
+    text-align: center;
+}
+
 .bookmark-card-title a {
     color: white;
     text-decoration: none;
@@ -176,11 +184,6 @@ a:link, a:visited, a:hover, a:active {
 .bookmark-card-footer {
     font-size: 12px;
     color: #707070;
-}
-
-.submit-button {
-    background-color: #5360F1;
-    color: white;
 }
 
 #profile-card {
@@ -296,6 +299,10 @@ a:link, a:visited, a:hover, a:active {
     font-style: bold;
 }
 
+.home-card-text {
+    font-size: 14px;
+}
+
 .edit-header-wrap {
     background-color: #03ADD1;
     color: #FFFFFF; 
@@ -351,4 +358,14 @@ a:link, a:visited, a:hover, a:active {
 
 .edit-contents {
     border-bottom: dotted 1px #03add1 
+}
+
+.register-text a {
+    font-size: 14px;
+    color: #5360F1;
+}
+
+.twitter-login-button {
+   background-color: #1DA1F2;
+   color: white; 
 }

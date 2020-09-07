@@ -3,56 +3,82 @@
 @section('ogp-matadata')
 <meta property="og:title" content="Media Bookmark">
 <meta property="og:description" content="Media Bookmark">
-<meta property="og:image" content="{{ asset('storage').'/common/toppage.gif' }}">
+<meta property="og:image" content="{{ asset('storage').'/common/toplogo.png' }}">
 @endsection
 
 @section('content')
-<div>
-    <img class="img-fluid" src="{{ asset('storage').'/common/toppage.gif' }}" alt="">
+<div class="d-flex justify-content-center my-3">
+    @auth
+        <a href="{{ url('/home') }}">
+        <button type="" class="submit-button">
+        Login</button>
+        </a>
+    @else
+        <div class="text-center">
+            <div>
+            <a href="{{ route('login') }}">
+            <button type="" class="submit-button">
+            Login</button>
+            </a>
+            </div>
+            <div class="register-text">
+            <a class="mx-1" href="{{ route('register') }}">新規会員登録する</a>
+            </div>
+        </div>
+    @endauth
 </div>
-<div class="d-flex justify-content-end my-1">
-    <div class="mx-1">
-        @auth
-            <a href="{{ url('/home') }}">Home</a>
-        @else
-            <a class="mx-1" href="{{ route('login') }}">Login</a>
-            <a class="mx-1" href="{{ route('register') }}">Register</a>
-        @endauth
+<div class="d-flex justify-content-center my-3">
+    <div class="btn-group">
+        <a href='/login/twitter'>
+        <button type="" class="submit-button twitter-login-button">
+        <i class="fab fa-twitter mr-2"></i>Sign in with Twitter</button>
+        </a>
     </div>
 </div>
-<div class="mx-4 mt-3 top-contents">
-        Media Bookmarkは自分の好きなコンテンツのブックマークを作成し、世界中の人と共有できるサービスです。
+<div class="mx-3 mt-3 bookmark-card">
+    <div class="home-card-title py-0 px-2">Media Bookmarkとは？</div>
+    <div class="home-card-text p-3">
+        Media Bookmarkは自分の好きなコンテンツのブックマークを作成し、世界中の人と共有できるサービスです。<br>
+        あなたの好きなHP、ブログ、動画、画像あらゆるメディアへのリンクを自分のお気に入りを書いたカードを配るような感覚で共有することができます。
+    </div>
 </div>
-<div class="mx-4 mt-3 top-contents">
-        あなたの好きなHP、ブログ、動画、画像あらゆるメディアへのリンクをメディアブックマークに登録して共有しましょう。
+<div class="mx-3 mt-3 bookmark-card">
+    <div class="home-card-title py-0 px-2">特徴</div>
+    <div class="home-card-text p-3">
+        <div>
+            <div class="home-card-subtitle">簡単登録</div>
+            <div>
+                ブックマークへのリンクの登録はurlをコピーするだけ。タイトルや詳細情報、サムネイルは自動で取得します。
+            </div>
+        </div>
+        <div class="mt-3">
+            <div>登録無料</div>
+            <div>
+            ユーザー登録をしていただければ無料にて利用できます。
+            ユーザ登録はメールアドレスまたはSNSアカウントにてできます。
+            </div>
+        </div>
+        <div class="mt-3">
+            <div>多様なシェア方法</div>
+            <div>
+            ブックマークの共有は各種SNS、QRコード、URLリンクのコピーにより簡単に行えます。<br>ブックマークの共有先は本サービスのユーザである必要はなく、多くの人に共有してもらうことができます。
+            </div>
+        </div>
+    </div>
+</div>
+<div class="mx-3 mt-3 bookmark-card">
+    <div class="home-card-title py-0 px-2">デモンストレーション</div>
+    <div class="home-card-text p-3">
+        <div class="mt-1">
+            <div>
+            百聞は一見に如かず。実際にデモを見てもらったほうがよいかもしれません。<br>
+            以下のQRコードまたはリンクから実際にシェアされるMedia Bookmarkとデモ動画をご覧ください。
+            </div>
+        </div>
+    </div>
 </div>
 <div class="mx-4 mt-3 top-contents text-center">
-    <h5>Features</h5>    
-</div>
-<div class="mx-4 mt-3 top-contents">
-    <div>簡単登録</div>
-    <div>
-        ブックマークへのリンクの登録はURLをコピーするだけ。タイトルや詳細情報、サムネイルは自動で取得します。
-    </div>
-</div>
-<div class="mx-4 mt-3 top-contents">
-    <div>Free to use</div>
-    <div>
-    ユーザー登録をしていただければ無料にて利用できます。
-    ユーザ登録はメールアドレスまたはSNSアカウントにてできます。
-    </div>
-</div>
-<div class="mx-4 mt-3 top-contents">
-    <div>多様なシェア方法</div>
-    <div>
-    ブックマークの共有は各種SNS、QRコード、URLリンクのコピーにより簡単に行えます。<br>ブックマークの共有者先は本サービスのユーザである必要はなく、多くの人に共有してもらうことができます。
-    </div>
-</div>
-<div class="mx-4 mt-3 top-contents text-center">
-    <h5>Demo</h5>    
-</div>
-<div class="mx-4 mt-3 top-contents">
-百聞は一見に如かず。実際にデモを見てもらったほうがよいかもしれません。以下のQRコードまたはリンクからMedia Bookmarkとデモ動画をご覧ください。
+    <h5>DEMO</h5>    
 </div>
 <div class="text-center">
     <div>
@@ -70,18 +96,13 @@
     <div class="w-50 text-center">
         Privacy
     </div>
-</div>
-<div class="d-flex justify-contents-between py-1">
     <div class="w-50 text-center">
         About Us
-    </div>
-    <div class="w-50 text-center">
-
     </div>
 </div>
 <div class="text-center py-1">
     <div>
-        2020 Rise Inc.
+        2020 Rise Inc.<br><br>
     </div>
 </div>
 @endsection       
