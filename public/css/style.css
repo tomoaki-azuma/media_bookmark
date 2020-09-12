@@ -198,6 +198,7 @@ a:link, a:visited, a:hover, a:active {
     display: flex;
     align-items: center;
     background-color: #7DC1F6;
+    border-radius: 10px 0 0 10px;
 }
 
 .profile-name {
