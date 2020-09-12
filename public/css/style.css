@@ -188,29 +188,27 @@ a:link, a:visited, a:hover, a:active {
 
 #profile-card {
     background-color: #FFFFFF;
-    border-radius: 25px;
-    box-shadow: 0px 0px 6px #777777;
+    border-radius: 10px;
+    box-shadow: 0px 0px 4px #777777;
     color: #E6EBEE;
+    height: 200px;
 }
 
-.profile-title {
-    background-color: #5360F1;
-    text-align: center;
-    width: 100%;
-    border-radius: 25px 25px 0 0;
-    color: #FFFFFF;
-    font-style: bold;
-    font-size: 20px;
+.profile-img {
+    display: flex;
+    align-items: center;
+    background-color: #7DC1F6;
 }
 
 .profile-name {
     color: #53A5DB;
-    font-size: 20px;
+    font-size: 18px;
 }
 
 
 .profile-comment {
     color: #707070;
+    font-size: 14px;
 }
 
 .profile-button {
@@ -235,6 +233,11 @@ a:link, a:visited, a:hover, a:active {
 	font-weight: 300;
 	background-color: #4069E2;
     color: #E6EBEE;
+}
+
+.logout-button {
+	background-color: #E6EBEE;
+    color: #4069E2;
 }
 
 .submit-button-middle {

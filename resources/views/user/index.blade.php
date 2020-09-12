@@ -1,11 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
-<div id="profile-card" class="mt-4 mx-3 pb-4">
-    <div class="profile-title my-2 py-2">
-	Profile
-    </div>
-	<div class="profile-img text-center my-3">
+
+<div class="my-3 text-center function-title">
+   Profile 
+</div>
+<div id="profile-card" class="d-flex mt-2 mx-2 ">
+	<div class="profile-img px-4">
         <template v-if="img_url === '' || img_url === null">
             <img src="{{ asset('storage').'/avatars/avatardefault.png' }}" class="rounded-circler" width="80" height="80">
         </template>
@@ -13,22 +14,26 @@
             <img v-bind:src="img_url" class="rounded-circle" width="80" height="80">
         </template>
     </div>
-    <div class="text-center profile-name mb-3">
-        @{{ name }}
-    </div>
-	<div class="profile-comment mx-5">
-	@{{ comment }}
-	</div>
-	<div class="d-flex justify-content-around mx-3 my-4">
-        <button type="" data-toggle="modal" data-target="#myModal" class="profile-button" @click="init_modal_data">Edit</button>
-        <a href="/logout">
-            <button class="profile-button">Logout</button>
-        </a>
+    <div class="profile-box">
+        <div class="profile-name mt-3 ml-2">
+            @{{ name }}
+        </div>
+        <div class="profile-comment ml-2 mt-3">
+        @{{ comment }}
+        </div>
     </div>
     
-    @include('layouts.contents-footer', ['current' => 'profile'])
 </div>
 
+<div class="d-flex justify-content-center my-3">
+    <button type="" data-toggle="modal" data-target="#myModal" class="submit-button" @click="init_modal_data">Edit</button>
+</div>
+<div class="d-flex justify-content-center my-3">
+    <a href="/logout">
+        <button class="submit-button logout-button">Logout</button>
+    </a>
+</div>
+@include('layouts.contents-footer', ['current' => 'profile'])
 </div>
 @endsection
 
