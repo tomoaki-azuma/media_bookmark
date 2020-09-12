@@ -11,7 +11,7 @@
             <img src="{{ asset('storage').'/avatars/avatardefault.png' }}" class="rounded-circler" width="80" height="80">
         </template>
         <template v-else>    
-            <img v-bind:src="img_url" class="rounded-circle" width="80" height="80">
+            <img v-bind:src="img_url" class="rounded-circle" width="60" height="60">
         </template>
     </div>
     <div class="profile-box">

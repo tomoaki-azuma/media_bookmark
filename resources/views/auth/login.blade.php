@@ -1,15 +1,18 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="card mt-3 mx-2">
-    <div class="card-header">{{ __('Login') }}</div>
-
-    <div class="card-body">
+<div>
+    
+    <div class="my-2 text-center function-title">
+    Login 
+    </div>
+    
+    <div class="mx-2">
         <form method="POST" action="{{ route('login') }}">
             @csrf
 
             <div class="form-group row">
-                <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
+                <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail') }}</label>
 
                 <div class="col-md-6">
                     <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
@@ -49,15 +52,17 @@
             </div>
 
             <div class="form-group row mb-0">
-                <div class="col-md-8 offset-md-4">
-                    <button type="submit" class="btn btn-primary">
+                <div class="col-md-8 offset-md-4 text-center login-button-wrap">
+                    <button type="submit" class="submit-button">
                         {{ __('Login') }}
                     </button>
 
                     @if (Route::has('password.request'))
-                        <a class="btn btn-link" href="{{ route('password.request') }}">
+                        <div class="mt-2">
+                        <a class="" href="{{ route('password.request') }}">
                             {{ __('Forgot Your Password?') }}
                         </a>
+                        </div>
                     @endif
                 </div>
             </div>
@@ -65,7 +70,8 @@
         <div class="d-flex justify-content-center my-3">
             <div class="btn-group">
                 <a href='/login/twitter'>
-                <img src="{{ asset('storage').'/common/twitter-login.png' }}" alt="">
+                <button type="" class="submit-button twitter-login-button">
+                <i class="fab fa-twitter mr-2"></i>Sign in with Twitter</button>
                 </a>
             </div>
         </div>

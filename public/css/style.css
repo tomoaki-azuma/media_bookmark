@@ -47,6 +47,12 @@ a:link, a:visited, a:hover, a:active {
     width: 100%;
 }
 
+.login-button-wrap a{
+    font-size: 14px;
+    color: #5360F1;
+    text-decoration: underline;
+}
+
 .login-menu-box {
     font-size: 10px;
 }
