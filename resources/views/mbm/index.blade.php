@@ -1,6 +1,5 @@
 @extends('layouts.app')
 
-
 @php
     $shared_url = url('').'/mbm/'; 
 @endphp
@@ -11,45 +10,38 @@
 <meta property="og:image" content="https://api.qrserver.com/v1/create-qr-code/?data={{ $shared_url.$bookmark->share_token }}&amp;size=200x200">
 @endsection
 
-@section('content')
-<div class="px-2">
-    <div class="my-2">
-        <div class="">
-        
-            <div class="card m-3">
-                <div class="card-header p-0 m-0">
-                <div class="my-1 text-center">
-                    <div class="bookmark-edit-title">{{ $bookmark->title }}</div>
-                </div>
-                </div>   
-                    <div class="m-2 bookmark-edit-comment">{{ $bookmark->comment }}</div>
-                </div>
-            </div>    
-            <!-- <div class="mx-3">
-                <div class="row mt-3">
-                    <div class="row mr-auto">
-                        <div class="row ml-3">
-                            <input type="text" v-model="search_keyword" @input="search_by_keyword" placeholder="search title">
-                            <div class="ml-2"><i class="fas fa-sort fa-2x" @click="sort_change()"></i></div>
-                        </div>
-                    </div>
-                    
-                </div>
-            </div> -->
-            
+@section('bookmark-edit-header')
+<div class="text-center mbm-header-logo">
+<img src="{{ asset('storage').'/common/logo_small.png' }}" width="130px">
+                
+</div>
+<div class="d-flex mt-2">
+    <div class="mx-3 w-100">
+        <div class="my-1">
+            <div class="bookmark-edit-title">{{ $bookmark->title }}</div>
+        </div>
+        <div class="my-2">
+            <div class="bookmark-edit-comment">{{ $bookmark->comment }}</div>
+        </div>
+        <div class="d-flex justify-content-end">
             <div class="text-right">
                 <div class="mbm-editor">
                 editor: {{ $editor->name }}
                 </div>
             </div>
         </div>
+    </div>
+</div>
+@endsection
+
+@section('content')
+<div class="px-2">
+    <div class="my-2">
         <div class="sticky-top">        
             <div v-show="ytplay_flg">
                 <div id="ytarea_wrapper" class="row d-flex justify-content-center bg-light my-2">
                     <div id="ytarea"></div>
                     <p @click="closeYT">
-                    
-                        <button id="b_modal_close_btn" type="button" class="close p-3">&times;</button>
                     <i class="far fa-times-circle fa-2x"></i>
                     </p>
                 </div>

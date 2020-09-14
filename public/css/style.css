@@ -122,6 +122,7 @@ a:link, a:visited, a:hover, a:active {
     background-color: white;
     border-radius: 8px;
     box-shadow: 0px 0px 2px #555555;
+    max-width: 430px;
 }
 
 .bookmark-card-tab {
@@ -316,6 +317,18 @@ a:link, a:visited, a:hover, a:active {
 .edit-header-wrap {
     background-color: #03ADD1;
     color: #FFFFFF; 
+    border-radius: 10px 10px 0 0;
+}
+
+.mbm-header-wrap {
+    background-color:#47B6FD;
+    color: #FFFFFF; 
+    border-radius: 10px 10px 0 0;
+}
+
+.mbm-header-logo {
+    border-bottom: solid 1px white;
+    background-color: white;
     border-radius: 10px 10px 0 0;
 }
 
