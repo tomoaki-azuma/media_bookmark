@@ -24,9 +24,11 @@
         $shared_url = url('').'/mbm/'; 
     @endphp
 
-    <div class="mx-2">
-        <div class="bookmark-card my-3" v-for="bookmark in bookmarks" >
-        @include('layouts.bookmark-card', ['my_bookmark' => true])
+    <div class="mx-2 d-flex justify-content-center">
+        <div>
+            <div class="bookmark-card my-3" v-for="bookmark in bookmarks" >
+            @include('layouts.bookmark-card', ['my_bookmark' => true])
+            </div>
         </div>
     </div>
     

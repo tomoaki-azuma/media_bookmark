@@ -87,6 +87,11 @@ class ProgramController extends Controller
             
             if ($html->filterXpath('//meta[@property="og:image"]')->count()) {
                 $image = $html->filterXpath('//meta[@property="og:image"]')->attr('content');
+            } else {
+                // amazon サムネイル取得
+                if ($html->filterXpath('//*[@id="imgBlkFront"]')->count()) {
+                    $image = $html->filterXpath('//*[@id="imgBlkFront"]')->attr('src');
+                } 
             } 
             
             return ['title' => $title, 'comment' => $comment, 'image' => $image];

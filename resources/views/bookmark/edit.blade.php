@@ -23,21 +23,21 @@
             <div class="bookmark-edit-comment">@{{ bookmark_comment }}</div>
         </div>
         <div class="d-flex justify-content-end">
-                    <div class="mx-2">
-                        <a class="p-2" href="" data-toggle="modal" data-target="#share-modal" @click="create_modal_data()">
-                        <i class="fas fa-share-alt"></i>
-                        </a>
-                    </div>
-                    <div class="mx-2">
-                        <a class="m-2" href="" data-toggle="modal" data-target="#edit-bookmark-modal" @click="create_modal_bookmark_data('update')" >
-                        <i class="fas fa-pen"></i>
-                        </a>
-                    </div>
-                    <div class="mx-2">
-                        <a class="m-2" href="" data-toggle="modal" data-target="#edit-bookmark-modal" @click="create_modal_bookmark_data('delete')" >
-                        <i class="fas fa-trash"></i>
-                        </a>
-                    </div>
+            <div class="mx-2">
+                <a class="p-2" href="" data-toggle="modal" data-target="#share-modal" @click="create_modal_data()">
+                <i class="fas fa-share-alt"></i>
+                </a>
+            </div>
+            <div class="mx-2">
+                <a class="m-2" href="" data-toggle="modal" data-target="#edit-bookmark-modal" @click="create_modal_bookmark_data('update')" >
+                <i class="fas fa-pen"></i>
+                </a>
+            </div>
+            <div class="mx-2">
+                <a class="m-2" href="" data-toggle="modal" data-target="#edit-bookmark-modal" @click="create_modal_bookmark_data('delete')" >
+                <i class="fas fa-trash"></i>
+                </a>
+            </div>
         </div>
     </div>
 </div>
@@ -55,7 +55,7 @@
                     <div class="">
                         <a class="text-white m-2" href="#" data-toggle="modal" data-target="#myModal" @click="init_program_modal">
                         <button type="" class="submit-button">
-                        <i class="fas fa-plus"></i> Add Media Bookmark</button>
+                        <i class="fas fa-plus"></i> URL を追加</button>
                         </a>
                     </div>
                 </div>
@@ -74,25 +74,27 @@
                         </div>
                         <div class="url-comment my-3">
                             <div class="">
-                                @{{ program.comment }}
 
-                                <div class="url-link mt-2">
-                                    <a v-bind:href="program.url" target="_blank">@{{ program.url}}</a> 
+                                <div class="card card-body p-2">
+                                    @{{ program.comment }}
+                                    <div class="url-link mt-2">
+                                    <a v-bind:href="program.url" target="_blank">@{{ shorten_url(program.url) }}</a> 
+                                    </div>
                                 </div>
-                            <div class="d-flex justify-content-end text-right text-white mt-2">
-                                <div class="mx-3">
-                                <a class="" href="#" data-toggle="modal" data-target="#myModal" @click="edit_program(program)" role="button">
-                                <button type="" class="edit-button">
-                                Edit</button>
-                                </a>
+                                <div class="d-flex justify-content-end text-right text-white mt-2">
+                                    <div class="mx-3">
+                                    <a class="" href="#" data-toggle="modal" data-target="#myModal" @click="edit_program(program)" role="button">
+                                    <button type="" class="edit-button">
+                                    Edit</button>
+                                    </a>
+                                    </div>
+                                    <div>
+                                    <a class="" href="#" data-toggle="modal" data-target="#myModal" @click="delete_program(program)" role="button">
+                                    <button type="" class="delete-button">
+                                    Delete</button>
+                                    </a> 
+                                    </div>
                                 </div>
-                                <div>
-                                <a class="" href="#" data-toggle="modal" data-target="#myModal" @click="delete_program(program)" role="button">
-                                <button type="" class="delete-button">
-                                Delete</button>
-                                </a> 
-                                </div>
-                            </div>
                             </div>
                         </div>
                     </div>
@@ -121,45 +123,45 @@
                 <div class="d-flex justify-content-center mt-2">
                     <div class="">
                         <template v-if="edit_type === 'create'">
-                            <div class="function-title">Add new program</div>
+                            <div class="function-title">URL を追加 </div>
                         </template>
                         <template v-if="edit_type === 'update'">
-                            <div class="function-title">Edit program</div>
+                            <div class="function-title">URL 情報の編集</div>
                         </template>
                         <template v-if="edit_type === 'delete'">
-                            <div class="function-title">Delete program</div>
+                            <div class="function-title">URL削除 </div>
                         </template>
                     </div>
                 </div>
                 <div id="theme" class="tab-pane active">
                     <template v-if="edit_type != 'delete'">
-                    <div class="form-group mb-1">
-                        <div class="d-flex justify-content-between my-2">
-                            <label for="new_program_url" class="mr-3">URL</label>
+                    <div class="mb-1">
+                        <div class="d-flex justify-content-between my-1">
+                            <label for="new_program_url" class="modal-label">URL</label>
                         </div>
                         
-                        <textarea v-model="new_program_url" class="form-control"></textarea>
+                        <textarea v-model="new_program_url" class="modal-input"></textarea>
                     </div>
                     <div class="text-center">
-                       <button type="button" class="submit-button-middle" value="META" @click="get_metadata">Get metadata via URL</button>
+                       <button type="button" class="submit-button-middle" value="META" @click="get_metadata">URL からデータを取得</button>
                     </div>
-                    <div class="form-group">
-                        <label for="new_program_title" class="mr-3">Title</label>
-                        <input type="text" v-model="new_program_title" class="form-control" value="">
+                    <div class="mt-1">
+                        <label for="new_program_title" class="modal-label">タイトル</label>
+                        <input type="text" v-model="new_program_title" class="modal-input" value="">
                     </div>
-                    <div class="form-group">
-                        <label for="new_program_comment" class="mr-3">Comment</label>
-                        <textarea v-model="new_program_comment" class="form-control"></textarea>
+                    <div class="mt-1">
+                        <label for="new_program_comment" class="modal-label">コメント</label>
+                        <textarea v-model="new_program_comment" class="modal-input"></textarea>
                     </div>
-                    <div>
-                        <label for="new_program_image" class="mr-3">Thumbnail(URL)</label>
-                        <textarea v-model="new_program_image" class="form-control"></textarea>
+                    <div class="mt-1">
+                        <label for="new_program_image" class="modal-label">サムネイル(URL)</label>
+                        <textarea v-model="new_program_image" class="modal-input"></textarea>
                         <img v-bind:src="new_program_image" class="img-fluid" alt="">
                     </div>
                     </template>
                     <template v-else>
-                    <div class="form-group mb-1">
-                        <div class="d-flex justify-content-between my-2">
+                    <div class="mb-1">
+                        <div class="d-flex justify-content-between my-1">
                             <label for="new_program_url" class="mr-3">URL</label>
                         </div>
                         
@@ -201,7 +203,7 @@
 @include('layouts.sharemodal')
 
 <div class="modal fade" id="edit-bookmark-modal">
-    <div class="modal-dialog modal-sm">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
         <div class="modal-header p-0 d-flex justify-content-end">
             <div class="py-2">
@@ -221,21 +223,21 @@
                 </div>
                 </template>
                 <div class="form-group">
-                    <label for="title">Title</label>
+                    <label class="modal-label" for="title">タイトル</label>
                     <template v-if="bookmark_edit_type === 'update'">
-                    <input type="text" v-model="bookmark_modal_title" class="form-control" value="">
+                    <input type="text" v-model="bookmark_modal_title" class="modal-input" value="">
                     </template>
                     <template v-else>
-                    <input type="text" v-model="bookmark_modal_title" class="form-control" value="" disabled>
+                    <input type="text" v-model="bookmark_modal_title" class="modal-input" value="" disabled>
                     </template>
                 </div>
                 <div class="form-group">
-                    <label for="comment">Comment</label>
+                    <label class="modal-label" for="comment">コメント</label>
                     <template v-if="bookmark_edit_type === 'update'">
-                    <textarea v-model="bookmark_modal_comment" class="form-control"></textarea>
+                    <textarea v-model="bookmark_modal_comment" class="modal-input"></textarea>
                     </template>
                     <template v-else>
-                    <textarea v-model="bookmark_modal_comment" class="form-control" disabled></textarea>
+                    <textarea v-model="bookmark_modal_comment" class="modal-input" disabled></textarea>
                     </template>
                 </div>
                 <div class="row my-3 mx-2 d-flex justify-content-around">
@@ -408,6 +410,14 @@
                     console.log(error);
                 });
             },
+            shorten_url: function(url) {
+                MAX_LENGTH = 50;
+                if (url.length > MAX_LENGTH) {
+                    return url.substr(0, MAX_LENGTH) + '  ...';
+                } else {
+                    return url;
+                }
+            }
         },
         created: function() {
             axios

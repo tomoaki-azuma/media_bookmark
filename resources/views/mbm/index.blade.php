@@ -86,27 +86,13 @@
                     </div>
                 </div>
                 <div class="url-comment my-3">
-                        <div class="card card-body p-2">
-                        @{{ data['comment'] }}
-                        <div class="url-link mt-2">
-                        <a v-bind:href="data.url" target="_blank">@{{ data['url']}}</a> 
-                        </div>
-                        </div>
+                    <div class="card card-body p-2">
+                    @{{ data['comment'] }}
+                    <div class="url-link mt-2">
+                    <a v-bind:href="data.url" target="_blank">@{{ shorten_url(data['url']) }}</a> 
+                    </div>
+                    </div>
                 </div>
-                <!-- <div class="">
-                    <div class="w-100 text-center px-2"> 
-                            <img class="p-3" src="{{ asset('storage').'/common/ic_more.png' }}" data-toggle="collapse" v-bind:href="'#collapseExample'+index" aria-expanded="false" v-bind:aria-controls="'collapseExample'+index">
-                    </div>
-                    <div class="collapse url-comment" v-bind:id="'collapseExample'+index">
-                        <div class="card card-body">
-                        @{{ data['comment'] }}
-                        <div class="url-link mt-2">
-                        <a v-bind:href="data.url" target="_blank">@{{ data['url']}}</a> 
-                        </div>
-                        </div>
-                    </div>                          
-                    </div>
-                </div> -->
             </div>
         </div>
     </div>
@@ -266,6 +252,14 @@ let vm = new Vue({
             }
 
         },
+        shorten_url: function(url) {
+            MAX_LENGTH = 50;
+            if (url.length > MAX_LENGTH) {
+                return url.substr(0, MAX_LENGTH) + '  ...';
+            } else {
+                return url;
+            }
+        }
     },
     computed: {
 

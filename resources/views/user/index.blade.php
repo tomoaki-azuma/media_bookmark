@@ -5,20 +5,20 @@
 <div class="my-3 text-center function-title">
    Profile 
 </div>
-<div id="profile-card" class="d-flex mt-2 mx-2 ">
-	<div class="profile-img px-4">
-        <template v-if="img_url === '' || img_url === null">
+<div id="profile-card" class="d-flex mt-2 mx-2 " v-cloak>
+	<div class="profile-img px-4" v-cloak>
+        <template v-if="img_url === '' || img_url === null" v-cloak>
             <img src="{{ asset('storage').'/avatars/avatardefault.png' }}" class="rounded-circler" width="80" height="80">
         </template>
-        <template v-else>    
-            <img v-bind:src="img_url" class="rounded-circle" width="60" height="60">
+        <template v-else v-cloak>    
+            <img v-bind:src="img_url" class="rounded-circle" width="60" height="60" v-cloak>
         </template>
     </div>
     <div class="profile-box">
-        <div class="profile-name mt-3 ml-2">
+        <div class="profile-name mt-3 ml-2" v-cloak>
             @{{ name }}
         </div>
-        <div class="profile-comment ml-2 mt-3">
+        <div class="profile-comment ml-2 mt-3" v-cloak>
         @{{ comment }}
         </div>
     </div>

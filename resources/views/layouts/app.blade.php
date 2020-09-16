@@ -23,8 +23,8 @@
 </head>
 <body>
     @if (preg_match('/bookmark\/edit\//', request()->path()))
-        <div id="app" class="bookmark-wrap-card d-flex justify-content-center my-2 mx-2">
-            <div class="col-xs-12 col-xl-6 col-lg-6 p-0">
+        <div id="app" class="d-flex justify-content-center my-2 mx-2" v-cloak>
+            <div class="col-xs-12 col-xl-6 col-lg-6 p-0 bookmark-wrap-card ">
                 <div class="edit-header-wrap text-white py-1">
                 @yield('bookmark-edit-header')
                 </div>
@@ -35,7 +35,7 @@
             </div>
         </div>
     @elseif (request()->path() == '/')
-        <div id="app" class="container-fluid d-flex justify-content-center p-0 m-0">
+        <div id="app" class="container-fluid d-flex justify-content-center p-0 m-0" v-cloak>
             <div class="col-xs-12 col-xl-6 col-lg-6 p-0">
                 <div class="text-center">
                     <img class="img-fluid" src="{{ asset('storage').'/common/toplogo.png' }}" alt="">
@@ -47,8 +47,8 @@
             </div>
         </div>
     @elseif (preg_match('/mbm\//', request()->path()))
-        <div id="app" class="bookmark-wrap-card d-flex justify-content-center my-2 mx-2">
-            <div class="col-xs-12 col-xl-6 col-lg-6 p-0">
+        <div id="app" class="d-flex justify-content-center my-2 mx-2" v-cloak>
+            <div class="col-xs-12 col-xl-6 col-lg-6 p-0 bookmark-wrap-card ">
                 <div class="mbm-header-wrap text-white pb-1">
                 @yield('bookmark-edit-header')
                 </div>
@@ -59,7 +59,7 @@
             </div>
         </div>
     @else
-        <div id="app" class="container-fluid d-flex justify-content-center p-0">
+        <div id="app" class="container-fluid d-flex justify-content-center p-0" v-cloak>
             <div class="col-xs-12 col-xl-6 col-lg-6 p-0">
                 <div class="d-flex justify-content-center header-wrap text-white py-1 sticky-top">
                     <img class="my-2" src="{{ asset('storage').'/common/logo1-2.png' }}" alt="" height="20px">

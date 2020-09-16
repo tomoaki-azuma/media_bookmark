@@ -23,9 +23,11 @@
             </div>
         </div>
     </div>
-    <div class="mx-2">
-        <div class="bookmark-card my-3" v-for="bookmark in bookmarks" >
-        @include('layouts.bookmark-card', ['my_bookmark' => false])
+    <div class="mx-2 d-flex justify-content-center">
+        <div class="">
+            <div class="bookmark-card my-3" v-for="bookmark in bookmarks" >
+            @include('layouts.bookmark-card', ['my_bookmark' => false])
+            </div>
         </div>
     </div>
 
