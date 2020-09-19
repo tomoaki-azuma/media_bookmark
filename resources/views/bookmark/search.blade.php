@@ -12,9 +12,12 @@
                 Search
             </div>
         </div>
+        <div class="text-center search-guide">
+            タイトル、コメント、ユーザー名、URLのトークンなどで検索
+        </div>
         <div class="my-4">
-            <div class="input-group">
-                <input type="text" class="form-control" v-model="keyword">
+            <div class="input-group d-flex justify-content-center">
+                <input type="text" class="form-control search-form" v-model="keyword">
                 <span class="input-group-btn">
                     <button type="button" class="btn submit-button-mini ml-2" @click="submit_search">
                     <i class="fas fa-search"></i>
@@ -24,7 +27,7 @@
         </div>
     </div>
     <div class="mx-2 d-flex justify-content-center">
-        <div class="">
+        <div class="w-100">
             <div class="bookmark-card my-3" v-for="bookmark in bookmarks" >
             @include('layouts.bookmark-card', ['my_bookmark' => false])
             </div>

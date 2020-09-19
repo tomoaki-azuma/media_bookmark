@@ -22,11 +22,7 @@
                 </div>
                 <div class="my-3">
                     <div class="ml-2">SNSでシェア</div>
-                    <div class="d-flex justify-content-around my-3">
-                    <img src="{{ asset('storage').'/common/twitter-icon.png' }}" alt="">
-                    <img src="{{ asset('storage').'/common/facebook-icon.png' }}" alt="">
-                    <img src="{{ asset('storage').'/common/line-icon.png' }}" alt="">
-                    </div>
+                    <div class="" id="tweet-area"></div>
                 </div>
             </div>
         </div>

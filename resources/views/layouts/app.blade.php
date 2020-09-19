@@ -24,7 +24,7 @@
 <body>
     @if (preg_match('/bookmark\/edit\//', request()->path()))
         <div id="app" class="d-flex justify-content-center my-2 mx-2" v-cloak>
-            <div class="col-xs-12 col-xl-6 col-lg-6 p-0 bookmark-wrap-card ">
+            <div class="col-xs-6 col-xl-6 col-lg-6 p-0 bookmark-wrap-card ">
                 <div class="edit-header-wrap text-white py-1">
                 @yield('bookmark-edit-header')
                 </div>
@@ -36,7 +36,7 @@
         </div>
     @elseif (request()->path() == '/')
         <div id="app" class="container-fluid d-flex justify-content-center p-0 m-0" v-cloak>
-            <div class="col-xs-12 col-xl-6 col-lg-6 p-0">
+            <div class="col-xs-6 col-xl-6 col-lg-6 p-0">
                 <div class="text-center">
                     <img class="img-fluid" src="{{ asset('storage').'/common/toplogo.png' }}" alt="">
                 </div>
@@ -48,7 +48,7 @@
         </div>
     @elseif (preg_match('/mbm\//', request()->path()))
         <div id="app" class="d-flex justify-content-center my-2 mx-2" v-cloak>
-            <div class="col-xs-12 col-xl-6 col-lg-6 p-0 bookmark-wrap-card ">
+            <div class="col-xs-6 col-xl-6 col-lg-6 p-0 bookmark-wrap-card ">
                 <div class="mbm-header-wrap text-white pb-1">
                 @yield('bookmark-edit-header')
                 </div>
@@ -60,7 +60,7 @@
         </div>
     @else
         <div id="app" class="container-fluid d-flex justify-content-center p-0" v-cloak>
-            <div class="col-xs-12 col-xl-6 col-lg-6 p-0">
+            <div class="col-xs-6 col-xl-6 col-lg-6 p-0">
                 <div class="d-flex justify-content-center header-wrap text-white py-1 sticky-top">
                     <img class="my-2" src="{{ asset('storage').'/common/logo1-2.png' }}" alt="" height="20px">
                 </div>
@@ -71,6 +71,7 @@
             </div>
         </div>
     @endif
+    <script defer src="https://platform.twitter.com/widgets.js" charset="utf-8"></script> 
     <!-- jQuery CDN - Slim version (=without AJAX) -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <!-- Popper.JS -->
@@ -80,7 +81,6 @@
     <!-- vue JS -->
     <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-
     @yield('vuepart')
 </body>
 </html>

@@ -22,7 +22,7 @@
                 </template>
                 <template v-else v-cloak>
                 <i class="far fa-heart" v-cloak></i>: @{{ bookmark.favorite_cnt }}
-            </template>
+                </template>
             </div>
             <div class="ml-3">
                 <button type="" class="edit-button" data-toggle="modal" data-target="#share-modal" @click="create_share_data(bookmark)">

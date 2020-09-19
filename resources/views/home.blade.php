@@ -25,7 +25,7 @@
     @endphp
 
     <div class="mx-2 d-flex justify-content-center">
-        <div>
+        <div class="w-100">
             <div class="bookmark-card my-3" v-for="bookmark in bookmarks" >
             @include('layouts.bookmark-card', ['my_bookmark' => true])
             </div>
@@ -81,7 +81,8 @@
             share_title: '',
             share_comment: '',
             shared_url: '',
-            qr_code_url: ''
+            qr_code_url: '',
+
         },
         methods: {
             init_modal_data: function() {
@@ -122,7 +123,22 @@
                 .catch(function(error) {
                     console.log(error);
                 });
-        }
+        },
+        mounted: function() {
+            $('#share-modal').on('shown.bs.modal', function (event) {
+                tweet_area = document.getElementById('tweet-area');
+                $('#tweet-area').empty(); //既存のボタン消す
+                twttr.widgets.createShareButton(
+                    shared_url,
+                    document.getElementById("tweet-area"),
+                    {
+                    lang: 'ja',
+                    text: '',
+                    hashtags: "media_bookmark", 
+                    }
+                );
+            });
+        },
     })
 </script>
 @endsection
