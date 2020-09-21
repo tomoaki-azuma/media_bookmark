@@ -108,6 +108,7 @@
             },
             create_share_data: function(bookmark) {
                 this.share_title = bookmark.title;
+                share_title = this.share_title + '\n';
                 this.share_comment = bookmark.comment;
                 shared_url = '{{ $shared_url}}' + bookmark.share_token;
                 this.shared_url = shared_url;
@@ -133,11 +134,23 @@
                     document.getElementById("tweet-area"),
                     {
                     lang: 'ja',
-                    text: '',
+                    text: share_title,
                     hashtags: "media_bookmark", 
                     }
                 );
-            });
+                line_url = 'http://line.me/R/msg/text/?' + share_title + '\n' + shared_url;
+                $('#line-sharebutton').attr('href', line_url);
+
+                $('.fb-share-button').attr('data-href', shared_url);
+                console.log(shared_url);
+
+                var js, fjs = document.getElementsByTagName('script')[0];
+                if (document.getElementById('facebook-jssdk')) return;
+                js = document.createElement('script'); js.id = 'facebook-jssdk';
+                js.src = "https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.0";
+                fjs.parentNode.insertBefore(js, fjs);
+                     FB.XFBML.parse();
+                });
         },
     })
 </script>

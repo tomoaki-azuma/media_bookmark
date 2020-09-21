@@ -21,10 +21,24 @@
                     <div class="text-center my-2"><img v-bind:src="qr_code_url" width="150" height="150" alt="" title="" /></div>
                 </div>
                 <div class="my-3">
-                    <div class="ml-2">SNSでシェア</div>
-                    <div class="" id="tweet-area"></div>
+                    <div class="ml-2 my-2">SNSでシェア</div>
+                    <div class="text-center">
+                        <div class="my-3" id="tweet-area"></div>
+                        <div class="my-3" >
+                            <a href="" target="_blank" id="line-sharebutton">
+                                <img class="" src="{{ asset('storage').'/common/line-share.png' }}" alt="" width="80px">
+                            </a>
+                        </div>
+                        <div class="my-3 fb-share-button" 
+                            data-href="" 
+                            data-layout="button">
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+<!-- Load Facebook SDK for JavaScript -->
+<div id="fb-root"></div>

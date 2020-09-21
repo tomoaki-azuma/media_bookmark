@@ -422,3 +422,8 @@ a:link, a:visited, a:hover, a:active {
 .search-form {
     max-width: 250px;
 }
+
+.sns-button-wrap {
+    height: 20px;
+    width: 75px;
+}
