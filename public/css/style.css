@@ -427,3 +427,17 @@ a:link, a:visited, a:hover, a:active {
     height: 20px;
     width: 75px;
 }
+
+.privacy-policy {
+    font-size: 12px;
+}
+
+.privacy-policy a {
+    color: red;
+    background-color: white;
+    text-decoration: underline;
+}
+
+.footer-wrap a:link,a:visited, a:hover, a:active {
+    color: white;
+}

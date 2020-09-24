@@ -99,10 +99,12 @@
     <div class="footer-wrap mt-3">
         <div class="d-flex justify-contents-between pt-2">
             <div class="w-50 text-center">
+                <a href="/terms_of_use">
                 Terms    
+                </a>
             </div>
             <div class="w-50 text-center">
-                Privacy
+                <a href="/privacy_policy">Privacy</a>
             </div>
             <div class="w-50 text-center">
                 About Us

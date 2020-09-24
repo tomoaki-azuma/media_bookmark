@@ -62,7 +62,7 @@
         <div id="app" class="container-fluid d-flex justify-content-center p-0" v-cloak>
             <div class="col-xs-6 col-xl-6 col-lg-6 p-0">
                 <div class="d-flex justify-content-center header-wrap text-white py-1 sticky-top">
-                @if (preg_match('/login|reset|register|verify/', request()->path()))
+                @if (preg_match('/login|reset|register|verify|privacy_policy|terms_of_use/', request()->path()))
                     <a href="/"> 
                     <img class="my-2" src="{{ asset('storage').'/common/logo1-2.png' }}" alt="" height="20px">
                     </a>

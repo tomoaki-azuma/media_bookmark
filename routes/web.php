@@ -20,6 +20,12 @@ Route::get('/', function () {
 Auth::routes(['verify' => true]);
 
 Route::get('/logout', 'Auth\LoginController@logout');
+Route::get('/privacy_policy', function() {
+    return view('privacy_policy');
+});
+Route::get('terms_of_use', function() {
+    return view('terms_of_use');
+});
 
 Route::group(['middleware' => 'verified'], function() {
 
