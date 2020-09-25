@@ -438,6 +438,31 @@ a:link, a:visited, a:hover, a:active {
     text-decoration: underline;
 }
 
-.footer-wrap a:link,a:visited, a:hover, a:active {
+.footer-wrap a {
     color: white;
+}
+
+.privacy-policy a {
+    color: #494949;
+}
+.subtitle {
+  color: #494949;/*文字色*/
+  background: #fffaf4;/*背景色*/
+  border-left: solid 5px #ffaf58;/*左線（実線 太さ 色）*/
+}
+
+.edit-header-wrap a {
+    color: white;
+}
+
+.bookmark-card-title a {
+    color: white;
+}
+
+.login-link a {
+    color: #4069E2;
+}
+
+.fa-twitter {
+    color: #00ACEE;
 }

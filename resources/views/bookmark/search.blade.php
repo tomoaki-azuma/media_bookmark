@@ -117,6 +117,31 @@
                 this.qr_code_url = `https://api.qrserver.com/v1/create-qr-code/?data=${shared_url}&amp;size=200x200`;
             },
         },
+        mounted: function() {
+            $('#share-modal').on('shown.bs.modal', function (event) {
+                tweet_area = document.getElementById('tweet-area');
+                $('#tweet-area').empty(); //既存のボタン消す
+                twttr.widgets.createShareButton(
+                    shared_url,
+                    document.getElementById("tweet-area"),
+                    {
+                    lang: 'ja',
+                    text: this.share_title,
+                    hashtags: "media_bookmark", 
+                    }
+                );
+                line_url = 'http://line.me/R/msg/text/?' + this.share_title + '\n' + this.shared_url;
+                $('#line-sharebutton').attr('href', line_url);
+
+                $('.fb-share-button').attr('data-href', this.shared_url);
+
+                var js, fjs = document.getElementsByTagName('script')[0];
+                if (document.getElementById('facebook-jssdk')) return;
+                js = document.createElement('script'); js.id = 'facebook-jssdk';
+                js.src = "https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.0";
+                fjs.parentNode.insertBefore(js, fjs);
+                });
+        },
     })
 </script>
 @endsection

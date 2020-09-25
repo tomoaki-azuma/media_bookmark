@@ -1,8 +1,8 @@
 @extends('layouts.app')
 
 @section('ogp-matadata')
-<meta property="og:title" content="Media Bookmark">
-<meta property="og:description" content="Media Bookmark">
+<meta property="og:title" content="Media Bookmark|メディアブックマーク">
+<meta property="og:description" content="Media Bookmark（メディアブックマーク）は自分の気に入った画像、動画、HPなど様々なコンテンツをブックマークとして登録し、QRコードやSNS（Twitter,LINE,FaceBook)でシェアするためのサービスです。">
 <meta property="og:image" content="{{ asset('storage').'/common/toplogo.png' }}">
 @endsection
 
@@ -107,7 +107,9 @@
                 <a href="/privacy_policy">Privacy</a>
             </div>
             <div class="w-50 text-center">
+                <a href="/about_us">
                 About Us
+                </a>
             </div>
         </div>
         <div class="text-center py-1">

@@ -34,7 +34,7 @@
     @if ($my_bookmark)
     <div class="bookmark-card-icon mx-2" v-cloak>
         <a v-bind:href="'/bookmark/edit/'+bookmark.id" v-cloak>
-            <i class="fas fa-angle-right fa-2x"></i>
+            <i style="color: #494949" class="fas fa-angle-right fa-2x"></i>
         </a>
     </div>
     @else

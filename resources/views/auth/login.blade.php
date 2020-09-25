@@ -57,7 +57,7 @@
         </button>
 
         @if (Route::has('password.request'))
-            <div class="mt-2">
+            <div class="mt-2 login-link">
             <a class="" href="{{ route('password.request') }}">
                 {{ __('Forgot Your Password?') }}
             </a>

@@ -27,6 +27,10 @@ Route::get('terms_of_use', function() {
     return view('terms_of_use');
 });
 
+Route::get('about_us', function() {
+    return view('about_us');
+});
+
 Route::group(['middleware' => 'verified'], function() {
 
     Route::get('/home', 'HomeController@index')->name('home');
