@@ -92,15 +92,11 @@ class LoginController extends Controller
             // $token = $request->oauth_token;
                 // $secret = $request->oauth_verifier;
             $user_info = Socialite::driver('google')->stateless()->user();
-            dd($user_info);
         } catch (\Exception $e) {
-            dd($e);
-            dd($request);
             return redirect('/')->with('oauth_error', 'ログインに失敗しました');
             // エラーならログイン画面へ転送
         }
         
-        dd($user_info);
         $user = new User();
 
         if (User::where('twitter_id', $user_info->id)->exists()) {
