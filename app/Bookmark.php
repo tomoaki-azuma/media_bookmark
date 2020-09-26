@@ -26,4 +26,8 @@ class Bookmark extends Model
         return $query->orWhere('share_token', 'like', '%'.$str.'%');
     }
 
+    public function scopeOrderByFavorites($query) {
+        return $query->orderBy('favorite_cnt', 'desc')->orderBy('view_cnt','desc');
+    }
+
 }

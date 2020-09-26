@@ -118,6 +118,8 @@
             },
         },
         mounted: function() {
+            this.bookmarks = <?= $bookmarks ?>;
+            this.favorites = {{ $favorites }}
             $('#share-modal').on('shown.bs.modal', function (event) {
                 tweet_area = document.getElementById('tweet-area');
                 $('#tweet-area').empty(); //既存のボタン消す

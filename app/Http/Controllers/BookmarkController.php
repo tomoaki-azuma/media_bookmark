@@ -40,8 +40,16 @@ class BookmarkController extends Controller
     }
 
     public function search_init() {
+
         $auth = Auth::user();
-        return view('bookmark.search', ['auth' => $auth]);
+
+        $query = Bookmark::query()->where('user_id', '<>', $auth->id)->with('user:id,name');
+        $query->orderByFavorites();
+        $bookmarks = $query->limit(10)->get();
+        $favorites = Favorite::where('user_id', $auth->id)->pluck('bookmark_id');
+
+        return view('bookmark.search')->with(['auth' => $auth, 'bookmarks'=>$bookmarks, 'favorites'=>$favorites]);
+    
     }
 
     public function store(Request $request) {
@@ -100,7 +108,7 @@ class BookmarkController extends Controller
             });
         }
 
-        $bookmarks = $query->get()->toArray();
+        $bookmarks = $query->orderByFavorites()->get()->toArray();
         
         $favorites = Favorite::where('user_id', $auth->id)->pluck('bookmark_id');
 

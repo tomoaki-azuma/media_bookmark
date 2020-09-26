@@ -68,3 +68,6 @@ Route::get('/mbm/{share_token}', 'MbmController@index');
 
 Route::get('/login/twitter', 'Auth\LoginController@redirectToTwitterProvider');
 Route::get('/login/twitter/callback', 'Auth\LoginController@handleTwitterCallback');
+
+Route::get('/login/google', 'Auth\LoginController@redirectToGoogleProvider');
+Route::get('/login/google/callback', 'Auth\LoginController@handleGoogleCallback');

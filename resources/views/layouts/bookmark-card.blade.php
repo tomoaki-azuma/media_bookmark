@@ -7,7 +7,6 @@
 <a v-bind:href="'{{ $shared_url }}'+ bookmark.share_token" target="_blank" v-cloak>@{{ bookmark.title }}</a>
 </div>
 @endif
-
 <div class="bookmark-card-body d-flex ml-2 mt-2">
     <div class="flex-fill" v-cloak>
         <div class="bookmark-card-text mt-2m ml-1" v-cloak>@{{ bookmark.comment }}</div>
@@ -17,7 +16,7 @@
             @endif
             <div><i class="far fa-eye"></i>: @{{ bookmark.view_cnt }}</div>
             <div class="ml-3">
-                <template v-if="bookmark.favorite_cnt > 0" v-cloak>
+                <template v-if="favorites.includes(bookmark.id)" v-cloak>
                 <i style="color: red;" class="fas fa-heart" v-cloak></i>: @{{ bookmark.favorite_cnt }}
                 </template>
                 <template v-else v-cloak>

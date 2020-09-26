@@ -51,18 +51,18 @@ class LoginController extends Controller
 
     public function handleTwitterCallback(Request $request){
 
-	try {
-	    $token = $request->oauth_token;
-            $secret = $request->oauth_verifier;
-	    $user_info = Socialite::driver('twitter')->user();
-	    //$user_info = Socialite::driver('twitter')->userFromTokenAndSecret($token, $secret);
-	    //dd($user_info);
+        try {
+            $token = $request->oauth_token;
+                $secret = $request->oauth_verifier;
+            $user_info = Socialite::driver('twitter')->user();
+            //$user_info = Socialite::driver('twitter')->userFromTokenAndSecret($token, $secret);
+            //dd($user_info);
         } 
         catch (\Exception $e) {
             return redirect('/')->with('oauth_error', 'ログインに失敗しました');
             // エラーならログイン画面へ転送
         }
-        
+            
         $user = new User();
 
         if (User::where('twitter_id', $user_info->id)->exists()) {
@@ -78,9 +78,45 @@ class LoginController extends Controller
             Auth::login($user);
         }
 
+        return redirect()->to('/home'); 
+    
+    }
+
+    public function redirectToGoogleProvider() {
+        return Socialite::driver('google')->redirect();
+    }
+    
+    public function handleGoogleCallback(Request $request){
+
+        try {
+            // $token = $request->oauth_token;
+                // $secret = $request->oauth_verifier;
+            $user_info = Socialite::driver('google')->stateless()->user();
+            dd($user_info);
+        } catch (\Exception $e) {
+            dd($e);
+            dd($request);
+            return redirect('/')->with('oauth_error', 'ログインに失敗しました');
+            // エラーならログイン画面へ転送
+        }
         
+        dd($user_info);
+        $user = new User();
+
+        if (User::where('twitter_id', $user_info->id)->exists()) {
+            $user = User::where('twitter_id', $user_info->id)->first();
+            Auth::login($user);
+            $user->update(['name' => $user_info->name, 'email'=>$user_info->email,
+                'img_url'=>$user_info->avatar]);
+        } else {
+            $user = User::firstOrCreate(
+                ['email'=> $user_info->email],
+                ['name' => $user_info->name, 'twitter_id'=>$user_info->id,
+                'img_url'=>$user_info->avatar]);
+            Auth::login($user);
+        }
 
         return redirect()->to('/home'); 
-     
+    
     }
 }
