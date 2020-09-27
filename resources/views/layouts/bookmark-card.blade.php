@@ -16,12 +16,16 @@
             @endif
             <div><i class="far fa-eye"></i>: @{{ bookmark.view_cnt }}</div>
             <div class="ml-3">
+                @if (!$my_bookmark)
                 <template v-if="favorites.includes(bookmark.id)" v-cloak>
                 <i style="color: red;" class="fas fa-heart" v-cloak></i>: @{{ bookmark.favorite_cnt }}
                 </template>
                 <template v-else v-cloak>
                 <i class="far fa-heart" v-cloak></i>: @{{ bookmark.favorite_cnt }}
                 </template>
+                @else
+                <i class="far fa-heart" v-cloak></i>: @{{ bookmark.favorite_cnt }}
+                @endif
             </div>
             <div class="ml-3">
                 <button type="" class="edit-button" data-toggle="modal" data-target="#share-modal" @click="create_share_data(bookmark)">
