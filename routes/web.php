@@ -31,6 +31,10 @@ Route::get('about_us', function() {
     return view('about_us');
 });
 
+Route::get('help', function() {
+    return view('help');
+});
+
 Route::group(['middleware' => 'verified'], function() {
 
     Route::get('/home', 'HomeController@index')->name('home');

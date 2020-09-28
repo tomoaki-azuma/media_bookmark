@@ -397,6 +397,10 @@ a:link, a:visited, a:hover, a:active {
    color: white; 
 }
 
+.google-login-button {
+    background-color: #df4f38;
+}
+
 .modal-input {
     display: block;
     width: 100%;

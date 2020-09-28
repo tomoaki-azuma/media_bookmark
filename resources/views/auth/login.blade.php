@@ -70,7 +70,15 @@
     <div class="btn-group">
         <a href='/login/twitter'>
         <button type="" class="submit-button twitter-login-button">
-        <i class="fab fa-twitter mr-2"></i>Sign in with Twitter</button>
+        <i style="color: white" class="fab fa-twitter mr-2"></i>Sign in with Twitter</button>
+        </a>
+    </div>
+</div>
+<div class="d-flex justify-content-center my-3">
+    <div class="btn-group">
+        <a href='/login/google'>
+        <button type="" class="submit-button google-login-button">
+        <i style="color: white" class="fab fa-google mr-2"></i>Sign in with Google</button>
         </a>
     </div>
 </div>

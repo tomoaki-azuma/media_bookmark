@@ -39,7 +39,7 @@
 <div class="d-flex justify-content-center my-3">
     <div class="btn-group">
         <a href='/login/google'>
-        <button type="" class="submit-button twitter-login-button">
+        <button type="" class="submit-button google-login-button">
         <i style="color: white" class="fab fa-google mr-2"></i>Sign in with Google</button>
         </a>
     </div>
@@ -82,18 +82,27 @@
 </div>
 <div class="d-flex justify-content-center">
     <div class="mx-3 mt-3 bookmark-card">
-        <div class="home-card-title py-0 px-2">デモンストレーション</div>
+        <div class="home-card-title py-0 px-2">ヘルプ＆デモ</div>
         <div class="home-card-text p-3">
             <div class="mt-1">
                 <div>
-                百聞は一見に如かず。実際にデモを見てもらったほうがよいかもしれません。<br>
-                以下のQRコードまたはリンクから実際にシェアされるMedia Bookmarkとデモ動画をご覧ください。
+                操作方法に困った場合は下記のヘルプページをご覧ください。<br>
+                また、本サービスの活用方法については動画によるデモをご覧いただけます。
+                以下のQRコードまたはリンクからご覧ください。
                 </div>
             </div>
         </div>
     </div>
 </div>
 <div class="">
+    <div class="mx-4 mt-3 top-contents text-center">
+        <h5>HELP</h5>    
+    </div>
+    <div class="text-center">
+        <div class="register-text">
+            <a href="help">http://media-bookmark.app/help</a>
+        </div>
+    </div>
     <div class="mx-4 mt-3 top-contents text-center">
         <h5>DEMO</h5>    
     </div>
