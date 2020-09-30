@@ -111,6 +111,7 @@
             },
             create_share_data: function(bookmark) {
                 this.share_title = bookmark.title;
+                share_title = this.share_title + '\n';
                 this.share_comment = bookmark.comment;
                 shared_url = '{{ $shared_url}}' + bookmark.share_token;
                 this.shared_url = shared_url;
@@ -132,7 +133,7 @@
                     hashtags: "media_bookmark", 
                     }
                 );
-                line_url = 'http://line.me/R/msg/text/?' + this.share_title + '\n' + this.shared_url;
+                line_url = 'http://line.me/R/msg/text/?' + share_title + '\n' + shared_url;
                 $('#line-sharebutton').attr('href', line_url);
 
                 $('.fb-share-button').attr('data-href', this.shared_url);

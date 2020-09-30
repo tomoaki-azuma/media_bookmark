@@ -39,7 +39,7 @@
 
 @section('modal-contents')
 <div class="modal fade" id="add-bookmark-modal">
-    <div class="modal-dialog modal-sm">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
         <div class="modal-header p-0 d-flex justify-content-end">
             <div class="py-2">
