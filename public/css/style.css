@@ -475,3 +475,13 @@ a:link, a:visited, a:hover, a:active {
     font-size: 20px;
     color: #4069E2;
 }
+
+.youtube-playall-button {
+	width: 120px;
+    border-radius: 10px;
+    border: solid 1px #03add1;
+	font-size: 12px;
+	font-style: bold;
+	background-color: white;
+    color: #03add1;
+}

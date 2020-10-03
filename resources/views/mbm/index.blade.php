@@ -5,9 +5,11 @@
 @endphp
 
 @section('ogp-matadata')
-<meta property="og:title" content="{{ $bookmark->title }}">
-<meta property="og:description" content="{{ $bookmark->comment }}">
-<meta property="og:image" content="https://api.qrserver.com/v1/create-qr-code/?data={{ $shared_url.$bookmark->share_token }}&amp;size=200x200">
+<meta property="og:title" content="{{ $bookmark->title }}"></meta>
+<meta property="og:description" content="{{ $bookmark->comment }}"></meta>
+<meta property="og:image" content="https://api.qrserver.com/v1/create-qr-code/?data={{ $shared_url.$bookmark->share_token }}&amp;size=200x200"></meta>
+<meta property="twitter:card" content="summary"></meta>
+
 @endsection
 
 @section('bookmark-edit-header')
@@ -49,6 +51,11 @@
             </div>
         </div>
 
+        <template v-if="program_list.length > 0">
+        <div class="">
+            <button class="youtube-playall-button" @click="playYT_list"><i class="fab fa-youtube fa-lg mr-2" style="color: red;"></i>PlayAll</button>
+        </div>
+        </template>
 
         <div class="mt-3">
 
@@ -128,7 +135,7 @@
                                 @if (preg_match('/^http(.+)/', $editor->img_url))
                                     <img src="{{ $editor->img_url }}" class="rounded-circle" width="60" height="60">
                                 @else
-                                    <img src="{{ asset('storage').'/'.$editor->img_url }}" class="rounded-circle" width="60" height="60">
+                                    <img src="{{ asset('storage').'/avatars/avatardefault.png' }}" class="rounded-circle" width="60" height="60">
                                 @endif
                             </div>
                             <div>
@@ -154,6 +161,7 @@
 @endsection
 
 @section('vuepart')
+<script src="https://www.youtube.com/iframe_api"></script>
 <script>
 let vm = new Vue({
     el: '#app',
@@ -165,15 +173,23 @@ let vm = new Vue({
         searched_program: [],
         sort_flg: 'd',  // ascending or decending
         search_keyword: "",
-        qr_code_url: ""
+        qr_code_url: "",
+        program_list: []
     },
     methods: {
+        playYT_list: function() {
+            console.log(this.program_list);
+            this.ytplay_flg = true;
+            ytPlayer.cuePlaylist({
+                listType: 'playlist',
+                playlist: this.program_list,
+                index: 0
+            });
+        },
         playYT: function(url) {
             video_id = this.get_youtube_program_id(url);
             this.ytplay_flg = true;
             this.cur_video_id = video_id;
-            console.log(video_id);
-            //ytPlayer.cueVideoById(video_id.replace('/watch?v=', ''));{videoId: videoId}
             console.log(video_id);
             ytPlayer.cueVideoById({videoId: video_id});           
         },
@@ -270,6 +286,12 @@ let vm = new Vue({
             .get('/mbm/programs/' + {{ $bookmark->id}})
             .then( response => {
                 this.program_data = response.data;
+                for (p of this.program_data) {
+                    if (this.is_youtube_url(p['url'])) {
+                        yid = this.get_youtube_program_id(p['url']);
+                        this.program_list.push(yid);
+                    }
+                }
                 this.searched_program = this.program_data
                 this.display_all(this.sort_flg)
             })    
@@ -281,7 +303,6 @@ let vm = new Vue({
        this.qr_code_url = `https://api.qrserver.com/v1/create-qr-code/?data={{ $bookmark->shared_url }}&amp;size=200x200`;
     }
 })
-
 
 // YouTube Player APIを読み込む
 let tag = document.createElement('script');
@@ -303,7 +324,7 @@ let yt_window_height = yt_window_size * 0.6;
 function onYouTubeIframeAPIReady() {
     ytPlayer = new YT.Player('ytarea', 
       {
-          videoId: 'FvCf8xYLYuA',   // Load the initial video
+          videoId: '',   // Load the initial video
           width: yt_window_size,
           height: yt_window_height,
           playerVars: {
@@ -312,7 +333,7 @@ function onYouTubeIframeAPIReady() {
                  theme: "light",   // Use a light player instead of a dark one
                  controls: 1,      // Show player controls
                  showinfo: 0,      // Don’t show title or loader
-                 modestbranding: 1 // No You Tube logo on control bar
+                 modestbranding: 0 // No You Tube logo on control bar
           }
       });
   
