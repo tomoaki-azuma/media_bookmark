@@ -87,8 +87,7 @@
             <div class="mt-1">
                 <div>
                 操作方法に困った場合は下記のヘルプページをご覧ください。<br>
-                また、本サービスの活用方法については動画によるデモをご覧いただけます。
-                以下のQRコードまたはリンクからご覧ください。
+                以下のリンクからご覧ください。
                 </div>
             </div>
         </div>
@@ -101,17 +100,6 @@
     <div class="text-center">
         <div class="register-text">
             <a href="help">http://media-bookmark.app/help</a>
-        </div>
-    </div>
-    <div class="mx-4 mt-3 top-contents text-center">
-        <h5>DEMO</h5>    
-    </div>
-    <div class="text-center">
-        <div>
-            <a href="" target="_blank" rel="noopener noreferrer">http://media_bookmark/mbm/demosample</a>
-        </div>
-        <div class="mt-2">
-            <img src="{{ asset('storage/common').'/demoimg.png' }}" alt="">
         </div>
     </div>
     <div class="footer-wrap mt-3">

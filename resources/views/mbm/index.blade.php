@@ -12,8 +12,9 @@
 
 @section('bookmark-edit-header')
 <div class="text-center mbm-header-logo">
+<a href="/" target="_blank">
 <img src="{{ asset('storage').'/common/logo_small.png' }}" width="130px">
-                
+</a>
 </div>
 <div class="d-flex mt-2">
     <div class="mx-3 w-100">
