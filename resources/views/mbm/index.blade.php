@@ -252,6 +252,13 @@ let vm = new Vue({
             if (result2) {
                 return true;
             }
+            
+            re3 = /^https?:\/\/m.youtube.com\/watch\?v=(.{11})/;
+            result3 = re3.exec(url);
+            if (result3) {
+                return true;
+            }
+
             return false;
         },
         get_youtube_program_id: function(url) {
@@ -266,6 +273,14 @@ let vm = new Vue({
             if (result2) {
                 console.log(result2);
                 return result2[1];
+            }
+
+
+            re3 = /^https?:\/\/m.youtube.com\/watch\?v=(.{11})/;
+            result3 = re3.exec(url);
+            if (result3) {
+                console.log(result3);
+                return result3[1];
             }
 
         },
