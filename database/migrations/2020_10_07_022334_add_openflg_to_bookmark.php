@@ -14,7 +14,7 @@ class AddOpenflgToBookmark extends Migration
     public function up()
     {
         Schema::table('bookmarks', function (Blueprint $table) {
-           $table->boolean('is_public')->default(false);
+           $table->boolean('is_public')->default(true);
         });
     }
 
