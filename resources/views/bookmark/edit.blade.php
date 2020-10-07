@@ -24,11 +24,6 @@
         </div>
         <div class="d-flex justify-content-end">
             <div class="mx-2">
-                <a class="p-2" href="" data-toggle="modal" data-target="#share-modal" @click="create_modal_data()">
-                <i class="fas fa-share-alt"></i>
-                </a>
-            </div>
-            <div class="mx-2">
                 <a class="m-2" href="" data-toggle="modal" data-target="#edit-bookmark-modal" @click="create_modal_bookmark_data('update')" >
                 <i class="fas fa-pen"></i>
                 </a>
@@ -240,6 +235,22 @@
                     <textarea v-model="bookmark_modal_comment" class="modal-input" disabled></textarea>
                     </template>
                 </div>
+                <div class="form-group">
+                    <label class="modal-label" for="bookmark_modal_is_public">Search機能に対して公開する</label>
+                    <div class="row mx-2 pt-1">
+                        <!-- Rounded switch -->
+                        <label class="switch">
+                        <input type="checkbox" v-model="bookmark_modal_is_public" true-value="1" false-value="0">
+                        <span class="slider round"></span>
+                        </label>
+                        <template v-if="bookmark_modal_is_public==1">
+                            <div class="ml-2 modal-label"><i class="fas fa-unlock"> 公開(public)</i></div>
+                        </template>
+                        <template v-else>
+                            <div class="ml-2 modal-label"><i class="fas fa-lock"> 非公開(private)</i></div>
+                        </template>
+                    </div>
+                </div>
                 <div class="row my-3 mx-2 d-flex justify-content-around">
                     <template v-if="bookmark_edit_type === 'update'">
                         <button class="submit-button-half" @click="submit_edit_bookmark">
@@ -270,6 +281,8 @@
             bookmark_comment: '{{ $bookmark->comment }}',
             bookmark_modal_title: '',
             bookmark_modal_comment: '',
+            bookmark_modal_is_public: 0,
+            is_public: {{ $bookmark->is_public }},
             bookmark_edit_type: 'update',
             programs: [],
             new_program_title: '',
@@ -380,6 +393,7 @@
                 this.bookmark_edit_type = edit_type;
                 this.bookmark_modal_title = this.bookmark_title;
                 this.bookmark_modal_comment = this.bookmark_comment;
+                this.bookmark_modal_is_public = this.is_public;
             },
             submit_edit_bookmark: function() {
                 axios
@@ -387,11 +401,13 @@
                     id: this.bookmark_id,
                     title: this.bookmark_modal_title,
                     comment: this.bookmark_modal_comment,
+                    is_public: this.bookmark_modal_is_public,
                     type: 'update'
                 })
                 .then( response => {
                     this.bookmark_title = response.data.title;
                     this.bookmark_comment = response.data.comment;
+                    this.is_public = response.data.is_public;
                     $("#b_modal_close_btn").click();
                 })    
                 .catch(function(error) {

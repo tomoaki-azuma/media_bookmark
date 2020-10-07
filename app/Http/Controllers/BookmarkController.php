@@ -44,7 +44,7 @@ class BookmarkController extends Controller
         $auth = Auth::user();
 
         $query = Bookmark::query()->where('user_id', '<>', $auth->id)->with('user:id,name');
-        $query->orderByFavorites();
+        $query->onlyPublic()->orderByFavorites();
         $bookmarks = $query->limit(10)->get();
         $favorites = Favorite::where('user_id', $auth->id)->pluck('bookmark_id');
 
@@ -65,6 +65,7 @@ class BookmarkController extends Controller
 
         $bookmark->title = $form['title'];
         $bookmark->comment = $form['comment'];
+        $bookmark->is_public = $form['is_public'];
 
         $bookmark->save();
 
@@ -108,7 +109,7 @@ class BookmarkController extends Controller
             });
         }
 
-        $bookmarks = $query->orderByFavorites()->get()->toArray();
+        $bookmarks = $query->onlyPublic()->orderByFavorites()->get()->toArray();
         
         $favorites = Favorite::where('user_id', $auth->id)->pluck('bookmark_id');
 
@@ -143,7 +144,7 @@ class BookmarkController extends Controller
         $this->add_favorite_common($request);
 
         $favorites = Favorite::where('user_id', $auth->id)->pluck('bookmark_id');
-        $favorite_bookmarks = Bookmark::whereIn('id', $favorites)->with('user:id,name')->get()->toArray();
+        $favorite_bookmarks = Bookmark::whereIn('id', $favorites)->with('user:id,name')->onlyPublic()->get()->toArray();
         return ['favorites'=>$favorites, 'favorite_bookmarks'=>$favorite_bookmarks];
         
     }
@@ -180,7 +181,7 @@ class BookmarkController extends Controller
         $user_id = $auth->id;
         
         $favorites = Favorite::where('user_id', $auth->id)->pluck('bookmark_id');
-        $bookmarks = Bookmark::whereIn('id', $favorites)->with('user:id,name')->get()->toArray();
+        $bookmarks = Bookmark::whereIn('id', $favorites)->with('user:id,name')->onlyPublic()->get()->toArray();
         return ['bookmarks'=>$bookmarks, 'favorites'=>$favorites];
         
     }

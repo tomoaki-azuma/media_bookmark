@@ -32,6 +32,18 @@
                 Share
                 </button>
             </div>
+            @if ($my_bookmark)
+            <template v-if="bookmark.is_public==1">
+                <div class="ml-3">
+                    <i class="fas fa-unlock"> (public)</i> 
+                </div>
+            </template>
+            <template v-else>
+                <div class="ml-3">
+                    <i class="fas fa-lock"> (private)</i> 
+                </div>
+            </template>
+            @endif
         </div>
     </div>
     @if ($my_bookmark)

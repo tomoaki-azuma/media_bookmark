@@ -58,6 +58,22 @@
                     <label for="comment">Comment</label>
                     <textarea v-model="modal_comment" class="form-control"></textarea>
                 </div>
+                <div class="form-group">
+                    <label class="modal-label" for="is_public">Search機能に対して公開する</label>
+                    <div class="row mx-2 pt-1">
+                        <!-- Rounded switch -->
+                        <label class="switch">
+                        <input type="checkbox" v-model="is_public" true-value="1" false-value="0">
+                        <span class="slider round"></span>
+                        </label>
+                        <template v-if="is_public==1">
+                            <div class="ml-2 modal-label"><i class="fas fa-unlock"> 公開(public)</i></div>
+                        </template>
+                        <template v-else>
+                            <div class="ml-2 modal-label"><i class="fas fa-lock"> 非公開(private)</i></div>
+                        </template>
+                    </div>
+                </div>
                 <div class="row my-3 mx-2 d-flex justify-content-center">
                     <input type="submit" class="btn btn-primary" value="OK" @click="submit_new_bookmark">
                 </div>
@@ -78,6 +94,7 @@
             bookmarks: [],
             modal_title: '',
             modal_comment: '',
+            is_public: 1,
             share_title: '',
             share_comment: '',
             shared_url: '',
@@ -88,6 +105,7 @@
             init_modal_data: function() {
                 this.modal_title = '';
                 this.modal_comment = '';
+                this.is_public = 1;
             },
             submit_new_bookmark: function() {
                 axios
@@ -95,6 +113,7 @@
                     user_id: {{ Auth::user()->id }},
                     title: this.modal_title,
                     comment: this.modal_comment,
+                    is_public: this.is_public,
                     type: 'create',
                 })
                 .then( response => {
