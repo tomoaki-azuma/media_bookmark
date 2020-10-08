@@ -82,12 +82,12 @@
 </div>
 <div class="d-flex justify-content-center">
     <div class="mx-3 mt-3 bookmark-card">
-        <div class="home-card-title py-0 px-2">ヘルプ＆デモ</div>
+        <div class="home-card-title py-0 px-2">Information</div>
         <div class="home-card-text p-3">
             <div class="mt-1">
                 <div>
-                操作方法に困った場合は下記のヘルプページをご覧ください。<br>
-                以下のリンクからご覧ください。
+                操作方法に困った場合は下記のヘルプページ、ブログをご覧ください。<br>
+                ブログでは管理者(tomoro)が作成したMedia Bookmarkコンテンツを随時公開しています。
                 </div>
             </div>
         </div>
@@ -100,6 +100,14 @@
     <div class="text-center">
         <div class="register-text">
             <a href="help">http://media-bookmark.app/help</a>
+        </div>
+    </div>
+    <div class="mx-4 mt-3 top-contents text-center">
+        <h5>BLOG</h5>    
+    </div>
+    <div class="text-center">
+        <div class="register-text">
+            <a href="help">http://media-bookmark.sblo.jp/</a>
         </div>
     </div>
     <div class="footer-wrap mt-3">
