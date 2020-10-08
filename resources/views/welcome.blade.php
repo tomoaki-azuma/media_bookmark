@@ -107,7 +107,7 @@
     </div>
     <div class="text-center">
         <div class="register-text">
-            <a href="help">http://media-bookmark.sblo.jp/</a>
+            <a href="http://media-bookmark.sblo.jp">http://media-bookmark.sblo.jp</a>
         </div>
     </div>
     <div class="footer-wrap mt-3">
