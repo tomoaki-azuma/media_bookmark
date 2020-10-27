@@ -51,7 +51,7 @@
 
 <div class="d-flex justify-content-center">
     <div class="mx-3 mt-3 bookmark-card">
-        <div class="home-card-title py-0 px-2">公開中の人気のMedia Bookmark</div>
+        <div class="home-card-title py-0 px-2">公開中のMedia Bookmark</div>
         <div class="home-card-text p-3">
         @foreach ($bookmarks as $bookmark)
             <div class="bookmark-list border-bottom py-2">
