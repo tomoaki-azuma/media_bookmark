@@ -30,6 +30,10 @@ class Bookmark extends Model
         return $query->orderBy('favorite_cnt', 'desc')->orderBy('view_cnt','desc');
     }
 
+    public function scopeOrderByViewcounts($query) {
+        return $query->orderBy('view_cnt','desc')->orderBy('favorite_cnt', 'desc');
+    }
+
     public function scopeOnlyPublic($query) {
         return $query->where('is_public', 1);
     }

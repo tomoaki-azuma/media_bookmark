@@ -14,10 +14,10 @@ class BookmarkController extends Controller
      *
      * @return void
      */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
+    // public function __construct()
+    // {
+        // $this->middleware('auth');
+    // }
 
     public function index() {
         $bookmarks = Bookmark::all();
@@ -188,6 +188,13 @@ class BookmarkController extends Controller
 
     public function init_my_favorite() {
         return view('bookmark.favorites');
+    }
+
+    public function welcome() {
+        $bookmarks = Bookmark::onlyPublic()->orderByViewcounts()->limit(7)->get();
+
+        return view('welcome', ['bookmarks'=>$bookmarks]);
+
     }
 
 }

@@ -6,6 +6,10 @@
 <meta property="og:image" content="{{ asset('storage').'/common/toplogo.png' }}">
 @endsection
 
+@php
+    $shared_url = url('').'/mbm/'; 
+@endphp
+
 @section('content')
 <div class="d-flex justify-content-center my-3">
     @auth
@@ -45,6 +49,23 @@
     </div>
 </div>
 
+<div class="d-flex justify-content-center">
+    <div class="mx-3 mt-3 bookmark-card">
+        <div class="home-card-title py-0 px-2">公開中の人気のMedia Bookmark</div>
+        <div class="home-card-text p-3">
+        @foreach ($bookmarks as $bookmark)
+            <div class="bookmark-list border-bottom py-2">
+
+            <a href="{{ $shared_url.$bookmark->share_token }}" target="_blank" rel="noopener">{{ $bookmark->title }}</a>
+            <div class="d-flex">
+            <div>{{ $bookmark->view_cnt }} views</div><div class="ml-3">editor: {{ $bookmark->user->name}} </div>
+            
+            </div>
+            </div>
+        @endforeach
+        </div>
+    </div>
+</div>
 <div class="d-flex justify-content-center">
     <div class="mx-3 mt-3 bookmark-card">
         <div class="home-card-title py-0 px-2">Media Bookmarkとは？</div>
